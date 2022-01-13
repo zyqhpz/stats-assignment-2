@@ -17,6 +17,18 @@ When you save the notebook, an HTML file containing the code and output will be 
 
 The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
 
+```{r}
+install.packages('lubridate')
+install.packages('tidyverse')
+
+```
+
+```{r}
+library(lubridate)
+library(tidyverse)
+
+```
+
 Import required library
 
 ```{r}
@@ -37,4 +49,73 @@ cases_MY <- cases_malaysia[cases_malaysia$date >= "2020-02-01" & cases_malaysia$
 
 ```{r}
 View(cases_MY)
+```
+
+```{r}
+t.test(cases_MY$cases_new, y = NULL, alternative = c("two.sided"), mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)
+
+t.test(cases_MY$cases_new, y = NULL, alternative = c("two.sided"), mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.99)
+```
+
+```{r}
+# ggplot(cases_MY$cases_unvax, date =  )
+ggplot(cases_MY, aes(x = as.Date(date), y = cases_unvax, group = 1)) + geom_line()
+```
+
+```{r}
+population_MY <- population[population$state == "Malaysia",]
+
+pop_MY <- population_MY$pop
+pop12_MY <- population_MY$pop_12
+pop18_MY <- population_MY$pop_18
+pop60_MY <- population_MY$pop_60
+```
+
+```{r}
+total_cases <- sum(cases_MY$cases_new)
+total_infected_percentage <- total_cases / pop_MY * 100
+print(total_cases)
+print(total_infected_percentage)
+#print(infected_percentage * pop_MY)
+
+print("Child")
+print(sum(cases_MY$cases_child + cases_MY$cases_adolescent) / pop12_MY * 100)
+```
+
+```{r}
+mean(cases_MY$cases_new)
+mean(cases_MY$cases_new, na.rm = TRUE)
+```
+
+```{r}
+firstTwo <- cases_MY[cases_MY$date >= "2020-02-01" & cases_MY$date <= "2020-03-31", ]
+#View(firstTwo)
+t.test(firstTwo$cases_new, y = NULL, alternative = c("two.sided"), mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)
+```
+
+```{r}
+firstFour <- cases_MY[cases_MY$date >= "2020-02-01" & cases_MY$date <= "2020-05-31", ]
+t.test(firstFour$cases_new, y = NULL, alternative = c("two.sided"), mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)
+```
+
+```{r}
+#seq(as.Date(cut(as.Date("2020-03-31"), "month")), length=2, by="+2 month")[2]-1
+## "2012-06-30"
+#lubricate
+#base_date <- "2020-03-31"
+base_date <- "2020-03-31"
+
+firstFour <- cases_MY[cases_MY$date >= "2020-02-01" & cases_MY$date <= base_date, ]
+t.test(firstFour$cases_new, y = NULL, alternative = c("two.sided"), mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)
+
+for (x in 1:10) {
+  #print(as.Date("2020-03-31") %m+% months(2))
+  update <- as.Date(base_date) %m+% months(2)
+  base_date <- update
+  filtered <- cases_MY[cases_MY$date >= "2020-02-01" & cases_MY$date <= base_date, ]
+dt <- t.test(filtered$cases_new, y = NULL, alternative = c("two.sided"), mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)
+  #print(base_date)
+print(dt)
+}
+
 ```

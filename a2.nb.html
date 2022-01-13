@@ -219,9 +219,51 @@ pre code {
 <p>Try executing this chunk by clicking the <em>Run</em> button within the chunk or by placing your cursor inside it and pressing <em>Ctrl+Shift+Enter</em>.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxucGxvdChjYXJzKVxuYGBgXG5gYGAifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuYGBgclxucGxvdChjYXJzKVxuYGBgXG5gYGBcbmBgYCJ9 -->
 <pre class="r"><code>```r
+```r
 plot(cars)</code></pre>
+<pre><code></code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Add a new chunk by clicking the <em>Insert Chunk</em> button on the toolbar or by pressing <em>Ctrl+Alt+I</em>.</p>
+<p>When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the <em>Preview</em> button or press <em>Ctrl+Shift+K</em> to preview the HTML file).</p>
+<p>The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike <em>Knit</em>, <em>Preview</em> does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaW5zdGFsbC5wYWNrYWdlcygnbHVicmlkYXRlJylcbmluc3RhbGwucGFja2FnZXMoJ3RpZHl2ZXJzZScpXG5cbmBgYCJ9 -->
+<pre class="r"><code>install.packages(&#39;lubridate&#39;)
+install.packages(&#39;tidyverse&#39;)
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShsdWJyaWRhdGUpXG5saWJyYXJ5KHRpZHl2ZXJzZSlcblxuYGBgIn0= -->
+<pre class="r"><code>library(lubridate)
+library(tidyverse)
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Import required library</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShnZ3Bsb3QyKVxuYGBgIn0= -->
+<pre class="r"><code>library(ggplot2)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZzogcGFja2FnZSDigJhnZ3Bsb3Qy4oCZIHdhcyBidWlsdCB1bmRlciBSIHZlcnNpb24gNC4xLjJcbiJ9 -->
+<pre><code>Warning: package ‘ggplot2’ was built under R version 4.1.2</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuY2FzZXNfTVkgPC0gY2FzZXNfbWFsYXlzaWFbY2FzZXNfbWFsYXlzaWEkZGF0ZSA+PSBcXDIwMjAtMDItMDFcXCAmIGNhc2VzX21hbGF5c2lhJGRhdGUgPD0gXFwyMDIxLTExLTMwXFwsXVxuYGBgXG5gYGAifQ== -->
+<pre class="r"><code>```r
+cases_MY &lt;- cases_malaysia[cases_malaysia$date &gt;= \2020-02-01\ &amp; cases_malaysia$date &lt;= \2021-11-30\,]</code></pre>
 <pre><code>
 &lt;!-- rnb-source-end --&gt;
 
@@ -231,13 +273,7 @@ plot(cars)</code></pre>
 &lt;!-- rnb-text-begin --&gt;
 
 
-Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
-
-When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
-
-The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
-
-Import required library
+Retrieve data based on desired range which is 01-02-2020 to 30-11-2021 only.
 
 
 &lt;!-- rnb-text-end --&gt;
@@ -246,27 +282,10 @@ Import required library
 &lt;!-- rnb-chunk-begin --&gt;
 
 
-&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShnZ3Bsb3QyKVxuYGBgIn0= --&gt;
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY2FzZXNfTVkgPC0gY2FzZXNfbWFsYXlzaWFbY2FzZXNfbWFsYXlzaWEkZGF0ZSA+PSBcIjIwMjAtMDItMDFcIiAmIGNhc2VzX21hbGF5c2lhJGRhdGUgPD0gXCIyMDIxLTExLTMwXCIsXVxuYGBgIn0= --&gt;
 
 ```r
-library(ggplot2)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBJbXBvcnQgZGF0YXNldFxuY2FzZXNfbWFsYXlzaWEgPC0gcmVhZC5jc3YoXCJFOi9VVGVNL1NlbSAzL1N0YXRpc3RpY3MgYW5kIFByb2JhYmlsaXR5L0EvQTIvY29kZS9kYXRhL2Nhc2VzX21hbGF5c2lhLmNzdlwiKVxucG9wdWxhdGlvbiA8LSByZWFkLmNzdihcIkU6L1VUZU0vU2VtIDMvU3RhdGlzdGljcyBhbmQgUHJvYmFiaWxpdHkvQS9BMi9jb2RlL2RhdGEvcG9wdWxhdGlvbi5jc3ZcIilcbmBgYCJ9 -->
-<pre class="r"><code># Import dataset
-cases_malaysia &lt;- read.csv(&quot;E:/UTeM/Sem 3/Statistics and Probability/A/A2/code/data/cases_malaysia.csv&quot;)
-population &lt;- read.csv(&quot;E:/UTeM/Sem 3/Statistics and Probability/A/A2/code/data/population.csv&quot;)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>Retrieve data based on desired range which is 01-02-2020 to 30-11-2021 only.</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY2FzZXNfTVkgPC0gY2FzZXNfbWFsYXlzaWFbY2FzZXNfbWFsYXlzaWEkZGF0ZSA+PSBcIjIwMjAtMDItMDFcIiAmIGNhc2VzX21hbGF5c2lhJGRhdGUgPD0gXCIyMDIxLTExLTMwXCIsXVxuYGBgIn0= -->
-<pre class="r"><code>cases_MY &lt;- cases_malaysia[cases_malaysia$date &gt;= &quot;2020-02-01&quot; &amp; cases_malaysia$date &lt;= &quot;2021-11-30&quot;,]</code></pre>
+cases_MY &lt;- cases_malaysia[cases_malaysia$date &gt;= &quot;2020-02-01&quot; &amp; cases_malaysia$date &lt;= &quot;2021-11-30&quot;,]</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
@@ -276,8 +295,317 @@ population &lt;- read.csv(&quot;E:/UTeM/Sem 3/Statistics and Probability/A/A2/co
 <pre class="r"><code>View(cases_MY)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudC50ZXN0KGNhc2VzX01ZJGNhc2VzX25ldywgeSA9IE5VTEwsIGFsdGVybmF0aXZlID0gYyhcInR3by5zaWRlZFwiKSwgbXUgPSAwLCBwYWlyZWQgPSBGQUxTRSwgdmFyLmVxdWFsID0gRkFMU0UsIGNvbmYubGV2ZWwgPSAwLjk1KVxuYGBgIn0= -->
+<pre class="r"><code>t.test(cases_MY$cases_new, y = NULL, alternative = c(&quot;two.sided&quot;), mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5cdE9uZSBTYW1wbGUgdC10ZXN0XG5cbmRhdGE6ICBjYXNlc19NWSRjYXNlc19uZXdcbnQgPSAxNy45MDksIGRmID0gNjY4LCBwLXZhbHVlIDwgMi4yZS0xNlxuYWx0ZXJuYXRpdmUgaHlwb3RoZXNpczogdHJ1ZSBtZWFuIGlzIG5vdCBlcXVhbCB0byAwXG45NSBwZXJjZW50IGNvbmZpZGVuY2UgaW50ZXJ2YWw6XG4gMzUwMy45MTkgNDM2Ni44NTVcbnNhbXBsZSBlc3RpbWF0ZXM6XG5tZWFuIG9mIHggXG4gMzkzNS4zODcgXG4ifQ== -->
+<pre><code>
+    One Sample t-test
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KDQpUaGlzIGlzIGFuIFtSIE1hcmtkb3duXShodHRwOi8vcm1hcmtkb3duLnJzdHVkaW8uY29tKSBOb3RlYm9vay4gV2hlbiB5b3UgZXhlY3V0ZSBjb2RlIHdpdGhpbiB0aGUgbm90ZWJvb2ssIHRoZSByZXN1bHRzIGFwcGVhciBiZW5lYXRoIHRoZSBjb2RlLg0KDQpUcnkgZXhlY3V0aW5nIHRoaXMgY2h1bmsgYnkgY2xpY2tpbmcgdGhlICpSdW4qIGJ1dHRvbiB3aXRoaW4gdGhlIGNodW5rIG9yIGJ5IHBsYWNpbmcgeW91ciBjdXJzb3IgaW5zaWRlIGl0IGFuZCBwcmVzc2luZyAqQ3RybCtTaGlmdCtFbnRlciouDQoNCmBgYHtyfQ0KcGxvdChjYXJzKQ0KYGBgDQoNCkFkZCBhIG5ldyBjaHVuayBieSBjbGlja2luZyB0aGUgKkluc2VydCBDaHVuayogYnV0dG9uIG9uIHRoZSB0b29sYmFyIG9yIGJ5IHByZXNzaW5nICpDdHJsK0FsdCtJKi4NCg0KV2hlbiB5b3Ugc2F2ZSB0aGUgbm90ZWJvb2ssIGFuIEhUTUwgZmlsZSBjb250YWluaW5nIHRoZSBjb2RlIGFuZCBvdXRwdXQgd2lsbCBiZSBzYXZlZCBhbG9uZ3NpZGUgaXQgKGNsaWNrIHRoZSAqUHJldmlldyogYnV0dG9uIG9yIHByZXNzICpDdHJsK1NoaWZ0K0sqIHRvIHByZXZpZXcgdGhlIEhUTUwgZmlsZSkuDQoNClRoZSBwcmV2aWV3IHNob3dzIHlvdSBhIHJlbmRlcmVkIEhUTUwgY29weSBvZiB0aGUgY29udGVudHMgb2YgdGhlIGVkaXRvci4gQ29uc2VxdWVudGx5LCB1bmxpa2UgKktuaXQqLCAqUHJldmlldyogZG9lcyBub3QgcnVuIGFueSBSIGNvZGUgY2h1bmtzLiBJbnN0ZWFkLCB0aGUgb3V0cHV0IG9mIHRoZSBjaHVuayB3aGVuIGl0IHdhcyBsYXN0IHJ1biBpbiB0aGUgZWRpdG9yIGlzIGRpc3BsYXllZC4NCg0KSW1wb3J0IHJlcXVpcmVkIGxpYnJhcnkNCg0KYGBge3J9DQpsaWJyYXJ5KGdncGxvdDIpDQpgYGANCg0KYGBge3J9DQojIEltcG9ydCBkYXRhc2V0DQpjYXNlc19tYWxheXNpYSA8LSByZWFkLmNzdigiRTovVVRlTS9TZW0gMy9TdGF0aXN0aWNzIGFuZCBQcm9iYWJpbGl0eS9BL0EyL2NvZGUvZGF0YS9jYXNlc19tYWxheXNpYS5jc3YiKQ0KcG9wdWxhdGlvbiA8LSByZWFkLmNzdigiRTovVVRlTS9TZW0gMy9TdGF0aXN0aWNzIGFuZCBQcm9iYWJpbGl0eS9BL0EyL2NvZGUvZGF0YS9wb3B1bGF0aW9uLmNzdiIpDQpgYGANCg0KUmV0cmlldmUgZGF0YSBiYXNlZCBvbiBkZXNpcmVkIHJhbmdlIHdoaWNoIGlzIDAxLTAyLTIwMjAgdG8gMzAtMTEtMjAyMSBvbmx5Lg0KDQpgYGB7cn0NCmNhc2VzX01ZIDwtIGNhc2VzX21hbGF5c2lhW2Nhc2VzX21hbGF5c2lhJGRhdGUgPj0gIjIwMjAtMDItMDEiICYgY2FzZXNfbWFsYXlzaWEkZGF0ZSA8PSAiMjAyMS0xMS0zMCIsXQ0KYGBgDQoNCmBgYHtyfQ0KVmlldyhjYXNlc19NWSkNCmBgYA0K</div>
+data:  cases_MY$cases_new
+t = 17.909, df = 668, p-value &lt; 2.2e-16
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ 3503.919 4366.855
+sample estimates:
+mean of x 
+ 3935.387 </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudC50ZXN0KGNhc2VzX01ZJGNhc2VzX25ldywgeSA9IE5VTEwsIGFsdGVybmF0aXZlID0gYyhcInR3by5zaWRlZFwiKSwgbXUgPSAwLCBwYWlyZWQgPSBGQUxTRSwgdmFyLmVxdWFsID0gRkFMU0UsIGNvbmYubGV2ZWwgPSAwLjk5KVxuYGBgIn0= -->
+<pre class="r"><code>t.test(cases_MY$cases_new, y = NULL, alternative = c(&quot;two.sided&quot;), mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.99)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5cdE9uZSBTYW1wbGUgdC10ZXN0XG5cbmRhdGE6ICBjYXNlc19NWSRjYXNlc19uZXdcbnQgPSAxNy45MDksIGRmID0gNjY4LCBwLXZhbHVlIDwgMi4yZS0xNlxuYWx0ZXJuYXRpdmUgaHlwb3RoZXNpczogdHJ1ZSBtZWFuIGlzIG5vdCBlcXVhbCB0byAwXG45OSBwZXJjZW50IGNvbmZpZGVuY2UgaW50ZXJ2YWw6XG4gMzM2Ny43NDggNDUwMy4wMjZcbnNhbXBsZSBlc3RpbWF0ZXM6XG5tZWFuIG9mIHggXG4gMzkzNS4zODcgXG4ifQ== -->
+<pre><code>
+    One Sample t-test
+
+data:  cases_MY$cases_new
+t = 17.909, df = 668, p-value &lt; 2.2e-16
+alternative hypothesis: true mean is not equal to 0
+99 percent confidence interval:
+ 3367.748 4503.026
+sample estimates:
+mean of x 
+ 3935.387 </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBnZ3Bsb3QoY2FzZXNfTVkkY2FzZXNfdW52YXgsIGRhdGUgPSAgKVxuZ2dwbG90KGNhc2VzX01ZLCBhZXMoeCA9IGFzLkRhdGUoZGF0ZSksIHkgPSBjYXNlc191bnZheCwgZ3JvdXAgPSAxKSkgKyBnZW9tX2xpbmUoKVxuYGBgIn0= -->
+<pre class="r"><code># ggplot(cases_MY$cases_unvax, date =  )
+ggplot(cases_MY, aes(x = as.Date(date), y = cases_unvax, group = 1)) + geom_line()</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-plot-begin eyJoZWlnaHQiOjQwOC41MjksIndpZHRoIjo2NjEsInNpemVfYmVoYXZpb3IiOjAsImNvbmRpdGlvbnMiOltdfQ== -->
+<p><img src="data:image/png;base64,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" /></p>
+<!-- rnb-plot-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucG9wdWxhdGlvbl9NWSA8LSBwb3B1bGF0aW9uW3BvcHVsYXRpb24kc3RhdGUgPT0gXCJNYWxheXNpYVwiLF1cblxucG9wX01ZIDwtIHBvcHVsYXRpb25fTVkkcG9wXG5wb3AxMl9NWSA8LSBwb3B1bGF0aW9uX01ZJHBvcF8xMlxucG9wMThfTVkgPC0gcG9wdWxhdGlvbl9NWSRwb3BfMThcbnBvcDYwX01ZIDwtIHBvcHVsYXRpb25fTVkkcG9wXzYwXG5gYGAifQ== -->
+<pre class="r"><code>population_MY &lt;- population[population$state == &quot;Malaysia&quot;,]
+
+pop_MY &lt;- population_MY$pop
+pop12_MY &lt;- population_MY$pop_12
+pop18_MY &lt;- population_MY$pop_18
+pop60_MY &lt;- population_MY$pop_60</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudG90YWxfY2FzZXMgPC0gc3VtKGNhc2VzX01ZJGNhc2VzX25ldylcbnRvdGFsX2luZmVjdGVkX3BlcmNlbnRhZ2UgPC0gdG90YWxfY2FzZXMgLyBwb3BfTVkgKiAxMDBcbnByaW50KHRvdGFsX2Nhc2VzKVxuYGBgIn0= -->
+<pre class="r"><code>total_cases &lt;- sum(cases_MY$cases_new)
+total_infected_percentage &lt;- total_cases / pop_MY * 100
+print(total_cases)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDI2MzI3NzRcbiJ9 -->
+<pre><code>[1] 2632774</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQodG90YWxfaW5mZWN0ZWRfcGVyY2VudGFnZSlcbmBgYCJ9 -->
+<pre class="r"><code>print(total_infected_percentage)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDguMDYxNzk5XG4ifQ== -->
+<pre><code>[1] 8.061799</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI3ByaW50KGluZmVjdGVkX3BlcmNlbnRhZ2UgKiBwb3BfTVkpXG5cbnByaW50KFwiQ2hpbGRcIilcbmBgYCJ9 -->
+<pre class="r"><code>#print(infected_percentage * pop_MY)
+
+print(&quot;Child&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiQ2hpbGRcIlxuIn0= -->
+<pre><code>[1] &quot;Child&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQoc3VtKGNhc2VzX01ZJGNhc2VzX2NoaWxkICsgY2FzZXNfTVkkY2FzZXNfYWRvbGVzY2VudCkgLyBwb3AxMl9NWSAqIDEwMClcbmBgYCJ9 -->
+<pre class="r"><code>print(sum(cases_MY$cases_child + cases_MY$cases_adolescent) / pop12_MY * 100)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDE2LjcyNTc1XG4ifQ== -->
+<pre><code>[1] 16.72575</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubWVhbihjYXNlc19NWSRjYXNlc19uZXcpXG5gYGAifQ== -->
+<pre class="r"><code>mean(cases_MY$cases_new)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDM5MzUuMzg3XG4ifQ== -->
+<pre><code>[1] 3935.387</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubWVhbihjYXNlc19NWSRjYXNlc19uZXcsIG5hLnJtID0gVFJVRSlcbmBgYCJ9 -->
+<pre class="r"><code>mean(cases_MY$cases_new, na.rm = TRUE)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDM5MzUuMzg3XG4ifQ== -->
+<pre><code>[1] 3935.387</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZmlyc3RUd28gPC0gY2FzZXNfTVlbY2FzZXNfTVkkZGF0ZSA+PSBcIjIwMjAtMDItMDFcIiAmIGNhc2VzX01ZJGRhdGUgPD0gXCIyMDIwLTAzLTMxXCIsIF1cblZpZXcoZmlyc3RUd28pXG50LnRlc3QoZmlyc3RUd28kY2FzZXNfbmV3LCB5ID0gTlVMTCwgYWx0ZXJuYXRpdmUgPSBjKFwidHdvLnNpZGVkXCIpLCBtdSA9IDAsIHBhaXJlZCA9IEZBTFNFLCB2YXIuZXF1YWwgPSBGQUxTRSwgY29uZi5sZXZlbCA9IDAuOTUpXG5gYGAifQ== -->
+<pre class="r"><code>firstTwo &lt;- cases_MY[cases_MY$date &gt;= &quot;2020-02-01&quot; &amp; cases_MY$date &lt;= &quot;2020-03-31&quot;, ]
+View(firstTwo)
+t.test(firstTwo$cases_new, y = NULL, alternative = c(&quot;two.sided&quot;), mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5cdE9uZSBTYW1wbGUgdC10ZXN0XG5cbmRhdGE6ICBmaXJzdFR3byRjYXNlc19uZXdcbnQgPSA1LjIwOTksIGRmID0gNTksIHAtdmFsdWUgPSAyLjUyNWUtMDZcbmFsdGVybmF0aXZlIGh5cG90aGVzaXM6IHRydWUgbWVhbiBpcyBub3QgZXF1YWwgdG8gMFxuOTUgcGVyY2VudCBjb25maWRlbmNlIGludGVydmFsOlxuIDI4LjMxMTk3IDYzLjYyMTM3XG5zYW1wbGUgZXN0aW1hdGVzOlxubWVhbiBvZiB4IFxuIDQ1Ljk2NjY3IFxuIn0= -->
+<pre><code>
+    One Sample t-test
+
+data:  firstTwo$cases_new
+t = 5.2099, df = 59, p-value = 2.525e-06
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ 28.31197 63.62137
+sample estimates:
+mean of x 
+ 45.96667 </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZmlyc3RGb3VyIDwtIGNhc2VzX01ZW2Nhc2VzX01ZJGRhdGUgPj0gXCIyMDIwLTAyLTAxXCIgJiBjYXNlc19NWSRkYXRlIDw9IFwiMjAyMC0wNS0zMVwiLCBdXG50LnRlc3QoZmlyc3RGb3VyJGNhc2VzX25ldywgeSA9IE5VTEwsIGFsdGVybmF0aXZlID0gYyhcInR3by5zaWRlZFwiKSwgbXUgPSAwLCBwYWlyZWQgPSBGQUxTRSwgdmFyLmVxdWFsID0gRkFMU0UsIGNvbmYubGV2ZWwgPSAwLjk1KVxuYGBgIn0= -->
+<pre class="r"><code>firstFour &lt;- cases_MY[cases_MY$date &gt;= &quot;2020-02-01&quot; &amp; cases_MY$date &lt;= &quot;2020-05-31&quot;, ]
+t.test(firstFour$cases_new, y = NULL, alternative = c(&quot;two.sided&quot;), mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5cdE9uZSBTYW1wbGUgdC10ZXN0XG5cbmRhdGE6ICBmaXJzdEZvdXIkY2FzZXNfbmV3XG50ID0gMTEuMDU1LCBkZiA9IDEyMCwgcC12YWx1ZSA8IDIuMmUtMTZcbmFsdGVybmF0aXZlIGh5cG90aGVzaXM6IHRydWUgbWVhbiBpcyBub3QgZXF1YWwgdG8gMFxuOTUgcGVyY2VudCBjb25maWRlbmNlIGludGVydmFsOlxuIDUyLjk5MjIwIDc2LjExNTI0XG5zYW1wbGUgZXN0aW1hdGVzOlxubWVhbiBvZiB4IFxuIDY0LjU1MzcyIFxuIn0= -->
+<pre><code>
+    One Sample t-test
+
+data:  firstFour$cases_new
+t = 11.055, df = 120, p-value &lt; 2.2e-16
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ 52.99220 76.11524
+sample estimates:
+mean of x 
+ 64.55372 </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI3NlcShhcy5EYXRlKGN1dChhcy5EYXRlKFwiMjAyMC0wMy0zMVwiKSwgXCJtb250aFwiKSksIGxlbmd0aD0yLCBieT1cIisyIG1vbnRoXCIpWzJdLTFcbiMjIFwiMjAxMi0wNi0zMFwiXG4jbHVicmljYXRlXG4jYmFzZV9kYXRlIDwtIFwiMjAyMC0wMy0zMVwiXG5iYXNlX2RhdGUgPC0gXCIyMDIwLTAzLTMxXCJcblxuZmlyc3RGb3VyIDwtIGNhc2VzX01ZW2Nhc2VzX01ZJGRhdGUgPj0gXCIyMDIwLTAyLTAxXCIgJiBjYXNlc19NWSRkYXRlIDw9IGJhc2VfZGF0ZSwgXVxudC50ZXN0KGZpcnN0Rm91ciRjYXNlc19uZXcsIHkgPSBOVUxMLCBhbHRlcm5hdGl2ZSA9IGMoXCJ0d28uc2lkZWRcIiksIG11ID0gMCwgcGFpcmVkID0gRkFMU0UsIHZhci5lcXVhbCA9IEZBTFNFLCBjb25mLmxldmVsID0gMC45NSlcbmBgYCJ9 -->
+<pre class="r"><code>#seq(as.Date(cut(as.Date(&quot;2020-03-31&quot;), &quot;month&quot;)), length=2, by=&quot;+2 month&quot;)[2]-1
+## &quot;2012-06-30&quot;
+#lubricate
+#base_date &lt;- &quot;2020-03-31&quot;
+base_date &lt;- &quot;2020-03-31&quot;
+
+firstFour &lt;- cases_MY[cases_MY$date &gt;= &quot;2020-02-01&quot; &amp; cases_MY$date &lt;= base_date, ]
+t.test(firstFour$cases_new, y = NULL, alternative = c(&quot;two.sided&quot;), mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5cdE9uZSBTYW1wbGUgdC10ZXN0XG5cbmRhdGE6ICBmaXJzdEZvdXIkY2FzZXNfbmV3XG50ID0gNS4yMDk5LCBkZiA9IDU5LCBwLXZhbHVlID0gMi41MjVlLTA2XG5hbHRlcm5hdGl2ZSBoeXBvdGhlc2lzOiB0cnVlIG1lYW4gaXMgbm90IGVxdWFsIHRvIDBcbjk1IHBlcmNlbnQgY29uZmlkZW5jZSBpbnRlcnZhbDpcbiAyOC4zMTE5NyA2My42MjEzN1xuc2FtcGxlIGVzdGltYXRlczpcbm1lYW4gb2YgeCBcbiA0NS45NjY2NyBcbiJ9 -->
+<pre><code>
+    One Sample t-test
+
+data:  firstFour$cases_new
+t = 5.2099, df = 59, p-value = 2.525e-06
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ 28.31197 63.62137
+sample estimates:
+mean of x 
+ 45.96667 </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZm9yICh4IGluIDE6MTApIHtcbiAgI3ByaW50KGFzLkRhdGUoXCIyMDIwLTAzLTMxXCIpICVtKyUgbW9udGhzKDIpKVxuICB1cGRhdGUgPC0gYXMuRGF0ZShiYXNlX2RhdGUpICVtKyUgbW9udGhzKDIpXG4gIGJhc2VfZGF0ZSA8LSB1cGRhdGVcbiAgZmlsdGVyZWQgPC0gY2FzZXNfTVlbY2FzZXNfTVkkZGF0ZSA+PSBcIjIwMjAtMDItMDFcIiAmIGNhc2VzX01ZJGRhdGUgPD0gYmFzZV9kYXRlLCBdXG5kdCA8LSB0LnRlc3QoZmlsdGVyZWQkY2FzZXNfbmV3LCB5ID0gTlVMTCwgYWx0ZXJuYXRpdmUgPSBjKFwidHdvLnNpZGVkXCIpLCBtdSA9IDAsIHBhaXJlZCA9IEZBTFNFLCB2YXIuZXF1YWwgPSBGQUxTRSwgY29uZi5sZXZlbCA9IDAuOTUpXG4gICNwcmludChiYXNlX2RhdGUpXG5wcmludChkdClcbn1cbmBgYCJ9 -->
+<pre class="r"><code>for (x in 1:10) {
+  #print(as.Date(&quot;2020-03-31&quot;) %m+% months(2))
+  update &lt;- as.Date(base_date) %m+% months(2)
+  base_date &lt;- update
+  filtered &lt;- cases_MY[cases_MY$date &gt;= &quot;2020-02-01&quot; &amp; cases_MY$date &lt;= base_date, ]
+dt &lt;- t.test(filtered$cases_new, y = NULL, alternative = c(&quot;two.sided&quot;), mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)
+  #print(base_date)
+print(dt)
+}</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5cdE9uZSBTYW1wbGUgdC10ZXN0XG5cbmRhdGE6ICBmaWx0ZXJlZCRjYXNlc19uZXdcbnQgPSAxMS4wNTUsIGRmID0gMTIwLCBwLXZhbHVlIDwgMi4yZS0xNlxuYWx0ZXJuYXRpdmUgaHlwb3RoZXNpczogdHJ1ZSBtZWFuIGlzIG5vdCBlcXVhbCB0byAwXG45NSBwZXJjZW50IGNvbmZpZGVuY2UgaW50ZXJ2YWw6XG4gNTIuOTkyMjAgNzYuMTE1MjRcbnNhbXBsZSBlc3RpbWF0ZXM6XG5tZWFuIG9mIHggXG4gNjQuNTUzNzIgXG5cblxuXHRPbmUgU2FtcGxlIHQtdGVzdFxuXG5kYXRhOiAgZmlsdGVyZWQkY2FzZXNfbmV3XG50ID0gMTEuMDA5LCBkZiA9IDE4MSwgcC12YWx1ZSA8IDIuMmUtMTZcbmFsdGVybmF0aXZlIGh5cG90aGVzaXM6IHRydWUgbWVhbiBpcyBub3QgZXF1YWwgdG8gMFxuOTUgcGVyY2VudCBjb25maWRlbmNlIGludGVydmFsOlxuIDQwLjQ0MzI4IDU4LjEwNjE3XG5zYW1wbGUgZXN0aW1hdGVzOlxubWVhbiBvZiB4IFxuIDQ5LjI3NDczIFxuXG5cblx0T25lIFNhbXBsZSB0LXRlc3RcblxuZGF0YTogIGZpbHRlcmVkJGNhc2VzX25ld1xudCA9IDEyLjczMywgZGYgPSAyNDIsIHAtdmFsdWUgPCAyLjJlLTE2XG5hbHRlcm5hdGl2ZSBoeXBvdGhlc2lzOiB0cnVlIG1lYW4gaXMgbm90IGVxdWFsIHRvIDBcbjk1IHBlcmNlbnQgY29uZmlkZW5jZSBpbnRlcnZhbDpcbiAzOS4wMTU3MiA1My4yOTcwM1xuc2FtcGxlIGVzdGltYXRlczpcbm1lYW4gb2YgeCBcbiA0Ni4xNTYzOCBcblxuXG5cdE9uZSBTYW1wbGUgdC10ZXN0XG5cbmRhdGE6ICBmaWx0ZXJlZCRjYXNlc19uZXdcbnQgPSA5Ljg2NjcsIGRmID0gMzAzLCBwLXZhbHVlIDwgMi4yZS0xNlxuYWx0ZXJuYXRpdmUgaHlwb3RoZXNpczogdHJ1ZSBtZWFuIGlzIG5vdCBlcXVhbCB0byAwXG45NSBwZXJjZW50IGNvbmZpZGVuY2UgaW50ZXJ2YWw6XG4gMTcyLjk4NjggMjU5LjE3NzdcbnNhbXBsZSBlc3RpbWF0ZXM6XG5tZWFuIG9mIHggXG4gMjE2LjA4MjIgXG5cblxuXHRPbmUgU2FtcGxlIHQtdGVzdFxuXG5kYXRhOiAgZmlsdGVyZWQkY2FzZXNfbmV3XG50ID0gMTEuMTE3LCBkZiA9IDM2NCwgcC12YWx1ZSA8IDIuMmUtMTZcbmFsdGVybmF0aXZlIGh5cG90aGVzaXM6IHRydWUgbWVhbiBpcyBub3QgZXF1YWwgdG8gMFxuOTUgcGVyY2VudCBjb25maWRlbmNlIGludGVydmFsOlxuIDQ3Mi43ODYyIDY3NS45OTc0XG5zYW1wbGUgZXN0aW1hdGVzOlxubWVhbiBvZiB4IFxuIDU3NC4zOTE4IFxuXG5cblx0T25lIFNhbXBsZSB0LXRlc3RcblxuZGF0YTogIGZpbHRlcmVkJGNhc2VzX25ld1xudCA9IDE0LjQ2MSwgZGYgPSA0MjMsIHAtdmFsdWUgPCAyLjJlLTE2XG5hbHRlcm5hdGl2ZSBoeXBvdGhlc2lzOiB0cnVlIG1lYW4gaXMgbm90IGVxdWFsIHRvIDBcbjk1IHBlcmNlbnQgY29uZmlkZW5jZSBpbnRlcnZhbDpcbiA3MDEuMDYxNCA5MjEuNjI3M1xuc2FtcGxlIGVzdGltYXRlczpcbm1lYW4gb2YgeCBcbiA4MTEuMzQ0MyBcblxuXG5cdE9uZSBTYW1wbGUgdC10ZXN0XG5cbmRhdGE6ICBmaWx0ZXJlZCRjYXNlc19uZXdcbnQgPSAxNS45OTksIGRmID0gNDg0LCBwLXZhbHVlIDwgMi4yZS0xNlxuYWx0ZXJuYXRpdmUgaHlwb3RoZXNpczogdHJ1ZSBtZWFuIGlzIG5vdCBlcXVhbCB0byAwXG45NSBwZXJjZW50IGNvbmZpZGVuY2UgaW50ZXJ2YWw6XG4gMTAyMi44MjggMTMwOS4yMzRcbnNhbXBsZSBlc3RpbWF0ZXM6XG5tZWFuIG9mIHggXG4gMTE2Ni4wMzEgXG5cblxuXHRPbmUgU2FtcGxlIHQtdGVzdFxuXG5kYXRhOiAgZmlsdGVyZWQkY2FzZXNfbmV3XG50ID0gMTUuMjEzLCBkZiA9IDU0NSwgcC12YWx1ZSA8IDIuMmUtMTZcbmFsdGVybmF0aXZlIGh5cG90aGVzaXM6IHRydWUgbWVhbiBpcyBub3QgZXF1YWwgdG8gMFxuOTUgcGVyY2VudCBjb25maWRlbmNlIGludGVydmFsOlxuIDE3NDcuMzA3IDIyNjUuNDMzXG5zYW1wbGUgZXN0aW1hdGVzOlxubWVhbiBvZiB4IFxuICAyMDA2LjM3IFxuXG5cblx0T25lIFNhbXBsZSB0LXRlc3RcblxuZGF0YTogIGZpbHRlcmVkJGNhc2VzX25ld1xudCA9IDE1LjQ3NiwgZGYgPSA2MDcsIHAtdmFsdWUgPCAyLjJlLTE2XG5hbHRlcm5hdGl2ZSBoeXBvdGhlc2lzOiB0cnVlIG1lYW4gaXMgbm90IGVxdWFsIHRvIDBcbjk1IHBlcmNlbnQgY29uZmlkZW5jZSBpbnRlcnZhbDpcbiAzMjI0Ljg2MiA0MTYyLjI2Nlxuc2FtcGxlIGVzdGltYXRlczpcbm1lYW4gb2YgeCBcbiAzNjkzLjU2NCBcblxuXG5cdE9uZSBTYW1wbGUgdC10ZXN0XG5cbmRhdGE6ICBmaWx0ZXJlZCRjYXNlc19uZXdcbnQgPSAxNy45MDksIGRmID0gNjY4LCBwLXZhbHVlIDwgMi4yZS0xNlxuYWx0ZXJuYXRpdmUgaHlwb3RoZXNpczogdHJ1ZSBtZWFuIGlzIG5vdCBlcXVhbCB0byAwXG45NSBwZXJjZW50IGNvbmZpZGVuY2UgaW50ZXJ2YWw6XG4gMzUwMy45MTkgNDM2Ni44NTVcbnNhbXBsZSBlc3RpbWF0ZXM6XG5tZWFuIG9mIHggXG4gMzkzNS4zODcgXG4ifQ== -->
+<pre><code>
+    One Sample t-test
+
+data:  filtered$cases_new
+t = 11.055, df = 120, p-value &lt; 2.2e-16
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ 52.99220 76.11524
+sample estimates:
+mean of x 
+ 64.55372 
+
+
+    One Sample t-test
+
+data:  filtered$cases_new
+t = 11.009, df = 181, p-value &lt; 2.2e-16
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ 40.44328 58.10617
+sample estimates:
+mean of x 
+ 49.27473 
+
+
+    One Sample t-test
+
+data:  filtered$cases_new
+t = 12.733, df = 242, p-value &lt; 2.2e-16
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ 39.01572 53.29703
+sample estimates:
+mean of x 
+ 46.15638 
+
+
+    One Sample t-test
+
+data:  filtered$cases_new
+t = 9.8667, df = 303, p-value &lt; 2.2e-16
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ 172.9868 259.1777
+sample estimates:
+mean of x 
+ 216.0822 
+
+
+    One Sample t-test
+
+data:  filtered$cases_new
+t = 11.117, df = 364, p-value &lt; 2.2e-16
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ 472.7862 675.9974
+sample estimates:
+mean of x 
+ 574.3918 
+
+
+    One Sample t-test
+
+data:  filtered$cases_new
+t = 14.461, df = 423, p-value &lt; 2.2e-16
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ 701.0614 921.6273
+sample estimates:
+mean of x 
+ 811.3443 
+
+
+    One Sample t-test
+
+data:  filtered$cases_new
+t = 15.999, df = 484, p-value &lt; 2.2e-16
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ 1022.828 1309.234
+sample estimates:
+mean of x 
+ 1166.031 
+
+
+    One Sample t-test
+
+data:  filtered$cases_new
+t = 15.213, df = 545, p-value &lt; 2.2e-16
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ 1747.307 2265.433
+sample estimates:
+mean of x 
+  2006.37 
+
+
+    One Sample t-test
+
+data:  filtered$cases_new
+t = 15.476, df = 607, p-value &lt; 2.2e-16
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ 3224.862 4162.266
+sample estimates:
+mean of x 
+ 3693.564 
+
+
+    One Sample t-test
+
+data:  filtered$cases_new
+t = 17.909, df = 668, p-value &lt; 2.2e-16
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ 3503.919 4366.855
+sample estimates:
+mean of x 
+ 3935.387 </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KDQpUaGlzIGlzIGFuIFtSIE1hcmtkb3duXShodHRwOi8vcm1hcmtkb3duLnJzdHVkaW8uY29tKSBOb3RlYm9vay4gV2hlbiB5b3UgZXhlY3V0ZSBjb2RlIHdpdGhpbiB0aGUgbm90ZWJvb2ssIHRoZSByZXN1bHRzIGFwcGVhciBiZW5lYXRoIHRoZSBjb2RlLg0KDQpUcnkgZXhlY3V0aW5nIHRoaXMgY2h1bmsgYnkgY2xpY2tpbmcgdGhlICpSdW4qIGJ1dHRvbiB3aXRoaW4gdGhlIGNodW5rIG9yIGJ5IHBsYWNpbmcgeW91ciBjdXJzb3IgaW5zaWRlIGl0IGFuZCBwcmVzc2luZyAqQ3RybCtTaGlmdCtFbnRlciouDQoNCmBgYHtyfQ0KcGxvdChjYXJzKQ0KYGBgDQoNCkFkZCBhIG5ldyBjaHVuayBieSBjbGlja2luZyB0aGUgKkluc2VydCBDaHVuayogYnV0dG9uIG9uIHRoZSB0b29sYmFyIG9yIGJ5IHByZXNzaW5nICpDdHJsK0FsdCtJKi4NCg0KV2hlbiB5b3Ugc2F2ZSB0aGUgbm90ZWJvb2ssIGFuIEhUTUwgZmlsZSBjb250YWluaW5nIHRoZSBjb2RlIGFuZCBvdXRwdXQgd2lsbCBiZSBzYXZlZCBhbG9uZ3NpZGUgaXQgKGNsaWNrIHRoZSAqUHJldmlldyogYnV0dG9uIG9yIHByZXNzICpDdHJsK1NoaWZ0K0sqIHRvIHByZXZpZXcgdGhlIEhUTUwgZmlsZSkuDQoNClRoZSBwcmV2aWV3IHNob3dzIHlvdSBhIHJlbmRlcmVkIEhUTUwgY29weSBvZiB0aGUgY29udGVudHMgb2YgdGhlIGVkaXRvci4gQ29uc2VxdWVudGx5LCB1bmxpa2UgKktuaXQqLCAqUHJldmlldyogZG9lcyBub3QgcnVuIGFueSBSIGNvZGUgY2h1bmtzLiBJbnN0ZWFkLCB0aGUgb3V0cHV0IG9mIHRoZSBjaHVuayB3aGVuIGl0IHdhcyBsYXN0IHJ1biBpbiB0aGUgZWRpdG9yIGlzIGRpc3BsYXllZC4NCg0KYGBge3J9DQppbnN0YWxsLnBhY2thZ2VzKCdsdWJyaWRhdGUnKQ0KaW5zdGFsbC5wYWNrYWdlcygndGlkeXZlcnNlJykNCg0KYGBgDQoNCmBgYHtyfQ0KbGlicmFyeShsdWJyaWRhdGUpDQpsaWJyYXJ5KHRpZHl2ZXJzZSkNCg0KYGBgDQoNCkltcG9ydCByZXF1aXJlZCBsaWJyYXJ5DQoNCmBgYHtyfQ0KbGlicmFyeShnZ3Bsb3QyKQ0KYGBgDQoNCmBgYHtyfQ0KIyBJbXBvcnQgZGF0YXNldA0KY2FzZXNfbWFsYXlzaWEgPC0gcmVhZC5jc3YoIkU6L1VUZU0vU2VtIDMvU3RhdGlzdGljcyBhbmQgUHJvYmFiaWxpdHkvQS9BMi9jb2RlL2RhdGEvY2FzZXNfbWFsYXlzaWEuY3N2IikNCnBvcHVsYXRpb24gPC0gcmVhZC5jc3YoIkU6L1VUZU0vU2VtIDMvU3RhdGlzdGljcyBhbmQgUHJvYmFiaWxpdHkvQS9BMi9jb2RlL2RhdGEvcG9wdWxhdGlvbi5jc3YiKQ0KYGBgDQoNClJldHJpZXZlIGRhdGEgYmFzZWQgb24gZGVzaXJlZCByYW5nZSB3aGljaCBpcyAwMS0wMi0yMDIwIHRvIDMwLTExLTIwMjEgb25seS4NCg0KYGBge3J9DQpjYXNlc19NWSA8LSBjYXNlc19tYWxheXNpYVtjYXNlc19tYWxheXNpYSRkYXRlID49ICIyMDIwLTAyLTAxIiAmIGNhc2VzX21hbGF5c2lhJGRhdGUgPD0gIjIwMjEtMTEtMzAiLF0NCmBgYA0KDQpgYGB7cn0NClZpZXcoY2FzZXNfTVkpDQpgYGANCg0KYGBge3J9DQp0LnRlc3QoY2FzZXNfTVkkY2FzZXNfbmV3LCB5ID0gTlVMTCwgYWx0ZXJuYXRpdmUgPSBjKCJ0d28uc2lkZWQiKSwgbXUgPSAwLCBwYWlyZWQgPSBGQUxTRSwgdmFyLmVxdWFsID0gRkFMU0UsIGNvbmYubGV2ZWwgPSAwLjk1KQ0KDQp0LnRlc3QoY2FzZXNfTVkkY2FzZXNfbmV3LCB5ID0gTlVMTCwgYWx0ZXJuYXRpdmUgPSBjKCJ0d28uc2lkZWQiKSwgbXUgPSAwLCBwYWlyZWQgPSBGQUxTRSwgdmFyLmVxdWFsID0gRkFMU0UsIGNvbmYubGV2ZWwgPSAwLjk5KQ0KYGBgDQoNCmBgYHtyfQ0KIyBnZ3Bsb3QoY2FzZXNfTVkkY2FzZXNfdW52YXgsIGRhdGUgPSAgKQ0KZ2dwbG90KGNhc2VzX01ZLCBhZXMoeCA9IGFzLkRhdGUoZGF0ZSksIHkgPSBjYXNlc191bnZheCwgZ3JvdXAgPSAxKSkgKyBnZW9tX2xpbmUoKQ0KYGBgDQoNCmBgYHtyfQ0KcG9wdWxhdGlvbl9NWSA8LSBwb3B1bGF0aW9uW3BvcHVsYXRpb24kc3RhdGUgPT0gIk1hbGF5c2lhIixdDQoNCnBvcF9NWSA8LSBwb3B1bGF0aW9uX01ZJHBvcA0KcG9wMTJfTVkgPC0gcG9wdWxhdGlvbl9NWSRwb3BfMTINCnBvcDE4X01ZIDwtIHBvcHVsYXRpb25fTVkkcG9wXzE4DQpwb3A2MF9NWSA8LSBwb3B1bGF0aW9uX01ZJHBvcF82MA0KYGBgDQoNCmBgYHtyfQ0KdG90YWxfY2FzZXMgPC0gc3VtKGNhc2VzX01ZJGNhc2VzX25ldykNCnRvdGFsX2luZmVjdGVkX3BlcmNlbnRhZ2UgPC0gdG90YWxfY2FzZXMgLyBwb3BfTVkgKiAxMDANCnByaW50KHRvdGFsX2Nhc2VzKQ0KcHJpbnQodG90YWxfaW5mZWN0ZWRfcGVyY2VudGFnZSkNCiNwcmludChpbmZlY3RlZF9wZXJjZW50YWdlICogcG9wX01ZKQ0KDQpwcmludCgiQ2hpbGQiKQ0KcHJpbnQoc3VtKGNhc2VzX01ZJGNhc2VzX2NoaWxkICsgY2FzZXNfTVkkY2FzZXNfYWRvbGVzY2VudCkgLyBwb3AxMl9NWSAqIDEwMCkNCmBgYA0KDQpgYGB7cn0NCm1lYW4oY2FzZXNfTVkkY2FzZXNfbmV3KQ0KbWVhbihjYXNlc19NWSRjYXNlc19uZXcsIG5hLnJtID0gVFJVRSkNCmBgYA0KDQpgYGB7cn0NCmZpcnN0VHdvIDwtIGNhc2VzX01ZW2Nhc2VzX01ZJGRhdGUgPj0gIjIwMjAtMDItMDEiICYgY2FzZXNfTVkkZGF0ZSA8PSAiMjAyMC0wMy0zMSIsIF0NCiNWaWV3KGZpcnN0VHdvKQ0KdC50ZXN0KGZpcnN0VHdvJGNhc2VzX25ldywgeSA9IE5VTEwsIGFsdGVybmF0aXZlID0gYygidHdvLnNpZGVkIiksIG11ID0gMCwgcGFpcmVkID0gRkFMU0UsIHZhci5lcXVhbCA9IEZBTFNFLCBjb25mLmxldmVsID0gMC45NSkNCmBgYA0KDQpgYGB7cn0NCmZpcnN0Rm91ciA8LSBjYXNlc19NWVtjYXNlc19NWSRkYXRlID49ICIyMDIwLTAyLTAxIiAmIGNhc2VzX01ZJGRhdGUgPD0gIjIwMjAtMDUtMzEiLCBdDQp0LnRlc3QoZmlyc3RGb3VyJGNhc2VzX25ldywgeSA9IE5VTEwsIGFsdGVybmF0aXZlID0gYygidHdvLnNpZGVkIiksIG11ID0gMCwgcGFpcmVkID0gRkFMU0UsIHZhci5lcXVhbCA9IEZBTFNFLCBjb25mLmxldmVsID0gMC45NSkNCmBgYA0KDQpgYGB7cn0NCiNzZXEoYXMuRGF0ZShjdXQoYXMuRGF0ZSgiMjAyMC0wMy0zMSIpLCAibW9udGgiKSksIGxlbmd0aD0yLCBieT0iKzIgbW9udGgiKVsyXS0xDQojIyAiMjAxMi0wNi0zMCINCiNsdWJyaWNhdGUNCiNiYXNlX2RhdGUgPC0gIjIwMjAtMDMtMzEiDQpiYXNlX2RhdGUgPC0gIjIwMjAtMDMtMzEiDQoNCmZpcnN0Rm91ciA8LSBjYXNlc19NWVtjYXNlc19NWSRkYXRlID49ICIyMDIwLTAyLTAxIiAmIGNhc2VzX01ZJGRhdGUgPD0gYmFzZV9kYXRlLCBdDQp0LnRlc3QoZmlyc3RGb3VyJGNhc2VzX25ldywgeSA9IE5VTEwsIGFsdGVybmF0aXZlID0gYygidHdvLnNpZGVkIiksIG11ID0gMCwgcGFpcmVkID0gRkFMU0UsIHZhci5lcXVhbCA9IEZBTFNFLCBjb25mLmxldmVsID0gMC45NSkNCg0KZm9yICh4IGluIDE6MTApIHsNCiAgI3ByaW50KGFzLkRhdGUoIjIwMjAtMDMtMzEiKSAlbSslIG1vbnRocygyKSkNCiAgdXBkYXRlIDwtIGFzLkRhdGUoYmFzZV9kYXRlKSAlbSslIG1vbnRocygyKQ0KICBiYXNlX2RhdGUgPC0gdXBkYXRlDQogIGZpbHRlcmVkIDwtIGNhc2VzX01ZW2Nhc2VzX01ZJGRhdGUgPj0gIjIwMjAtMDItMDEiICYgY2FzZXNfTVkkZGF0ZSA8PSBiYXNlX2RhdGUsIF0NCmR0IDwtIHQudGVzdChmaWx0ZXJlZCRjYXNlc19uZXcsIHkgPSBOVUxMLCBhbHRlcm5hdGl2ZSA9IGMoInR3by5zaWRlZCIpLCBtdSA9IDAsIHBhaXJlZCA9IEZBTFNFLCB2YXIuZXF1YWwgPSBGQUxTRSwgY29uZi5sZXZlbCA9IDAuOTUpDQogICNwcmludChiYXNlX2RhdGUpDQpwcmludChkdCkNCn0NCg0KYGBgDQo=</div>
 
 
 
