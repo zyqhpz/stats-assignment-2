@@ -448,11 +448,35 @@ mean of x
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI3NlcShhcy5EYXRlKGN1dChhcy5EYXRlKFwiMjAyMC0wMy0zMVwiKSwgXCJtb250aFwiKSksIGxlbmd0aD0yLCBieT1cIisyIG1vbnRoXCIpWzJdLTFcbiMjIFwiMjAxMi0wNi0zMFwiXG4jbHVicmljYXRlXG4jYmFzZV9kYXRlIDwtIFwiMjAyMC0wMy0zMVwiXG5iYXNlX2RhdGUgPC0gXCIyMDIwLTAzLTMxXCJcblxuZmlyc3RGb3VyIDwtIGNhc2VzX01ZW2Nhc2VzX01ZJGRhdGUgPj0gXCIyMDIwLTAyLTAxXCIgJiBjYXNlc19NWSRkYXRlIDw9IGJhc2VfZGF0ZSwgXVxudC50ZXN0KGZpcnN0Rm91ciRjYXNlc19uZXcsIHkgPSBOVUxMLCBhbHRlcm5hdGl2ZSA9IGMoXCJ0d28uc2lkZWRcIiksIG11ID0gMCwgcGFpcmVkID0gRkFMU0UsIHZhci5lcXVhbCA9IEZBTFNFLCBjb25mLmxldmVsID0gMC45NSlcbmBgYCJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI3NlcShhcy5EYXRlKGN1dChhcy5EYXRlKFwiMjAyMC0wMy0zMVwiKSwgXCJtb250aFwiKSksIGxlbmd0aD0yLCBieT1cIisyIG1vbnRoXCIpWzJdLTFcbiMjIFwiMjAxMi0wNi0zMFwiXG4jbHVicmljYXRlXG4jYmFzZV9kYXRlIDwtIFwiMjAyMC0wMy0zMVwiXG5iYXNlX2RhdGUgPC0gXCIyMDIwLTAzLTMxXCJcblxuZmlyc3RGb3VyIDwtIGNhc2VzX01ZW2Nhc2VzX01ZJGRhdGUgPj0gXCIyMDIwLTAyLTAxXCIgJiBjYXNlc19NWSRkYXRlIDw9IGJhc2VfZGF0ZSwgXVxudC50ZXN0KGZpcnN0Rm91ciRjYXNlc19uZXcsIHkgPSBOVUxMLCBhbHRlcm5hdGl2ZSA9IGMoXCJ0d28uc2lkZWRcIiksIG11ID0gMCwgcGFpcmVkID0gRkFMU0UsIHZhci5lcXVhbCA9IEZBTFNFLCBjb25mLmxldmVsID0gMC45NSlcblxuZm9yICh4IGluIDE6MTApIHtcbiAgI3ByaW50KGFzLkRhdGUoXCIyMDIwLTAzLTMxXCIpICVtKyUgbW9udGhzKDIpKVxuICB1cGRhdGUgPC0gYXMuRGF0ZShiYXNlX2RhdGUpICVtKyUgbW9udGhzKDIpXG4gIGJhc2VfZGF0ZSA8LSB1cGRhdGVcbiAgZmlsdGVyZWQgPC0gY2FzZXNfTVlbY2FzZXNfTVkkZGF0ZSA+PSBcIjIwMjAtMDItMDFcIiAmIGNhc2VzX01ZJGRhdGUgPD0gYmFzZV9kYXRlLCBdXG5kdCA8LSB0LnRlc3QoZmlsdGVyZWQkY2FzZXNfbmV3LCB5ID0gTlVMTCwgYWx0ZXJuYXRpdmUgPSBjKFwidHdvLnNpZGVkXCIpLCBtdSA9IDAsIHBhaXJlZCA9IEZBTFNFLCB2YXIuZXF1YWwgPSBGQUxTRSwgY29uZi5sZXZlbCA9IDAuOTUpXG4gICNwcmludChiYXNlX2RhdGUpXG5wcmludChkdClcbnByaW50KG1lYW4oZmlsdGVyZWQkY2FzZXNfbmV3KSlcbn1cblxuYGBgIn0= -->
 <pre class="r"><code>#seq(as.Date(cut(as.Date(&quot;2020-03-31&quot;), &quot;month&quot;)), length=2, by=&quot;+2 month&quot;)[2]-1
 ## &quot;2012-06-30&quot;
 #lubricate
 #base_date &lt;- &quot;2020-03-31&quot;
+base_date &lt;- &quot;2020-03-31&quot;
+
+firstFour &lt;- cases_MY[cases_MY$date &gt;= &quot;2020-02-01&quot; &amp; cases_MY$date &lt;= base_date, ]
+t.test(firstFour$cases_new, y = NULL, alternative = c(&quot;two.sided&quot;), mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)
+
+for (x in 1:10) {
+  #print(as.Date(&quot;2020-03-31&quot;) %m+% months(2))
+  update &lt;- as.Date(base_date) %m+% months(2)
+  base_date &lt;- update
+  filtered &lt;- cases_MY[cases_MY$date &gt;= &quot;2020-02-01&quot; &amp; cases_MY$date &lt;= base_date, ]
+dt &lt;- t.test(filtered$cases_new, y = NULL, alternative = c(&quot;two.sided&quot;), mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)
+  #print(base_date)
+print(dt)
+print(mean(filtered$cases_new))
+}
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyByZXRyaWV2ZSBjYXNlcyBmb3IgdW5kZXIgMTggY2hpbGRcblxuYmFzZV9kYXRlIDwtIFwiMjAyMC0wMy0zMVwiXG5cbmZpcnN0Rm91ciA8LSBjYXNlc19NWVtjYXNlc19NWSRkYXRlID49IFwiMjAyMC0wMi0wMVwiICYgY2FzZXNfTVkkZGF0ZSA8PSBiYXNlX2RhdGUsIF1cbnQudGVzdChmaXJzdEZvdXIkY2FzZXNfbmV3LCB5ID0gTlVMTCwgYWx0ZXJuYXRpdmUgPSBjKFwidHdvLnNpZGVkXCIpLCBtdSA9IDAsIHBhaXJlZCA9IEZBTFNFLCB2YXIuZXF1YWwgPSBGQUxTRSwgY29uZi5sZXZlbCA9IDAuOTUpXG5gYGAifQ== -->
+<pre class="r"><code># retrieve cases for under 18 child
+
 base_date &lt;- &quot;2020-03-31&quot;
 
 firstFour &lt;- cases_MY[cases_MY$date &gt;= &quot;2020-02-01&quot; &amp; cases_MY$date &lt;= base_date, ]
@@ -471,141 +495,765 @@ sample estimates:
 mean of x 
  45.96667 </code></pre>
 <!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZm9yICh4IGluIDE6MTApIHtcbiAgI3ByaW50KGFzLkRhdGUoXCIyMDIwLTAzLTMxXCIpICVtKyUgbW9udGhzKDIpKVxuICB1cGRhdGUgPC0gYXMuRGF0ZShiYXNlX2RhdGUpICVtKyUgbW9udGhzKDIpXG4gIGJhc2VfZGF0ZSA8LSB1cGRhdGVcbiAgZmlsdGVyZWQgPC0gY2FzZXNfTVlbY2FzZXNfTVkkZGF0ZSA+PSBcIjIwMjAtMDItMDFcIiAmIGNhc2VzX01ZJGRhdGUgPD0gYmFzZV9kYXRlLCBdXG5kdCA8LSB0LnRlc3QoZmlsdGVyZWQkY2FzZXNfbmV3LCB5ID0gTlVMTCwgYWx0ZXJuYXRpdmUgPSBjKFwidHdvLnNpZGVkXCIpLCBtdSA9IDAsIHBhaXJlZCA9IEZBTFNFLCB2YXIuZXF1YWwgPSBGQUxTRSwgY29uZi5sZXZlbCA9IDAuOTUpXG4gICNwcmludChiYXNlX2RhdGUpXG5wcmludChkdClcbn1cbmBgYCJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZm9yICh4IGluIDE6MTApIHtcbiAgYmFzZV9kYXRlIDwtIGFzLkRhdGUoYmFzZV9kYXRlKSAlbSslIG1vbnRocygyKVxuICBmaWx0ZXJlZCA8LSBjYXNlc19NWVtjYXNlc19NWSRkYXRlID49IFwiMjAyMC0wMi0wMVwiICYgY2FzZXNfTVkkZGF0ZSA8PSBiYXNlX2RhdGUsXVxuICAjY2FzZXMxMiA8LSBmaWx0ZXJlZFtmaWx0ZXJlZCRdXG4gIGNhc2VzXzEyIDwtIGZpbHRlcmVkJGNhc2VzXzBfNCArIGZpbHRlcmVkJGNhc2VzXzVfMTEgKyBmaWx0ZXJlZCRjYXNlc18xMl8xN1xuICB0b3RhbF8xMiA8LSBkYXRhLmZyYW1lKGRhdGUgPSBmaWx0ZXJlZCRkYXRlLCBjYXNlcyA9IGNhc2VzXzEyKVxuICMgVmlldyhjYXNlc18xMilcbiAgI1ZpZXcodG90YWxfMTIpXG4gIGNhc2VzMTIgPC0gdC50ZXN0KHRvdGFsXzEyJGNhc2VzLCB5ID0gTlVMTCwgYWx0ZXJuYXRpdmUgPSBcInR3by5zaWRlZFwiLCBtdSA9IDAsIHBhaXJlZCA9IEZBTFNFLCB2YXIuZXF1YWwgPSBGQUxTRSwgY29uZi5sZXZlbCA9IDAuOTUpXG4gIHByaW50KGNhc2VzMTIpXG4gIHByaW50KG1lYW4oZmlsdGVyZWQkY2FzZXNfbmV3KSlcbn1cbmBgYCJ9 -->
 <pre class="r"><code>for (x in 1:10) {
-  #print(as.Date(&quot;2020-03-31&quot;) %m+% months(2))
-  update &lt;- as.Date(base_date) %m+% months(2)
-  base_date &lt;- update
-  filtered &lt;- cases_MY[cases_MY$date &gt;= &quot;2020-02-01&quot; &amp; cases_MY$date &lt;= base_date, ]
-dt &lt;- t.test(filtered$cases_new, y = NULL, alternative = c(&quot;two.sided&quot;), mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)
-  #print(base_date)
-print(dt)
+  base_date &lt;- as.Date(base_date) %m+% months(2)
+  filtered &lt;- cases_MY[cases_MY$date &gt;= &quot;2020-02-01&quot; &amp; cases_MY$date &lt;= base_date,]
+  #cases12 &lt;- filtered[filtered$]
+  cases_12 &lt;- filtered$cases_0_4 + filtered$cases_5_11 + filtered$cases_12_17
+  total_12 &lt;- data.frame(date = filtered$date, cases = cases_12)
+ # View(cases_12)
+  #View(total_12)
+  cases12 &lt;- t.test(total_12$cases, y = NULL, alternative = &quot;two.sided&quot;, mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)
+  print(cases12)
+  print(mean(filtered$cases_new))
 }</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG5cdE9uZSBTYW1wbGUgdC10ZXN0XG5cbmRhdGE6ICBmaWx0ZXJlZCRjYXNlc19uZXdcbnQgPSAxMS4wNTUsIGRmID0gMTIwLCBwLXZhbHVlIDwgMi4yZS0xNlxuYWx0ZXJuYXRpdmUgaHlwb3RoZXNpczogdHJ1ZSBtZWFuIGlzIG5vdCBlcXVhbCB0byAwXG45NSBwZXJjZW50IGNvbmZpZGVuY2UgaW50ZXJ2YWw6XG4gNTIuOTkyMjAgNzYuMTE1MjRcbnNhbXBsZSBlc3RpbWF0ZXM6XG5tZWFuIG9mIHggXG4gNjQuNTUzNzIgXG5cblxuXHRPbmUgU2FtcGxlIHQtdGVzdFxuXG5kYXRhOiAgZmlsdGVyZWQkY2FzZXNfbmV3XG50ID0gMTEuMDA5LCBkZiA9IDE4MSwgcC12YWx1ZSA8IDIuMmUtMTZcbmFsdGVybmF0aXZlIGh5cG90aGVzaXM6IHRydWUgbWVhbiBpcyBub3QgZXF1YWwgdG8gMFxuOTUgcGVyY2VudCBjb25maWRlbmNlIGludGVydmFsOlxuIDQwLjQ0MzI4IDU4LjEwNjE3XG5zYW1wbGUgZXN0aW1hdGVzOlxubWVhbiBvZiB4IFxuIDQ5LjI3NDczIFxuXG5cblx0T25lIFNhbXBsZSB0LXRlc3RcblxuZGF0YTogIGZpbHRlcmVkJGNhc2VzX25ld1xudCA9IDEyLjczMywgZGYgPSAyNDIsIHAtdmFsdWUgPCAyLjJlLTE2XG5hbHRlcm5hdGl2ZSBoeXBvdGhlc2lzOiB0cnVlIG1lYW4gaXMgbm90IGVxdWFsIHRvIDBcbjk1IHBlcmNlbnQgY29uZmlkZW5jZSBpbnRlcnZhbDpcbiAzOS4wMTU3MiA1My4yOTcwM1xuc2FtcGxlIGVzdGltYXRlczpcbm1lYW4gb2YgeCBcbiA0Ni4xNTYzOCBcblxuXG5cdE9uZSBTYW1wbGUgdC10ZXN0XG5cbmRhdGE6ICBmaWx0ZXJlZCRjYXNlc19uZXdcbnQgPSA5Ljg2NjcsIGRmID0gMzAzLCBwLXZhbHVlIDwgMi4yZS0xNlxuYWx0ZXJuYXRpdmUgaHlwb3RoZXNpczogdHJ1ZSBtZWFuIGlzIG5vdCBlcXVhbCB0byAwXG45NSBwZXJjZW50IGNvbmZpZGVuY2UgaW50ZXJ2YWw6XG4gMTcyLjk4NjggMjU5LjE3NzdcbnNhbXBsZSBlc3RpbWF0ZXM6XG5tZWFuIG9mIHggXG4gMjE2LjA4MjIgXG5cblxuXHRPbmUgU2FtcGxlIHQtdGVzdFxuXG5kYXRhOiAgZmlsdGVyZWQkY2FzZXNfbmV3XG50ID0gMTEuMTE3LCBkZiA9IDM2NCwgcC12YWx1ZSA8IDIuMmUtMTZcbmFsdGVybmF0aXZlIGh5cG90aGVzaXM6IHRydWUgbWVhbiBpcyBub3QgZXF1YWwgdG8gMFxuOTUgcGVyY2VudCBjb25maWRlbmNlIGludGVydmFsOlxuIDQ3Mi43ODYyIDY3NS45OTc0XG5zYW1wbGUgZXN0aW1hdGVzOlxubWVhbiBvZiB4IFxuIDU3NC4zOTE4IFxuXG5cblx0T25lIFNhbXBsZSB0LXRlc3RcblxuZGF0YTogIGZpbHRlcmVkJGNhc2VzX25ld1xudCA9IDE0LjQ2MSwgZGYgPSA0MjMsIHAtdmFsdWUgPCAyLjJlLTE2XG5hbHRlcm5hdGl2ZSBoeXBvdGhlc2lzOiB0cnVlIG1lYW4gaXMgbm90IGVxdWFsIHRvIDBcbjk1IHBlcmNlbnQgY29uZmlkZW5jZSBpbnRlcnZhbDpcbiA3MDEuMDYxNCA5MjEuNjI3M1xuc2FtcGxlIGVzdGltYXRlczpcbm1lYW4gb2YgeCBcbiA4MTEuMzQ0MyBcblxuXG5cdE9uZSBTYW1wbGUgdC10ZXN0XG5cbmRhdGE6ICBmaWx0ZXJlZCRjYXNlc19uZXdcbnQgPSAxNS45OTksIGRmID0gNDg0LCBwLXZhbHVlIDwgMi4yZS0xNlxuYWx0ZXJuYXRpdmUgaHlwb3RoZXNpczogdHJ1ZSBtZWFuIGlzIG5vdCBlcXVhbCB0byAwXG45NSBwZXJjZW50IGNvbmZpZGVuY2UgaW50ZXJ2YWw6XG4gMTAyMi44MjggMTMwOS4yMzRcbnNhbXBsZSBlc3RpbWF0ZXM6XG5tZWFuIG9mIHggXG4gMTE2Ni4wMzEgXG5cblxuXHRPbmUgU2FtcGxlIHQtdGVzdFxuXG5kYXRhOiAgZmlsdGVyZWQkY2FzZXNfbmV3XG50ID0gMTUuMjEzLCBkZiA9IDU0NSwgcC12YWx1ZSA8IDIuMmUtMTZcbmFsdGVybmF0aXZlIGh5cG90aGVzaXM6IHRydWUgbWVhbiBpcyBub3QgZXF1YWwgdG8gMFxuOTUgcGVyY2VudCBjb25maWRlbmNlIGludGVydmFsOlxuIDE3NDcuMzA3IDIyNjUuNDMzXG5zYW1wbGUgZXN0aW1hdGVzOlxubWVhbiBvZiB4IFxuICAyMDA2LjM3IFxuXG5cblx0T25lIFNhbXBsZSB0LXRlc3RcblxuZGF0YTogIGZpbHRlcmVkJGNhc2VzX25ld1xudCA9IDE1LjQ3NiwgZGYgPSA2MDcsIHAtdmFsdWUgPCAyLjJlLTE2XG5hbHRlcm5hdGl2ZSBoeXBvdGhlc2lzOiB0cnVlIG1lYW4gaXMgbm90IGVxdWFsIHRvIDBcbjk1IHBlcmNlbnQgY29uZmlkZW5jZSBpbnRlcnZhbDpcbiAzMjI0Ljg2MiA0MTYyLjI2Nlxuc2FtcGxlIGVzdGltYXRlczpcbm1lYW4gb2YgeCBcbiAzNjkzLjU2NCBcblxuXG5cdE9uZSBTYW1wbGUgdC10ZXN0XG5cbmRhdGE6ICBmaWx0ZXJlZCRjYXNlc19uZXdcbnQgPSAxNy45MDksIGRmID0gNjY4LCBwLXZhbHVlIDwgMi4yZS0xNlxuYWx0ZXJuYXRpdmUgaHlwb3RoZXNpczogdHJ1ZSBtZWFuIGlzIG5vdCBlcXVhbCB0byAwXG45NSBwZXJjZW50IGNvbmZpZGVuY2UgaW50ZXJ2YWw6XG4gMzUwMy45MTkgNDM2Ni44NTVcbnNhbXBsZSBlc3RpbWF0ZXM6XG5tZWFuIG9mIHggXG4gMzkzNS4zODcgXG4ifQ== -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5cdE9uZSBTYW1wbGUgdC10ZXN0XG5cbmRhdGE6ICB0b3RhbF8xMiRjYXNlc1xudCA9IDguMzE3MSwgZGYgPSAxMjAsIHAtdmFsdWUgPSAxLjYzM2UtMTNcbmFsdGVybmF0aXZlIGh5cG90aGVzaXM6IHRydWUgbWVhbiBpcyBub3QgZXF1YWwgdG8gMFxuOTUgcGVyY2VudCBjb25maWRlbmNlIGludGVydmFsOlxuIDQuNDk2MTA2IDcuMzA1NTQ3XG5zYW1wbGUgZXN0aW1hdGVzOlxubWVhbiBvZiB4IFxuIDUuOTAwODI2IFxuXG5bMV0gNjQuNTUzNzJcblxuXHRPbmUgU2FtcGxlIHQtdGVzdFxuXG5kYXRhOiAgdG90YWxfMTIkY2FzZXNcbnQgPSA4LjczNjEsIGRmID0gMTgxLCBwLXZhbHVlID0gMS41OTZlLTE1XG5hbHRlcm5hdGl2ZSBoeXBvdGhlc2lzOiB0cnVlIG1lYW4gaXMgbm90IGVxdWFsIHRvIDBcbjk1IHBlcmNlbnQgY29uZmlkZW5jZSBpbnRlcnZhbDpcbiAzLjU4NTcwNCA1LjY3ODAzM1xuc2FtcGxlIGVzdGltYXRlczpcbm1lYW4gb2YgeCBcbiA0LjYzMTg2OCBcblxuWzFdIDQ5LjI3NDczXG5cblx0T25lIFNhbXBsZSB0LXRlc3RcblxuZGF0YTogIHRvdGFsXzEyJGNhc2VzXG50ID0gMTAuMTgzLCBkZiA9IDI0MiwgcC12YWx1ZSA8IDIuMmUtMTZcbmFsdGVybmF0aXZlIGh5cG90aGVzaXM6IHRydWUgbWVhbiBpcyBub3QgZXF1YWwgdG8gMFxuOTUgcGVyY2VudCBjb25maWRlbmNlIGludGVydmFsOlxuIDMuODA3MDk5IDUuNjMzMjMwXG5zYW1wbGUgZXN0aW1hdGVzOlxubWVhbiBvZiB4IFxuIDQuNzIwMTY1IFxuXG5bMV0gNDYuMTU2MzhcblxuXHRPbmUgU2FtcGxlIHQtdGVzdFxuXG5kYXRhOiAgdG90YWxfMTIkY2FzZXNcbnQgPSA5LjI3NjksIGRmID0gMzAzLCBwLXZhbHVlIDwgMi4yZS0xNlxuYWx0ZXJuYXRpdmUgaHlwb3RoZXNpczogdHJ1ZSBtZWFuIGlzIG5vdCBlcXVhbCB0byAwXG45NSBwZXJjZW50IGNvbmZpZGVuY2UgaW50ZXJ2YWw6XG4gMjEuMDczMTkgMzIuNDIwMjNcbnNhbXBsZSBlc3RpbWF0ZXM6XG5tZWFuIG9mIHggXG4gMjYuNzQ2NzEgXG5cblsxXSAyMTYuMDgyMlxuXG5cdE9uZSBTYW1wbGUgdC10ZXN0XG5cbmRhdGE6ICB0b3RhbF8xMiRjYXNlc1xudCA9IDEwLjkxLCBkZiA9IDM2NCwgcC12YWx1ZSA8IDIuMmUtMTZcbmFsdGVybmF0aXZlIGh5cG90aGVzaXM6IHRydWUgbWVhbiBpcyBub3QgZXF1YWwgdG8gMFxuOTUgcGVyY2VudCBjb25maWRlbmNlIGludGVydmFsOlxuIDUzLjI5NzY1IDc2LjczNTIzXG5zYW1wbGUgZXN0aW1hdGVzOlxubWVhbiBvZiB4IFxuIDY1LjAxNjQ0IFxuXG5bMV0gNTc0LjM5MThcblxuXHRPbmUgU2FtcGxlIHQtdGVzdFxuXG5kYXRhOiAgdG90YWxfMTIkY2FzZXNcbnQgPSAxNC43MTUsIGRmID0gNDIzLCBwLXZhbHVlIDwgMi4yZS0xNlxuYWx0ZXJuYXRpdmUgaHlwb3RoZXNpczogdHJ1ZSBtZWFuIGlzIG5vdCBlcXVhbCB0byAwXG45NSBwZXJjZW50IGNvbmZpZGVuY2UgaW50ZXJ2YWw6XG4gIDc4LjE0OTc2IDEwMi4yNDY0Nlxuc2FtcGxlIGVzdGltYXRlczpcbm1lYW4gb2YgeCBcbiA5MC4xOTgxMSBcblxuWzFdIDgxMS4zNDQzXG5cblx0T25lIFNhbXBsZSB0LXRlc3RcblxuZGF0YTogIHRvdGFsXzEyJGNhc2VzXG50ID0gMTMuMzUzLCBkZiA9IDQ4NCwgcC12YWx1ZSA8IDIuMmUtMTZcbmFsdGVybmF0aXZlIGh5cG90aGVzaXM6IHRydWUgbWVhbiBpcyBub3QgZXF1YWwgdG8gMFxuOTUgcGVyY2VudCBjb25maWRlbmNlIGludGVydmFsOlxuIDE0Mi41MDYwIDE5MS42Nzk2XG5zYW1wbGUgZXN0aW1hdGVzOlxubWVhbiBvZiB4IFxuIDE2Ny4wOTI4IFxuXG5bMV0gMTE2Ni4wMzFcblxuXHRPbmUgU2FtcGxlIHQtdGVzdFxuXG5kYXRhOiAgdG90YWxfMTIkY2FzZXNcbnQgPSAxMy4wNDYsIGRmID0gNTQ1LCBwLXZhbHVlIDwgMi4yZS0xNlxuYWx0ZXJuYXRpdmUgaHlwb3RoZXNpczogdHJ1ZSBtZWFuIGlzIG5vdCBlcXVhbCB0byAwXG45NSBwZXJjZW50IGNvbmZpZGVuY2UgaW50ZXJ2YWw6XG4gMjgyLjA2OTIgMzgyLjA3MDBcbnNhbXBsZSBlc3RpbWF0ZXM6XG5tZWFuIG9mIHggXG4gMzMyLjA2OTYgXG5cblsxXSAyMDA2LjM3XG5cblx0T25lIFNhbXBsZSB0LXRlc3RcblxuZGF0YTogIHRvdGFsXzEyJGNhc2VzXG50ID0gMTMuNjc4LCBkZiA9IDYwNywgcC12YWx1ZSA8IDIuMmUtMTZcbmFsdGVybmF0aXZlIGh5cG90aGVzaXM6IHRydWUgbWVhbiBpcyBub3QgZXF1YWwgdG8gMFxuOTUgcGVyY2VudCBjb25maWRlbmNlIGludGVydmFsOlxuIDYxOC45MjA4IDgyNi40NDc3XG5zYW1wbGUgZXN0aW1hdGVzOlxubWVhbiBvZiB4IFxuIDcyMi42ODQyIFxuXG5bMV0gMzY5My41NjRcblxuXHRPbmUgU2FtcGxlIHQtdGVzdFxuXG5kYXRhOiAgdG90YWxfMTIkY2FzZXNcbnQgPSAxNi4wNjIsIGRmID0gNjY4LCBwLXZhbHVlIDwgMi4yZS0xNlxuYWx0ZXJuYXRpdmUgaHlwb3RoZXNpczogdHJ1ZSBtZWFuIGlzIG5vdCBlcXVhbCB0byAwXG45NSBwZXJjZW50IGNvbmZpZGVuY2UgaW50ZXJ2YWw6XG4gNjkwLjcxNTIgODgzLjEwNTRcbnNhbXBsZSBlc3RpbWF0ZXM6XG5tZWFuIG9mIHggXG4gNzg2LjkxMDMgXG5cblsxXSAzOTM1LjM4N1xuIn0= -->
 <pre><code>
     One Sample t-test
 
-data:  filtered$cases_new
-t = 11.055, df = 120, p-value &lt; 2.2e-16
+data:  total_12$cases
+t = 8.3171, df = 120, p-value = 1.633e-13
 alternative hypothesis: true mean is not equal to 0
 95 percent confidence interval:
- 52.99220 76.11524
+ 4.496106 7.305547
 sample estimates:
 mean of x 
- 64.55372 
+ 5.900826 
+
+[1] 64.55372
+
+    One Sample t-test
+
+data:  total_12$cases
+t = 8.7361, df = 181, p-value = 1.596e-15
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ 3.585704 5.678033
+sample estimates:
+mean of x 
+ 4.631868 
+
+[1] 49.27473
+
+    One Sample t-test
+
+data:  total_12$cases
+t = 10.183, df = 242, p-value &lt; 2.2e-16
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ 3.807099 5.633230
+sample estimates:
+mean of x 
+ 4.720165 
+
+[1] 46.15638
+
+    One Sample t-test
+
+data:  total_12$cases
+t = 9.2769, df = 303, p-value &lt; 2.2e-16
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ 21.07319 32.42023
+sample estimates:
+mean of x 
+ 26.74671 
+
+[1] 216.0822
+
+    One Sample t-test
+
+data:  total_12$cases
+t = 10.91, df = 364, p-value &lt; 2.2e-16
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ 53.29765 76.73523
+sample estimates:
+mean of x 
+ 65.01644 
+
+[1] 574.3918
+
+    One Sample t-test
+
+data:  total_12$cases
+t = 14.715, df = 423, p-value &lt; 2.2e-16
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+  78.14976 102.24646
+sample estimates:
+mean of x 
+ 90.19811 
+
+[1] 811.3443
+
+    One Sample t-test
+
+data:  total_12$cases
+t = 13.353, df = 484, p-value &lt; 2.2e-16
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ 142.5060 191.6796
+sample estimates:
+mean of x 
+ 167.0928 
+
+[1] 1166.031
+
+    One Sample t-test
+
+data:  total_12$cases
+t = 13.046, df = 545, p-value &lt; 2.2e-16
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ 282.0692 382.0700
+sample estimates:
+mean of x 
+ 332.0696 
+
+[1] 2006.37
+
+    One Sample t-test
+
+data:  total_12$cases
+t = 13.678, df = 607, p-value &lt; 2.2e-16
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ 618.9208 826.4477
+sample estimates:
+mean of x 
+ 722.6842 
+
+[1] 3693.564
+
+    One Sample t-test
+
+data:  total_12$cases
+t = 16.062, df = 668, p-value &lt; 2.2e-16
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ 690.7152 883.1054
+sample estimates:
+mean of x 
+ 786.9103 
+
+[1] 3935.387</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuICBwcmludChzdW0odG90YWxfMTIkY2FzZXMpKVxuYGBgIn0= -->
+<pre class="r"><code>  print(sum(total_12$cases))</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDUyNjQ0M1xuIn0= -->
+<pre><code>[1] 526443</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyByZXRyaWV2ZSBjYXNlcyBmb3IgY2hpbGQgYWx0ZXJuYXRpdmVcblxuYmFzZV9kYXRlIDwtIFwiMjAyMC0wMy0zMVwiXG5cbmZpcnN0Rm91ciA8LSBjYXNlc19NWVtjYXNlc19NWSRkYXRlID49IFwiMjAyMC0wMi0wMVwiICYgY2FzZXNfTVkkZGF0ZSA8PSBiYXNlX2RhdGUsIF1cbnQudGVzdChmaXJzdEZvdXIkY2FzZXNfY2hpbGQgKyBmaXJzdEZvdXIkY2FzZXNfYWRvbGVzY2VudCwgeSA9IE5VTEwsIGFsdGVybmF0aXZlID0gYyhcInR3by5zaWRlZFwiKSwgbXUgPSAwLCBwYWlyZWQgPSBGQUxTRSwgdmFyLmVxdWFsID0gRkFMU0UsIGNvbmYubGV2ZWwgPSAwLjk1KVxuYGBgIn0= -->
+<pre class="r"><code># retrieve cases for child alternative
+
+base_date &lt;- &quot;2020-03-31&quot;
+
+firstFour &lt;- cases_MY[cases_MY$date &gt;= &quot;2020-02-01&quot; &amp; cases_MY$date &lt;= base_date, ]
+t.test(firstFour$cases_child + firstFour$cases_adolescent, y = NULL, alternative = c(&quot;two.sided&quot;), mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5cdE9uZSBTYW1wbGUgdC10ZXN0XG5cbmRhdGE6ICBmaXJzdEZvdXIkY2FzZXNfY2hpbGQgKyBmaXJzdEZvdXIkY2FzZXNfYWRvbGVzY2VudFxudCA9IDQuNDMwOCwgZGYgPSA1OSwgcC12YWx1ZSA9IDQuMTM3ZS0wNVxuYWx0ZXJuYXRpdmUgaHlwb3RoZXNpczogdHJ1ZSBtZWFuIGlzIG5vdCBlcXVhbCB0byAwXG45NSBwZXJjZW50IGNvbmZpZGVuY2UgaW50ZXJ2YWw6XG4gMS44MzcwOTMgNC44NjI5MDdcbnNhbXBsZSBlc3RpbWF0ZXM6XG5tZWFuIG9mIHggXG4gICAgIDMuMzUgXG4ifQ== -->
+<pre><code>
+    One Sample t-test
+
+data:  firstFour$cases_child + firstFour$cases_adolescent
+t = 4.4308, df = 59, p-value = 4.137e-05
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ 1.837093 4.862907
+sample estimates:
+mean of x 
+     3.35 </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZm9yICh4IGluIDE6MTApIHtcbiAgYmFzZV9kYXRlIDwtIGFzLkRhdGUoYmFzZV9kYXRlKSAlbSslIG1vbnRocygyKVxuICBmaWx0ZXJlZCA8LSBjYXNlc19NWVtjYXNlc19NWSRkYXRlID49IFwiMjAyMC0wMi0wMVwiICYgY2FzZXNfTVkkZGF0ZSA8PSBiYXNlX2RhdGUsXVxuICBjYXNlczEyIDwtIHQudGVzdChmaWx0ZXJlZCRjYXNlc19jaGlsZCArIGZpbHRlcmVkJGNhc2VzX2Fkb2xlc2NlbnQsIHkgPSBOVUxMLCBhbHRlcm5hdGl2ZSA9IFwidHdvLnNpZGVkXCIsIG11ID0gMCwgcGFpcmVkID0gRkFMU0UsIHZhci5lcXVhbCA9IEZBTFNFLCBjb25mLmxldmVsID0gMC45NSlcbiAgcHJpbnQoY2FzZXMxMilcbiAgcHJpbnQobWVhbihmaWx0ZXJlZCRjYXNlc19jaGlsZCArIGZpbHRlcmVkJGNhc2VzX2Fkb2xlc2NlbnQpKVxufVxuYGBgIn0= -->
+<pre class="r"><code>for (x in 1:10) {
+  base_date &lt;- as.Date(base_date) %m+% months(2)
+  filtered &lt;- cases_MY[cases_MY$date &gt;= &quot;2020-02-01&quot; &amp; cases_MY$date &lt;= base_date,]
+  cases12 &lt;- t.test(filtered$cases_child + filtered$cases_adolescent, y = NULL, alternative = &quot;two.sided&quot;, mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)
+  print(cases12)
+  print(mean(filtered$cases_child + filtered$cases_adolescent))
+}</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5cdE9uZSBTYW1wbGUgdC10ZXN0XG5cbmRhdGE6ICBmaWx0ZXJlZCRjYXNlc19jaGlsZCArIGZpbHRlcmVkJGNhc2VzX2Fkb2xlc2NlbnRcbnQgPSA4LjMxNzEsIGRmID0gMTIwLCBwLXZhbHVlID0gMS42MzNlLTEzXG5hbHRlcm5hdGl2ZSBoeXBvdGhlc2lzOiB0cnVlIG1lYW4gaXMgbm90IGVxdWFsIHRvIDBcbjk1IHBlcmNlbnQgY29uZmlkZW5jZSBpbnRlcnZhbDpcbiA0LjQ5NjEwNiA3LjMwNTU0N1xuc2FtcGxlIGVzdGltYXRlczpcbm1lYW4gb2YgeCBcbiA1LjkwMDgyNiBcblxuWzFdIDUuOTAwODI2XG5cblx0T25lIFNhbXBsZSB0LXRlc3RcblxuZGF0YTogIGZpbHRlcmVkJGNhc2VzX2NoaWxkICsgZmlsdGVyZWQkY2FzZXNfYWRvbGVzY2VudFxudCA9IDguNzM2MSwgZGYgPSAxODEsIHAtdmFsdWUgPSAxLjU5NmUtMTVcbmFsdGVybmF0aXZlIGh5cG90aGVzaXM6IHRydWUgbWVhbiBpcyBub3QgZXF1YWwgdG8gMFxuOTUgcGVyY2VudCBjb25maWRlbmNlIGludGVydmFsOlxuIDMuNTg1NzA0IDUuNjc4MDMzXG5zYW1wbGUgZXN0aW1hdGVzOlxubWVhbiBvZiB4IFxuIDQuNjMxODY4IFxuXG5bMV0gNC42MzE4NjhcblxuXHRPbmUgU2FtcGxlIHQtdGVzdFxuXG5kYXRhOiAgZmlsdGVyZWQkY2FzZXNfY2hpbGQgKyBmaWx0ZXJlZCRjYXNlc19hZG9sZXNjZW50XG50ID0gMTAuMTgzLCBkZiA9IDI0MiwgcC12YWx1ZSA8IDIuMmUtMTZcbmFsdGVybmF0aXZlIGh5cG90aGVzaXM6IHRydWUgbWVhbiBpcyBub3QgZXF1YWwgdG8gMFxuOTUgcGVyY2VudCBjb25maWRlbmNlIGludGVydmFsOlxuIDMuODA3MDk5IDUuNjMzMjMwXG5zYW1wbGUgZXN0aW1hdGVzOlxubWVhbiBvZiB4IFxuIDQuNzIwMTY1IFxuXG5bMV0gNC43MjAxNjVcblxuXHRPbmUgU2FtcGxlIHQtdGVzdFxuXG5kYXRhOiAgZmlsdGVyZWQkY2FzZXNfY2hpbGQgKyBmaWx0ZXJlZCRjYXNlc19hZG9sZXNjZW50XG50ID0gOS4yNzY5LCBkZiA9IDMwMywgcC12YWx1ZSA8IDIuMmUtMTZcbmFsdGVybmF0aXZlIGh5cG90aGVzaXM6IHRydWUgbWVhbiBpcyBub3QgZXF1YWwgdG8gMFxuOTUgcGVyY2VudCBjb25maWRlbmNlIGludGVydmFsOlxuIDIxLjA3MzE5IDMyLjQyMDIzXG5zYW1wbGUgZXN0aW1hdGVzOlxubWVhbiBvZiB4IFxuIDI2Ljc0NjcxIFxuXG5bMV0gMjYuNzQ2NzFcblxuXHRPbmUgU2FtcGxlIHQtdGVzdFxuXG5kYXRhOiAgZmlsdGVyZWQkY2FzZXNfY2hpbGQgKyBmaWx0ZXJlZCRjYXNlc19hZG9sZXNjZW50XG50ID0gMTAuOTEsIGRmID0gMzY0LCBwLXZhbHVlIDwgMi4yZS0xNlxuYWx0ZXJuYXRpdmUgaHlwb3RoZXNpczogdHJ1ZSBtZWFuIGlzIG5vdCBlcXVhbCB0byAwXG45NSBwZXJjZW50IGNvbmZpZGVuY2UgaW50ZXJ2YWw6XG4gNTMuMjk3NjUgNzYuNzM1MjNcbnNhbXBsZSBlc3RpbWF0ZXM6XG5tZWFuIG9mIHggXG4gNjUuMDE2NDQgXG5cblsxXSA2NS4wMTY0NFxuXG5cdE9uZSBTYW1wbGUgdC10ZXN0XG5cbmRhdGE6ICBmaWx0ZXJlZCRjYXNlc19jaGlsZCArIGZpbHRlcmVkJGNhc2VzX2Fkb2xlc2NlbnRcbnQgPSAxNC43MTUsIGRmID0gNDIzLCBwLXZhbHVlIDwgMi4yZS0xNlxuYWx0ZXJuYXRpdmUgaHlwb3RoZXNpczogdHJ1ZSBtZWFuIGlzIG5vdCBlcXVhbCB0byAwXG45NSBwZXJjZW50IGNvbmZpZGVuY2UgaW50ZXJ2YWw6XG4gIDc4LjE0OTc2IDEwMi4yNDY0Nlxuc2FtcGxlIGVzdGltYXRlczpcbm1lYW4gb2YgeCBcbiA5MC4xOTgxMSBcblxuWzFdIDkwLjE5ODExXG5cblx0T25lIFNhbXBsZSB0LXRlc3RcblxuZGF0YTogIGZpbHRlcmVkJGNhc2VzX2NoaWxkICsgZmlsdGVyZWQkY2FzZXNfYWRvbGVzY2VudFxudCA9IDEzLjM1MywgZGYgPSA0ODQsIHAtdmFsdWUgPCAyLjJlLTE2XG5hbHRlcm5hdGl2ZSBoeXBvdGhlc2lzOiB0cnVlIG1lYW4gaXMgbm90IGVxdWFsIHRvIDBcbjk1IHBlcmNlbnQgY29uZmlkZW5jZSBpbnRlcnZhbDpcbiAxNDIuNTA2MCAxOTEuNjc5Nlxuc2FtcGxlIGVzdGltYXRlczpcbm1lYW4gb2YgeCBcbiAxNjcuMDkyOCBcblxuWzFdIDE2Ny4wOTI4XG5cblx0T25lIFNhbXBsZSB0LXRlc3RcblxuZGF0YTogIGZpbHRlcmVkJGNhc2VzX2NoaWxkICsgZmlsdGVyZWQkY2FzZXNfYWRvbGVzY2VudFxudCA9IDEzLjA0NiwgZGYgPSA1NDUsIHAtdmFsdWUgPCAyLjJlLTE2XG5hbHRlcm5hdGl2ZSBoeXBvdGhlc2lzOiB0cnVlIG1lYW4gaXMgbm90IGVxdWFsIHRvIDBcbjk1IHBlcmNlbnQgY29uZmlkZW5jZSBpbnRlcnZhbDpcbiAyODIuMDY5MiAzODIuMDcwMFxuc2FtcGxlIGVzdGltYXRlczpcbm1lYW4gb2YgeCBcbiAzMzIuMDY5NiBcblxuWzFdIDMzMi4wNjk2XG5cblx0T25lIFNhbXBsZSB0LXRlc3RcblxuZGF0YTogIGZpbHRlcmVkJGNhc2VzX2NoaWxkICsgZmlsdGVyZWQkY2FzZXNfYWRvbGVzY2VudFxudCA9IDEzLjY3OCwgZGYgPSA2MDcsIHAtdmFsdWUgPCAyLjJlLTE2XG5hbHRlcm5hdGl2ZSBoeXBvdGhlc2lzOiB0cnVlIG1lYW4gaXMgbm90IGVxdWFsIHRvIDBcbjk1IHBlcmNlbnQgY29uZmlkZW5jZSBpbnRlcnZhbDpcbiA2MTguOTIwOCA4MjYuNDQ3N1xuc2FtcGxlIGVzdGltYXRlczpcbm1lYW4gb2YgeCBcbiA3MjIuNjg0MiBcblxuWzFdIDcyMi42ODQyXG5cblx0T25lIFNhbXBsZSB0LXRlc3RcblxuZGF0YTogIGZpbHRlcmVkJGNhc2VzX2NoaWxkICsgZmlsdGVyZWQkY2FzZXNfYWRvbGVzY2VudFxudCA9IDE2LjA2MiwgZGYgPSA2NjgsIHAtdmFsdWUgPCAyLjJlLTE2XG5hbHRlcm5hdGl2ZSBoeXBvdGhlc2lzOiB0cnVlIG1lYW4gaXMgbm90IGVxdWFsIHRvIDBcbjk1IHBlcmNlbnQgY29uZmlkZW5jZSBpbnRlcnZhbDpcbiA2OTAuNzE1MiA4ODMuMTA1NFxuc2FtcGxlIGVzdGltYXRlczpcbm1lYW4gb2YgeCBcbiA3ODYuOTEwMyBcblxuWzFdIDc4Ni45MTAzXG4ifQ== -->
+<pre><code>
+    One Sample t-test
+
+data:  filtered$cases_child + filtered$cases_adolescent
+t = 8.3171, df = 120, p-value = 1.633e-13
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ 4.496106 7.305547
+sample estimates:
+mean of x 
+ 5.900826 
+
+[1] 5.900826
+
+    One Sample t-test
+
+data:  filtered$cases_child + filtered$cases_adolescent
+t = 8.7361, df = 181, p-value = 1.596e-15
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ 3.585704 5.678033
+sample estimates:
+mean of x 
+ 4.631868 
+
+[1] 4.631868
+
+    One Sample t-test
+
+data:  filtered$cases_child + filtered$cases_adolescent
+t = 10.183, df = 242, p-value &lt; 2.2e-16
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ 3.807099 5.633230
+sample estimates:
+mean of x 
+ 4.720165 
+
+[1] 4.720165
+
+    One Sample t-test
+
+data:  filtered$cases_child + filtered$cases_adolescent
+t = 9.2769, df = 303, p-value &lt; 2.2e-16
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ 21.07319 32.42023
+sample estimates:
+mean of x 
+ 26.74671 
+
+[1] 26.74671
+
+    One Sample t-test
+
+data:  filtered$cases_child + filtered$cases_adolescent
+t = 10.91, df = 364, p-value &lt; 2.2e-16
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ 53.29765 76.73523
+sample estimates:
+mean of x 
+ 65.01644 
+
+[1] 65.01644
+
+    One Sample t-test
+
+data:  filtered$cases_child + filtered$cases_adolescent
+t = 14.715, df = 423, p-value &lt; 2.2e-16
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+  78.14976 102.24646
+sample estimates:
+mean of x 
+ 90.19811 
+
+[1] 90.19811
+
+    One Sample t-test
+
+data:  filtered$cases_child + filtered$cases_adolescent
+t = 13.353, df = 484, p-value &lt; 2.2e-16
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ 142.5060 191.6796
+sample estimates:
+mean of x 
+ 167.0928 
+
+[1] 167.0928
+
+    One Sample t-test
+
+data:  filtered$cases_child + filtered$cases_adolescent
+t = 13.046, df = 545, p-value &lt; 2.2e-16
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ 282.0692 382.0700
+sample estimates:
+mean of x 
+ 332.0696 
+
+[1] 332.0696
+
+    One Sample t-test
+
+data:  filtered$cases_child + filtered$cases_adolescent
+t = 13.678, df = 607, p-value &lt; 2.2e-16
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ 618.9208 826.4477
+sample estimates:
+mean of x 
+ 722.6842 
+
+[1] 722.6842
+
+    One Sample t-test
+
+data:  filtered$cases_child + filtered$cases_adolescent
+t = 16.062, df = 668, p-value &lt; 2.2e-16
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ 690.7152 883.1054
+sample estimates:
+mean of x 
+ 786.9103 
+
+[1] 786.9103</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQoc3VtKGZpbHRlcmVkJGNhc2VzX2NoaWxkICsgZmlsdGVyZWQkY2FzZXNfYWRvbGVzY2VudCkpXG5gYGAifQ== -->
+<pre class="r"><code>print(sum(filtered$cases_child + filtered$cases_adolescent))</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDUyNjQ0M1xuIn0= -->
+<pre><code>[1] 526443</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyByZXRyaWV2ZSBjYXNlcyBmb3IgYWR1bHRcblxuYmFzZV9kYXRlIDwtIFwiMjAyMC0wMy0zMVwiXG5cbmZpcnN0Rm91ciA8LSBjYXNlc19NWVtjYXNlc19NWSRkYXRlID49IFwiMjAyMC0wMi0wMVwiICYgY2FzZXNfTVkkZGF0ZSA8PSBiYXNlX2RhdGUsIF1cbnQudGVzdChmaXJzdEZvdXIkY2FzZXNfYWR1bHQsIHkgPSBOVUxMLCBhbHRlcm5hdGl2ZSA9IGMoXCJ0d28uc2lkZWRcIiksIG11ID0gMCwgcGFpcmVkID0gRkFMU0UsIHZhci5lcXVhbCA9IEZBTFNFLCBjb25mLmxldmVsID0gMC45NSlcbmBgYCJ9 -->
+<pre class="r"><code># retrieve cases for adult
+
+base_date &lt;- &quot;2020-03-31&quot;
+
+firstFour &lt;- cases_MY[cases_MY$date &gt;= &quot;2020-02-01&quot; &amp; cases_MY$date &lt;= base_date, ]
+t.test(firstFour$cases_adult, y = NULL, alternative = c(&quot;two.sided&quot;), mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5cdE9uZSBTYW1wbGUgdC10ZXN0XG5cbmRhdGE6ICBmaXJzdEZvdXIkY2FzZXNfYWR1bHRcbnQgPSA1LjIzOSwgZGYgPSA1OSwgcC12YWx1ZSA9IDIuMjY4ZS0wNlxuYWx0ZXJuYXRpdmUgaHlwb3RoZXNpczogdHJ1ZSBtZWFuIGlzIG5vdCBlcXVhbCB0byAwXG45NSBwZXJjZW50IGNvbmZpZGVuY2UgaW50ZXJ2YWw6XG4gMjAuMzIzNzMgNDUuNDQyOTNcbnNhbXBsZSBlc3RpbWF0ZXM6XG5tZWFuIG9mIHggXG4gMzIuODgzMzMgXG4ifQ== -->
+<pre><code>
+    One Sample t-test
+
+data:  firstFour$cases_adult
+t = 5.239, df = 59, p-value = 2.268e-06
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ 20.32373 45.44293
+sample estimates:
+mean of x 
+ 32.88333 </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZm9yICh4IGluIDE6MTApIHtcbiAgYmFzZV9kYXRlIDwtIGFzLkRhdGUoYmFzZV9kYXRlKSAlbSslIG1vbnRocygyKVxuICBmaWx0ZXJlZCA8LSBjYXNlc19NWVtjYXNlc19NWSRkYXRlID49IFwiMjAyMC0wMi0wMVwiICYgY2FzZXNfTVkkZGF0ZSA8PSBiYXNlX2RhdGUsXVxuICBjYXNlczE4IDwtIHQudGVzdChmaWx0ZXJlZCRjYXNlc19hZHVsdCwgeSA9IE5VTEwsIGFsdGVybmF0aXZlID0gXCJ0d28uc2lkZWRcIiwgbXUgPSAwLCBwYWlyZWQgPSBGQUxTRSwgdmFyLmVxdWFsID0gRkFMU0UsIGNvbmYubGV2ZWwgPSAwLjk1KVxuICBwcmludChjYXNlczE4KVxuICMgcHJpbnQobWVhbihmaWx0ZXJlZCRjYXNlc19uZXcpKVxufVxuYGBgIn0= -->
+<pre class="r"><code>for (x in 1:10) {
+  base_date &lt;- as.Date(base_date) %m+% months(2)
+  filtered &lt;- cases_MY[cases_MY$date &gt;= &quot;2020-02-01&quot; &amp; cases_MY$date &lt;= base_date,]
+  cases18 &lt;- t.test(filtered$cases_adult, y = NULL, alternative = &quot;two.sided&quot;, mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)
+  print(cases18)
+ # print(mean(filtered$cases_new))
+}</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5cdE9uZSBTYW1wbGUgdC10ZXN0XG5cbmRhdGE6ICBmaWx0ZXJlZCRjYXNlc19hZHVsdFxudCA9IDEwLjkzMywgZGYgPSAxMjAsIHAtdmFsdWUgPCAyLjJlLTE2XG5hbHRlcm5hdGl2ZSBoeXBvdGhlc2lzOiB0cnVlIG1lYW4gaXMgbm90IGVxdWFsIHRvIDBcbjk1IHBlcmNlbnQgY29uZmlkZW5jZSBpbnRlcnZhbDpcbiAzNi4zOTAzNyA1Mi40ODU2Nlxuc2FtcGxlIGVzdGltYXRlczpcbm1lYW4gb2YgeCBcbiA0NC40MzgwMiBcblxuXG5cdE9uZSBTYW1wbGUgdC10ZXN0XG5cbmRhdGE6ICBmaWx0ZXJlZCRjYXNlc19hZHVsdFxudCA9IDEwLjcyLCBkZiA9IDE4MSwgcC12YWx1ZSA8IDIuMmUtMTZcbmFsdGVybmF0aXZlIGh5cG90aGVzaXM6IHRydWUgbWVhbiBpcyBub3QgZXF1YWwgdG8gMFxuOTUgcGVyY2VudCBjb25maWRlbmNlIGludGVydmFsOlxuIDI4LjEwOTQ5IDQwLjc5MTYxXG5zYW1wbGUgZXN0aW1hdGVzOlxubWVhbiBvZiB4IFxuIDM0LjQ1MDU1IFxuXG5cblx0T25lIFNhbXBsZSB0LXRlc3RcblxuZGF0YTogIGZpbHRlcmVkJGNhc2VzX2FkdWx0XG50ID0gMTIuNDMyLCBkZiA9IDI0MiwgcC12YWx1ZSA8IDIuMmUtMTZcbmFsdGVybmF0aXZlIGh5cG90aGVzaXM6IHRydWUgbWVhbiBpcyBub3QgZXF1YWwgdG8gMFxuOTUgcGVyY2VudCBjb25maWRlbmNlIGludGVydmFsOlxuIDI3Ljc2Nzk3IDM4LjIyMzgwXG5zYW1wbGUgZXN0aW1hdGVzOlxubWVhbiBvZiB4IFxuIDMyLjk5NTg4IFxuXG5cblx0T25lIFNhbXBsZSB0LXRlc3RcblxuZGF0YTogIGZpbHRlcmVkJGNhc2VzX2FkdWx0XG50ID0gOS44MjM3LCBkZiA9IDMwMywgcC12YWx1ZSA8IDIuMmUtMTZcbmFsdGVybmF0aXZlIGh5cG90aGVzaXM6IHRydWUgbWVhbiBpcyBub3QgZXF1YWwgdG8gMFxuOTUgcGVyY2VudCBjb25maWRlbmNlIGludGVydmFsOlxuIDEyOC44MjU4IDE5My4zNjUwXG5zYW1wbGUgZXN0aW1hdGVzOlxubWVhbiBvZiB4IFxuIDE2MS4wOTU0IFxuXG5cblx0T25lIFNhbXBsZSB0LXRlc3RcblxuZGF0YTogIGZpbHRlcmVkJGNhc2VzX2FkdWx0XG50ID0gMTEuMDQzLCBkZiA9IDM2NCwgcC12YWx1ZSA8IDIuMmUtMTZcbmFsdGVybmF0aXZlIGh5cG90aGVzaXM6IHRydWUgbWVhbiBpcyBub3QgZXF1YWwgdG8gMFxuOTUgcGVyY2VudCBjb25maWRlbmNlIGludGVydmFsOlxuIDM2My45MjU5IDUyMS42MTM5XG5zYW1wbGUgZXN0aW1hdGVzOlxubWVhbiBvZiB4IFxuIDQ0Mi43Njk5IFxuXG5cblx0T25lIFNhbXBsZSB0LXRlc3RcblxuZGF0YTogIGZpbHRlcmVkJGNhc2VzX2FkdWx0XG50ID0gMTQuMzI1LCBkZiA9IDQyMywgcC12YWx1ZSA8IDIuMmUtMTZcbmFsdGVybmF0aXZlIGh5cG90aGVzaXM6IHRydWUgbWVhbiBpcyBub3QgZXF1YWwgdG8gMFxuOTUgcGVyY2VudCBjb25maWRlbmNlIGludGVydmFsOlxuIDUzOS42MzUxIDcxMS4yODAwXG5zYW1wbGUgZXN0aW1hdGVzOlxubWVhbiBvZiB4IFxuIDYyNS40NTc1IFxuXG5cblx0T25lIFNhbXBsZSB0LXRlc3RcblxuZGF0YTogIGZpbHRlcmVkJGNhc2VzX2FkdWx0XG50ID0gMTYuNDEyLCBkZiA9IDQ4NCwgcC12YWx1ZSA8IDIuMmUtMTZcbmFsdGVybmF0aXZlIGh5cG90aGVzaXM6IHRydWUgbWVhbiBpcyBub3QgZXF1YWwgdG8gMFxuOTUgcGVyY2VudCBjb25maWRlbmNlIGludGVydmFsOlxuIDc1NS4yMzE5IDk2MC42NjA5XG5zYW1wbGUgZXN0aW1hdGVzOlxubWVhbiBvZiB4IFxuIDg1Ny45NDY0IFxuXG5cblx0T25lIFNhbXBsZSB0LXRlc3RcblxuZGF0YTogIGZpbHRlcmVkJGNhc2VzX2FkdWx0XG50ID0gMTUuNTY3LCBkZiA9IDU0NSwgcC12YWx1ZSA8IDIuMmUtMTZcbmFsdGVybmF0aXZlIGh5cG90aGVzaXM6IHRydWUgbWVhbiBpcyBub3QgZXF1YWwgdG8gMFxuOTUgcGVyY2VudCBjb25maWRlbmNlIGludGVydmFsOlxuIDEyNTguMDc1IDE2MjEuNDMwXG5zYW1wbGUgZXN0aW1hdGVzOlxubWVhbiBvZiB4IFxuIDE0MzkuNzUzIFxuXG5cblx0T25lIFNhbXBsZSB0LXRlc3RcblxuZGF0YTogIGZpbHRlcmVkJGNhc2VzX2FkdWx0XG50ID0gMTUuODg5LCBkZiA9IDYwNywgcC12YWx1ZSA8IDIuMmUtMTZcbmFsdGVybmF0aXZlIGh5cG90aGVzaXM6IHRydWUgbWVhbiBpcyBub3QgZXF1YWwgdG8gMFxuOTUgcGVyY2VudCBjb25maWRlbmNlIGludGVydmFsOlxuIDIyMzkuMDc4IDI4NzAuNjQyXG5zYW1wbGUgZXN0aW1hdGVzOlxubWVhbiBvZiB4IFxuICAyNTU0Ljg2IFxuXG5cblx0T25lIFNhbXBsZSB0LXRlc3RcblxuZGF0YTogIGZpbHRlcmVkJGNhc2VzX2FkdWx0XG50ID0gMTguMjUsIGRmID0gNjY4LCBwLXZhbHVlIDwgMi4yZS0xNlxuYWx0ZXJuYXRpdmUgaHlwb3RoZXNpczogdHJ1ZSBtZWFuIGlzIG5vdCBlcXVhbCB0byAwXG45NSBwZXJjZW50IGNvbmZpZGVuY2UgaW50ZXJ2YWw6XG4gMjQwMi45NTEgMjk4Mi4zNDBcbnNhbXBsZSBlc3RpbWF0ZXM6XG5tZWFuIG9mIHggXG4gMjY5Mi42NDYgXG4ifQ== -->
+<pre><code>
+    One Sample t-test
+
+data:  filtered$cases_adult
+t = 10.933, df = 120, p-value &lt; 2.2e-16
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ 36.39037 52.48566
+sample estimates:
+mean of x 
+ 44.43802 
 
 
     One Sample t-test
 
-data:  filtered$cases_new
-t = 11.009, df = 181, p-value &lt; 2.2e-16
+data:  filtered$cases_adult
+t = 10.72, df = 181, p-value &lt; 2.2e-16
 alternative hypothesis: true mean is not equal to 0
 95 percent confidence interval:
- 40.44328 58.10617
+ 28.10949 40.79161
 sample estimates:
 mean of x 
- 49.27473 
+ 34.45055 
 
 
     One Sample t-test
 
-data:  filtered$cases_new
-t = 12.733, df = 242, p-value &lt; 2.2e-16
+data:  filtered$cases_adult
+t = 12.432, df = 242, p-value &lt; 2.2e-16
 alternative hypothesis: true mean is not equal to 0
 95 percent confidence interval:
- 39.01572 53.29703
+ 27.76797 38.22380
 sample estimates:
 mean of x 
- 46.15638 
+ 32.99588 
 
 
     One Sample t-test
 
-data:  filtered$cases_new
-t = 9.8667, df = 303, p-value &lt; 2.2e-16
+data:  filtered$cases_adult
+t = 9.8237, df = 303, p-value &lt; 2.2e-16
 alternative hypothesis: true mean is not equal to 0
 95 percent confidence interval:
- 172.9868 259.1777
+ 128.8258 193.3650
 sample estimates:
 mean of x 
- 216.0822 
+ 161.0954 
 
 
     One Sample t-test
 
-data:  filtered$cases_new
-t = 11.117, df = 364, p-value &lt; 2.2e-16
+data:  filtered$cases_adult
+t = 11.043, df = 364, p-value &lt; 2.2e-16
 alternative hypothesis: true mean is not equal to 0
 95 percent confidence interval:
- 472.7862 675.9974
+ 363.9259 521.6139
 sample estimates:
 mean of x 
- 574.3918 
+ 442.7699 
 
 
     One Sample t-test
 
-data:  filtered$cases_new
-t = 14.461, df = 423, p-value &lt; 2.2e-16
+data:  filtered$cases_adult
+t = 14.325, df = 423, p-value &lt; 2.2e-16
 alternative hypothesis: true mean is not equal to 0
 95 percent confidence interval:
- 701.0614 921.6273
+ 539.6351 711.2800
 sample estimates:
 mean of x 
- 811.3443 
+ 625.4575 
 
 
     One Sample t-test
 
-data:  filtered$cases_new
-t = 15.999, df = 484, p-value &lt; 2.2e-16
+data:  filtered$cases_adult
+t = 16.412, df = 484, p-value &lt; 2.2e-16
 alternative hypothesis: true mean is not equal to 0
 95 percent confidence interval:
- 1022.828 1309.234
+ 755.2319 960.6609
 sample estimates:
 mean of x 
- 1166.031 
+ 857.9464 
 
 
     One Sample t-test
 
-data:  filtered$cases_new
-t = 15.213, df = 545, p-value &lt; 2.2e-16
+data:  filtered$cases_adult
+t = 15.567, df = 545, p-value &lt; 2.2e-16
 alternative hypothesis: true mean is not equal to 0
 95 percent confidence interval:
- 1747.307 2265.433
+ 1258.075 1621.430
 sample estimates:
 mean of x 
-  2006.37 
+ 1439.753 
 
 
     One Sample t-test
 
-data:  filtered$cases_new
-t = 15.476, df = 607, p-value &lt; 2.2e-16
+data:  filtered$cases_adult
+t = 15.889, df = 607, p-value &lt; 2.2e-16
 alternative hypothesis: true mean is not equal to 0
 95 percent confidence interval:
- 3224.862 4162.266
+ 2239.078 2870.642
 sample estimates:
 mean of x 
- 3693.564 
+  2554.86 
 
 
     One Sample t-test
 
-data:  filtered$cases_new
-t = 17.909, df = 668, p-value &lt; 2.2e-16
+data:  filtered$cases_adult
+t = 18.25, df = 668, p-value &lt; 2.2e-16
 alternative hypothesis: true mean is not equal to 0
 95 percent confidence interval:
- 3503.919 4366.855
+ 2402.951 2982.340
 sample estimates:
 mean of x 
- 3935.387 </code></pre>
+ 2692.646 </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQoc3VtKGZpbHRlcmVkJGNhc2VzX2FkdWx0KSlcbmBgYCJ9 -->
+<pre class="r"><code>print(sum(filtered$cases_adult))</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDE4MDEzODBcbiJ9 -->
+<pre><code>[1] 1801380</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyByZXRyaWV2ZSBjYXNlcyBmb3IgZWxkZXJseVxuXG5iYXNlX2RhdGUgPC0gXCIyMDIwLTAzLTMxXCJcblxuZmlyc3RGb3VyIDwtIGNhc2VzX01ZW2Nhc2VzX01ZJGRhdGUgPj0gXCIyMDIwLTAyLTAxXCIgJiBjYXNlc19NWSRkYXRlIDw9IGJhc2VfZGF0ZSwgXVxudC50ZXN0KGZpcnN0Rm91ciRjYXNlc19lbGRlcmx5LCB5ID0gTlVMTCwgYWx0ZXJuYXRpdmUgPSBjKFwidHdvLnNpZGVkXCIpLCBtdSA9IDAsIHBhaXJlZCA9IEZBTFNFLCB2YXIuZXF1YWwgPSBGQUxTRSwgY29uZi5sZXZlbCA9IDAuOTUpXG5gYGAifQ== -->
+<pre class="r"><code># retrieve cases for elderly
+
+base_date &lt;- &quot;2020-03-31&quot;
+
+firstFour &lt;- cases_MY[cases_MY$date &gt;= &quot;2020-02-01&quot; &amp; cases_MY$date &lt;= base_date, ]
+t.test(firstFour$cases_elderly, y = NULL, alternative = c(&quot;two.sided&quot;), mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5cdE9uZSBTYW1wbGUgdC10ZXN0XG5cbmRhdGE6ICBmaXJzdEZvdXIkY2FzZXNfZWxkZXJseVxudCA9IDUuMTMwOSwgZGYgPSA1OSwgcC12YWx1ZSA9IDMuMzc3ZS0wNlxuYWx0ZXJuYXRpdmUgaHlwb3RoZXNpczogdHJ1ZSBtZWFuIGlzIG5vdCBlcXVhbCB0byAwXG45NSBwZXJjZW50IGNvbmZpZGVuY2UgaW50ZXJ2YWw6XG4gIDUuMzM3NTc3IDEyLjE2MjQyM1xuc2FtcGxlIGVzdGltYXRlczpcbm1lYW4gb2YgeCBcbiAgICAgOC43NSBcbiJ9 -->
+<pre><code>
+    One Sample t-test
+
+data:  firstFour$cases_elderly
+t = 5.1309, df = 59, p-value = 3.377e-06
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+  5.337577 12.162423
+sample estimates:
+mean of x 
+     8.75 </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZm9yICh4IGluIDE6MTApIHtcbiAgYmFzZV9kYXRlIDwtIGFzLkRhdGUoYmFzZV9kYXRlKSAlbSslIG1vbnRocygyKVxuICBmaWx0ZXJlZCA8LSBjYXNlc19NWVtjYXNlc19NWSRkYXRlID49IFwiMjAyMC0wMi0wMVwiICYgY2FzZXNfTVkkZGF0ZSA8PSBiYXNlX2RhdGUsXVxuICBjYXNlczYwIDwtIHQudGVzdChmaWx0ZXJlZCRjYXNlc19lbGRlcmx5LCB5ID0gTlVMTCwgYWx0ZXJuYXRpdmUgPSBcInR3by5zaWRlZFwiLCBtdSA9IDAsIHBhaXJlZCA9IEZBTFNFLCB2YXIuZXF1YWwgPSBGQUxTRSwgY29uZi5sZXZlbCA9IDAuOTUpXG4gIHByaW50KGNhc2VzNjApXG4gIyBwcmludChtZWFuKGZpbHRlcmVkJGNhc2VzX25ldykpXG59XG5gYGAifQ== -->
+<pre class="r"><code>for (x in 1:10) {
+  base_date &lt;- as.Date(base_date) %m+% months(2)
+  filtered &lt;- cases_MY[cases_MY$date &gt;= &quot;2020-02-01&quot; &amp; cases_MY$date &lt;= base_date,]
+  cases60 &lt;- t.test(filtered$cases_elderly, y = NULL, alternative = &quot;two.sided&quot;, mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)
+  print(cases60)
+ # print(mean(filtered$cases_new))
+}</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5cdE9uZSBTYW1wbGUgdC10ZXN0XG5cbmRhdGE6ICBmaWx0ZXJlZCRjYXNlc19lbGRlcmx5XG50ID0gOC4wMzc1LCBkZiA9IDEyMCwgcC12YWx1ZSA9IDcuMjQzZS0xM1xuYWx0ZXJuYXRpdmUgaHlwb3RoZXNpczogdHJ1ZSBtZWFuIGlzIG5vdCBlcXVhbCB0byAwXG45NSBwZXJjZW50IGNvbmZpZGVuY2UgaW50ZXJ2YWw6XG4gIDYuMjIyMzg1IDEwLjI5MDAxMVxuc2FtcGxlIGVzdGltYXRlczpcbm1lYW4gb2YgeCBcbiA4LjI1NjE5OCBcblxuXG5cdE9uZSBTYW1wbGUgdC10ZXN0XG5cbmRhdGE6ICBmaWx0ZXJlZCRjYXNlc19lbGRlcmx5XG50ID0gOC4wNzA0LCBkZiA9IDE4MSwgcC12YWx1ZSA9IDkuNDI0ZS0xNFxuYWx0ZXJuYXRpdmUgaHlwb3RoZXNpczogdHJ1ZSBtZWFuIGlzIG5vdCBlcXVhbCB0byAwXG45NSBwZXJjZW50IGNvbmZpZGVuY2UgaW50ZXJ2YWw6XG4gNC40NDU4NjIgNy4zMjMzNjlcbnNhbXBsZSBlc3RpbWF0ZXM6XG5tZWFuIG9mIHggXG4gNS44ODQ2MTUgXG5cblxuXHRPbmUgU2FtcGxlIHQtdGVzdFxuXG5kYXRhOiAgZmlsdGVyZWQkY2FzZXNfZWxkZXJseVxudCA9IDguOTgwMiwgZGYgPSAyNDIsIHAtdmFsdWUgPCAyLjJlLTE2XG5hbHRlcm5hdGl2ZSBoeXBvdGhlc2lzOiB0cnVlIG1lYW4gaXMgbm90IGVxdWFsIHRvIDBcbjk1IHBlcmNlbnQgY29uZmlkZW5jZSBpbnRlcnZhbDpcbiAzLjkzNTM2NyA2LjE0NjkzOFxuc2FtcGxlIGVzdGltYXRlczpcbm1lYW4gb2YgeCBcbiA1LjA0MTE1MiBcblxuXG5cdE9uZSBTYW1wbGUgdC10ZXN0XG5cbmRhdGE6ICBmaWx0ZXJlZCRjYXNlc19lbGRlcmx5XG50ID0gMTEuNjk3LCBkZiA9IDMwMywgcC12YWx1ZSA8IDIuMmUtMTZcbmFsdGVybmF0aXZlIGh5cG90aGVzaXM6IHRydWUgbWVhbiBpcyBub3QgZXF1YWwgdG8gMFxuOTUgcGVyY2VudCBjb25maWRlbmNlIGludGVydmFsOlxuIDExLjU1OTkzIDE2LjIzNjEzXG5zYW1wbGUgZXN0aW1hdGVzOlxubWVhbiBvZiB4IFxuIDEzLjg5ODAzIFxuXG5cblx0T25lIFNhbXBsZSB0LXRlc3RcblxuZGF0YTogIGZpbHRlcmVkJGNhc2VzX2VsZGVybHlcbnQgPSAxMC40MTcsIGRmID0gMzY0LCBwLXZhbHVlIDwgMi4yZS0xNlxuYWx0ZXJuYXRpdmUgaHlwb3RoZXNpczogdHJ1ZSBtZWFuIGlzIG5vdCBlcXVhbCB0byAwXG45NSBwZXJjZW50IGNvbmZpZGVuY2UgaW50ZXJ2YWw6XG4gMjkuMjEyNjggNDIuODA5MjRcbnNhbXBsZSBlc3RpbWF0ZXM6XG5tZWFuIG9mIHggXG4gMzYuMDEwOTYgXG5cblxuXHRPbmUgU2FtcGxlIHQtdGVzdFxuXG5kYXRhOiAgZmlsdGVyZWQkY2FzZXNfZWxkZXJseVxudCA9IDEzLjk5NiwgZGYgPSA0MjMsIHAtdmFsdWUgPCAyLjJlLTE2XG5hbHRlcm5hdGl2ZSBoeXBvdGhlc2lzOiB0cnVlIG1lYW4gaXMgbm90IGVxdWFsIHRvIDBcbjk1IHBlcmNlbnQgY29uZmlkZW5jZSBpbnRlcnZhbDpcbiA0My4xNjg4IDU3LjI3NDZcbnNhbXBsZSBlc3RpbWF0ZXM6XG5tZWFuIG9mIHggXG4gIDUwLjIyMTcgXG5cblxuXHRPbmUgU2FtcGxlIHQtdGVzdFxuXG5kYXRhOiAgZmlsdGVyZWQkY2FzZXNfZWxkZXJseVxudCA9IDEyLjY1NCwgZGYgPSA0ODQsIHAtdmFsdWUgPCAyLjJlLTE2XG5hbHRlcm5hdGl2ZSBoeXBvdGhlc2lzOiB0cnVlIG1lYW4gaXMgbm90IGVxdWFsIHRvIDBcbjk1IHBlcmNlbnQgY29uZmlkZW5jZSBpbnRlcnZhbDpcbiAgNzkuNTcxMTIgMTA4LjgyNDc2XG5zYW1wbGUgZXN0aW1hdGVzOlxubWVhbiBvZiB4IFxuIDk0LjE5Nzk0IFxuXG5cblx0T25lIFNhbXBsZSB0LXRlc3RcblxuZGF0YTogIGZpbHRlcmVkJGNhc2VzX2VsZGVybHlcbnQgPSAxNC44NTksIGRmID0gNTQ1LCBwLXZhbHVlIDwgMi4yZS0xNlxuYWx0ZXJuYXRpdmUgaHlwb3RoZXNpczogdHJ1ZSBtZWFuIGlzIG5vdCBlcXVhbCB0byAwXG45NSBwZXJjZW50IGNvbmZpZGVuY2UgaW50ZXJ2YWw6XG4gMTM2LjA1MzIgMTc3LjUwMzZcbnNhbXBsZSBlc3RpbWF0ZXM6XG5tZWFuIG9mIHggXG4gMTU2Ljc3ODQgXG5cblxuXHRPbmUgU2FtcGxlIHQtdGVzdFxuXG5kYXRhOiAgZmlsdGVyZWQkY2FzZXNfZWxkZXJseVxudCA9IDE1LjEwNiwgZGYgPSA2MDcsIHAtdmFsdWUgPCAyLjJlLTE2XG5hbHRlcm5hdGl2ZSBoeXBvdGhlc2lzOiB0cnVlIG1lYW4gaXMgbm90IGVxdWFsIHRvIDBcbjk1IHBlcmNlbnQgY29uZmlkZW5jZSBpbnRlcnZhbDpcbiAyNjAuODY0MiAzMzguODI2Nlxuc2FtcGxlIGVzdGltYXRlczpcbm1lYW4gb2YgeCBcbiAyOTkuODQ1NCBcblxuXG5cdE9uZSBTYW1wbGUgdC10ZXN0XG5cbmRhdGE6ICBmaWx0ZXJlZCRjYXNlc19lbGRlcmx5XG50ID0gMTguMjAxLCBkZiA9IDY2OCwgcC12YWx1ZSA8IDIuMmUtMTZcbmFsdGVybmF0aXZlIGh5cG90aGVzaXM6IHRydWUgbWVhbiBpcyBub3QgZXF1YWwgdG8gMFxuOTUgcGVyY2VudCBjb25maWRlbmNlIGludGVydmFsOlxuIDMwOC40MTg3IDM4My4wMTAzXG5zYW1wbGUgZXN0aW1hdGVzOlxubWVhbiBvZiB4IFxuIDM0NS43MTQ1IFxuIn0= -->
+<pre><code>
+    One Sample t-test
+
+data:  filtered$cases_elderly
+t = 8.0375, df = 120, p-value = 7.243e-13
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+  6.222385 10.290011
+sample estimates:
+mean of x 
+ 8.256198 
+
+
+    One Sample t-test
+
+data:  filtered$cases_elderly
+t = 8.0704, df = 181, p-value = 9.424e-14
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ 4.445862 7.323369
+sample estimates:
+mean of x 
+ 5.884615 
+
+
+    One Sample t-test
+
+data:  filtered$cases_elderly
+t = 8.9802, df = 242, p-value &lt; 2.2e-16
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ 3.935367 6.146938
+sample estimates:
+mean of x 
+ 5.041152 
+
+
+    One Sample t-test
+
+data:  filtered$cases_elderly
+t = 11.697, df = 303, p-value &lt; 2.2e-16
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ 11.55993 16.23613
+sample estimates:
+mean of x 
+ 13.89803 
+
+
+    One Sample t-test
+
+data:  filtered$cases_elderly
+t = 10.417, df = 364, p-value &lt; 2.2e-16
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ 29.21268 42.80924
+sample estimates:
+mean of x 
+ 36.01096 
+
+
+    One Sample t-test
+
+data:  filtered$cases_elderly
+t = 13.996, df = 423, p-value &lt; 2.2e-16
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ 43.1688 57.2746
+sample estimates:
+mean of x 
+  50.2217 
+
+
+    One Sample t-test
+
+data:  filtered$cases_elderly
+t = 12.654, df = 484, p-value &lt; 2.2e-16
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+  79.57112 108.82476
+sample estimates:
+mean of x 
+ 94.19794 
+
+
+    One Sample t-test
+
+data:  filtered$cases_elderly
+t = 14.859, df = 545, p-value &lt; 2.2e-16
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ 136.0532 177.5036
+sample estimates:
+mean of x 
+ 156.7784 
+
+
+    One Sample t-test
+
+data:  filtered$cases_elderly
+t = 15.106, df = 607, p-value &lt; 2.2e-16
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ 260.8642 338.8266
+sample estimates:
+mean of x 
+ 299.8454 
+
+
+    One Sample t-test
+
+data:  filtered$cases_elderly
+t = 18.201, df = 668, p-value &lt; 2.2e-16
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+ 308.4187 383.0103
+sample estimates:
+mean of x 
+ 345.7145 </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQoc3VtKGZpbHRlcmVkJGNhc2VzX2VsZGVybHkpKVxuYGBgIn0= -->
+<pre class="r"><code>print(sum(filtered$cases_elderly))</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDIzMTI4M1xuIn0= -->
+<pre><code>[1] 231283</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYmFzZV9kYXRlIDwtIFwiMjAyMC0wMy0zMVwiXG5cbmZpcnN0Rm91ciA8LSBjYXNlc19NWVtjYXNlc19NWSRkYXRlID49IFwiMjAyMC0wMi0wMVwiICYgY2FzZXNfTVkkZGF0ZSA8PSBiYXNlX2RhdGUsIF1cbnQudGVzdChmaXJzdEZvdXIkY2FzZXNfZWxkZXJseSwgeSA9IE5VTEwsIGFsdGVybmF0aXZlID0gYyhcInR3by5zaWRlZFwiKSwgbXUgPSAwLCBwYWlyZWQgPSBGQUxTRSwgdmFyLmVxdWFsID0gRkFMU0UsIGNvbmYubGV2ZWwgPSAwLjk1KVxuYGBgIn0= -->
+<pre class="r"><code>base_date &lt;- &quot;2020-03-31&quot;
+
+firstFour &lt;- cases_MY[cases_MY$date &gt;= &quot;2020-02-01&quot; &amp; cases_MY$date &lt;= base_date, ]
+t.test(firstFour$cases_elderly, y = NULL, alternative = c(&quot;two.sided&quot;), mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5cdE9uZSBTYW1wbGUgdC10ZXN0XG5cbmRhdGE6ICBmaXJzdEZvdXIkY2FzZXNfZWxkZXJseVxudCA9IDUuMTMwOSwgZGYgPSA1OSwgcC12YWx1ZSA9IDMuMzc3ZS0wNlxuYWx0ZXJuYXRpdmUgaHlwb3RoZXNpczogdHJ1ZSBtZWFuIGlzIG5vdCBlcXVhbCB0byAwXG45NSBwZXJjZW50IGNvbmZpZGVuY2UgaW50ZXJ2YWw6XG4gIDUuMzM3NTc3IDEyLjE2MjQyM1xuc2FtcGxlIGVzdGltYXRlczpcbm1lYW4gb2YgeCBcbiAgICAgOC43NSBcbiJ9 -->
+<pre><code>
+    One Sample t-test
+
+data:  firstFour$cases_elderly
+t = 5.1309, df = 59, p-value = 3.377e-06
+alternative hypothesis: true mean is not equal to 0
+95 percent confidence interval:
+  5.337577 12.162423
+sample estimates:
+mean of x 
+     8.75 </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZm9yICh4IGluIDE6MTApIHtcbiAgYmFzZV9kYXRlIDwtIGFzLkRhdGUoYmFzZV9kYXRlKSAlbSslIG1vbnRocygyKVxuICBmaWx0ZXJlZCA8LSBjYXNlc19NWVtjYXNlc19NWSRkYXRlID49IFwiMjAyMC0wMi0wMVwiICYgY2FzZXNfTVkkZGF0ZSA8PSBiYXNlX2RhdGUsXVxuICBjYXNlczYwIDwtIHQudGVzdChmaWx0ZXJlZCRjYXNlc19lbGRlcmx5LCB5ID0gTlVMTCwgYWx0ZXJuYXRpdmUgPSBcInR3by5zaWRlZFwiLCBtdSA9IDAsIHBhaXJlZCA9IEZBTFNFLCB2YXIuZXF1YWwgPSBGQUxTRSwgY29uZi5sZXZlbCA9IDAuOTUpXG4gIyBwcmludChjYXNlczYwJGVzdGltYXRlKVxuICAjcHJpbnQoY2FzZXM2MCRjb25mLmludClcbiAgcHJpbnQodG9TdHJpbmcocm91bmQoY2FzZXM2MCRlc3RpbWF0ZSwgZGlnaXRzID0gNCkpKVxuICBwcmludCh0b1N0cmluZyhyb3VuZChjYXNlczYwJGNvbmYuaW50LCBkaWdpdHMgPSA0KSkpXG4gIyBwcmludChtZWFuKGZpbHRlcmVkJGNhc2VzX25ldykpXG59XG5gYGAifQ== -->
+<pre class="r"><code>for (x in 1:10) {
+  base_date &lt;- as.Date(base_date) %m+% months(2)
+  filtered &lt;- cases_MY[cases_MY$date &gt;= &quot;2020-02-01&quot; &amp; cases_MY$date &lt;= base_date,]
+  cases60 &lt;- t.test(filtered$cases_elderly, y = NULL, alternative = &quot;two.sided&quot;, mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)
+ # print(cases60$estimate)
+  #print(cases60$conf.int)
+  print(toString(round(cases60$estimate, digits = 4)))
+  print(toString(round(cases60$conf.int, digits = 4)))
+ # print(mean(filtered$cases_new))
+}</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiOC4yNTYyXCJcblsxXSBcIjYuMjIyNCwgMTAuMjlcIlxuWzFdIFwiNS44ODQ2XCJcblsxXSBcIjQuNDQ1OSwgNy4zMjM0XCJcblsxXSBcIjUuMDQxMlwiXG5bMV0gXCIzLjkzNTQsIDYuMTQ2OVwiXG5bMV0gXCIxMy44OThcIlxuWzFdIFwiMTEuNTU5OSwgMTYuMjM2MVwiXG5bMV0gXCIzNi4wMTFcIlxuWzFdIFwiMjkuMjEyNywgNDIuODA5MlwiXG5bMV0gXCI1MC4yMjE3XCJcblsxXSBcIjQzLjE2ODgsIDU3LjI3NDZcIlxuWzFdIFwiOTQuMTk3OVwiXG5bMV0gXCI3OS41NzExLCAxMDguODI0OFwiXG5bMV0gXCIxNTYuNzc4NFwiXG5bMV0gXCIxMzYuMDUzMiwgMTc3LjUwMzZcIlxuWzFdIFwiMjk5Ljg0NTRcIlxuWzFdIFwiMjYwLjg2NDIsIDMzOC44MjY2XCJcblsxXSBcIjM0NS43MTQ1XCJcblsxXSBcIjMwOC40MTg3LCAzODMuMDEwM1wiXG4ifQ== -->
+<pre><code>[1] &quot;8.2562&quot;
+[1] &quot;6.2224, 10.29&quot;
+[1] &quot;5.8846&quot;
+[1] &quot;4.4459, 7.3234&quot;
+[1] &quot;5.0412&quot;
+[1] &quot;3.9354, 6.1469&quot;
+[1] &quot;13.898&quot;
+[1] &quot;11.5599, 16.2361&quot;
+[1] &quot;36.011&quot;
+[1] &quot;29.2127, 42.8092&quot;
+[1] &quot;50.2217&quot;
+[1] &quot;43.1688, 57.2746&quot;
+[1] &quot;94.1979&quot;
+[1] &quot;79.5711, 108.8248&quot;
+[1] &quot;156.7784&quot;
+[1] &quot;136.0532, 177.5036&quot;
+[1] &quot;299.8454&quot;
+[1] &quot;260.8642, 338.8266&quot;
+[1] &quot;345.7145&quot;
+[1] &quot;308.4187, 383.0103&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQoc3VtKGZpbHRlcmVkJGNhc2VzX2VsZGVybHkpKVxuYGBgIn0= -->
+<pre class="r"><code>print(sum(filtered$cases_elderly))</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDIzMTI4M1xuIn0= -->
+<pre><code>[1] 231283</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYmFzZV9kYXRlIDwtIFwiMjAyMC0wMy0zMVwiXG5cbmZpcnN0Rm91ciA8LSBjYXNlc19NWVtjYXNlc19NWSRkYXRlID49IFwiMjAyMC0wMi0wMVwiICYgY2FzZXNfTVkkZGF0ZSA8PSBiYXNlX2RhdGUsIF1cbmNhc2VzNjAgPC0gdC50ZXN0KGZpcnN0Rm91ciRjYXNlc19lbGRlcmx5LCB5ID0gTlVMTCwgYWx0ZXJuYXRpdmUgPSBjKFwidHdvLnNpZGVkXCIpLCBtdSA9IDAsIHBhaXJlZCA9IEZBTFNFLCB2YXIuZXF1YWwgPSBGQUxTRSwgY29uZi5sZXZlbCA9IDAuOTUpXG5cbiNkZiA9IGRhdGEuZnJhbWUoZGF0ZSA9IGMoMSwgMiwgMywgNCwgNSwgNiwgNywgOCwgOSwgMTAgLCAxMSkpXG5cbmRmID0gZGF0YS5mcmFtZSgpXG5cbmZpcnN0IDwtIGRhdGEuZnJhbWUoZGF0ZSA9IGZpcnN0Rm91ciRkYXRlLCBtZWFuID0gdG9TdHJpbmcocm91bmQoY2FzZXM2MCRlc3RpbWF0ZSwgZGlnaXRzID0gNCkpLCBjb25maWRlbmNlX2ludGVydmFsID0gdG9TdHJpbmcocm91bmQoY2FzZXM2MCRjb25mLmludCwgZGlnaXRzID0gNCkpKVxuXG4jZmlyc3QgPC0gaGVhZChmaXJzdCwgbiA9IDEpXG5maXJzdCA8LSB0YWlsKGZpcnN0LCBuID0gMSlcblxuZGYgPSByYmluZChkZiwgZmlyc3QpXG5cbmZvciAoeCBpbiAxOjEwKSB7XG4gIGJhc2VfZGF0ZSA8LSBhcy5EYXRlKGJhc2VfZGF0ZSkgJW0rJSBtb250aHMoMilcbiAgZmlsdGVyZWQgPC0gY2FzZXNfTVlbY2FzZXNfTVkkZGF0ZSA+PSBcIjIwMjAtMDItMDFcIiAmIGNhc2VzX01ZJGRhdGUgPD0gYmFzZV9kYXRlLF1cbiAgY2FzZXM2MCA8LSB0LnRlc3QoZmlsdGVyZWQkY2FzZXNfZWxkZXJseSwgeSA9IE5VTEwsIGFsdGVybmF0aXZlID0gXCJ0d28uc2lkZWRcIiwgbXUgPSAwLCBwYWlyZWQgPSBGQUxTRSwgdmFyLmVxdWFsID0gRkFMU0UsIGNvbmYubGV2ZWwgPSAwLjk1KVxuICMgcHJpbnQoY2FzZXM2MCRlc3RpbWF0ZSlcbiAgI3ByaW50KGNhc2VzNjAkY29uZi5pbnQpXG4gIyBwcmludCh0b1N0cmluZyhyb3VuZChjYXNlczYwJGVzdGltYXRlLCBkaWdpdHMgPSA0KSkpXG4gICNwcmludCh0b1N0cmluZyhyb3VuZChjYXNlczYwJGNvbmYuaW50LCBkaWdpdHMgPSA0KSkpXG4gIyBwcmludChtZWFuKGZpbHRlcmVkJGNhc2VzX25ldykpXG4gIHNlY29uZCA8LSBkYXRhLmZyYW1lKGRhdGUgPSBmaWx0ZXJlZCRkYXRlLCBtZWFuID0gdG9TdHJpbmcocm91bmQoY2FzZXM2MCRlc3RpbWF0ZSwgZGlnaXRzID0gNCkpLCBjb25maWRlbmNlX2ludGVydmFsID0gdG9TdHJpbmcocm91bmQoY2FzZXM2MCRjb25mLmludCwgZGlnaXRzID0gNCkpKVxuICBcbiAgI3NlY29uZCA8LSBoZWFkKHNlY29uZCwgbiA9IDEpXG4gIHNlY29uZCA8LSB0YWlsKHNlY29uZCwgbiA9IDEpXG4gIFxuICBkZiA9IHJiaW5kKGRmLCBzZWNvbmQpXG4gIFxuICAjdGhpcmQgPC0gcmJpbmQoZmlyc3QsIHNlY29uZClcbn1cbiNWaWV3KHRoaXJkKVxuI2RmXG5WaWV3KGRmKVxucHJpbnQoc3VtKGZpbHRlcmVkJGNhc2VzX2VsZGVybHkpKVxuYGBgIn0= -->
+<pre class="r"><code>base_date &lt;- &quot;2020-03-31&quot;
+
+firstFour &lt;- cases_MY[cases_MY$date &gt;= &quot;2020-02-01&quot; &amp; cases_MY$date &lt;= base_date, ]
+cases60 &lt;- t.test(firstFour$cases_elderly, y = NULL, alternative = c(&quot;two.sided&quot;), mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)
+
+#df = data.frame(date = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10 , 11))
+
+df = data.frame()
+
+first &lt;- data.frame(date = firstFour$date, mean = toString(round(cases60$estimate, digits = 4)), confidence_interval = toString(round(cases60$conf.int, digits = 4)))
+
+#first &lt;- head(first, n = 1)
+first &lt;- tail(first, n = 1)
+
+df = rbind(df, first)
+
+for (x in 1:10) {
+  base_date &lt;- as.Date(base_date) %m+% months(2)
+  filtered &lt;- cases_MY[cases_MY$date &gt;= &quot;2020-02-01&quot; &amp; cases_MY$date &lt;= base_date,]
+  cases60 &lt;- t.test(filtered$cases_elderly, y = NULL, alternative = &quot;two.sided&quot;, mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)
+ # print(cases60$estimate)
+  #print(cases60$conf.int)
+ # print(toString(round(cases60$estimate, digits = 4)))
+  #print(toString(round(cases60$conf.int, digits = 4)))
+ # print(mean(filtered$cases_new))
+  second &lt;- data.frame(date = filtered$date, mean = toString(round(cases60$estimate, digits = 4)), confidence_interval = toString(round(cases60$conf.int, digits = 4)))
+  
+  #second &lt;- head(second, n = 1)
+  second &lt;- tail(second, n = 1)
+  
+  df = rbind(df, second)
+  
+  #third &lt;- rbind(first, second)
+}
+#View(third)
+#df
+View(df)
+print(sum(filtered$cases_elderly))</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDIzMTI4M1xuIn0= -->
+<pre><code>[1] 231283</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KDQpUaGlzIGlzIGFuIFtSIE1hcmtkb3duXShodHRwOi8vcm1hcmtkb3duLnJzdHVkaW8uY29tKSBOb3RlYm9vay4gV2hlbiB5b3UgZXhlY3V0ZSBjb2RlIHdpdGhpbiB0aGUgbm90ZWJvb2ssIHRoZSByZXN1bHRzIGFwcGVhciBiZW5lYXRoIHRoZSBjb2RlLg0KDQpUcnkgZXhlY3V0aW5nIHRoaXMgY2h1bmsgYnkgY2xpY2tpbmcgdGhlICpSdW4qIGJ1dHRvbiB3aXRoaW4gdGhlIGNodW5rIG9yIGJ5IHBsYWNpbmcgeW91ciBjdXJzb3IgaW5zaWRlIGl0IGFuZCBwcmVzc2luZyAqQ3RybCtTaGlmdCtFbnRlciouDQoNCmBgYHtyfQ0KcGxvdChjYXJzKQ0KYGBgDQoNCkFkZCBhIG5ldyBjaHVuayBieSBjbGlja2luZyB0aGUgKkluc2VydCBDaHVuayogYnV0dG9uIG9uIHRoZSB0b29sYmFyIG9yIGJ5IHByZXNzaW5nICpDdHJsK0FsdCtJKi4NCg0KV2hlbiB5b3Ugc2F2ZSB0aGUgbm90ZWJvb2ssIGFuIEhUTUwgZmlsZSBjb250YWluaW5nIHRoZSBjb2RlIGFuZCBvdXRwdXQgd2lsbCBiZSBzYXZlZCBhbG9uZ3NpZGUgaXQgKGNsaWNrIHRoZSAqUHJldmlldyogYnV0dG9uIG9yIHByZXNzICpDdHJsK1NoaWZ0K0sqIHRvIHByZXZpZXcgdGhlIEhUTUwgZmlsZSkuDQoNClRoZSBwcmV2aWV3IHNob3dzIHlvdSBhIHJlbmRlcmVkIEhUTUwgY29weSBvZiB0aGUgY29udGVudHMgb2YgdGhlIGVkaXRvci4gQ29uc2VxdWVudGx5LCB1bmxpa2UgKktuaXQqLCAqUHJldmlldyogZG9lcyBub3QgcnVuIGFueSBSIGNvZGUgY2h1bmtzLiBJbnN0ZWFkLCB0aGUgb3V0cHV0IG9mIHRoZSBjaHVuayB3aGVuIGl0IHdhcyBsYXN0IHJ1biBpbiB0aGUgZWRpdG9yIGlzIGRpc3BsYXllZC4NCg0KYGBge3J9DQppbnN0YWxsLnBhY2thZ2VzKCdsdWJyaWRhdGUnKQ0KaW5zdGFsbC5wYWNrYWdlcygndGlkeXZlcnNlJykNCg0KYGBgDQoNCmBgYHtyfQ0KbGlicmFyeShsdWJyaWRhdGUpDQpsaWJyYXJ5KHRpZHl2ZXJzZSkNCg0KYGBgDQoNCkltcG9ydCByZXF1aXJlZCBsaWJyYXJ5DQoNCmBgYHtyfQ0KbGlicmFyeShnZ3Bsb3QyKQ0KYGBgDQoNCmBgYHtyfQ0KIyBJbXBvcnQgZGF0YXNldA0KY2FzZXNfbWFsYXlzaWEgPC0gcmVhZC5jc3YoIkU6L1VUZU0vU2VtIDMvU3RhdGlzdGljcyBhbmQgUHJvYmFiaWxpdHkvQS9BMi9jb2RlL2RhdGEvY2FzZXNfbWFsYXlzaWEuY3N2IikNCnBvcHVsYXRpb24gPC0gcmVhZC5jc3YoIkU6L1VUZU0vU2VtIDMvU3RhdGlzdGljcyBhbmQgUHJvYmFiaWxpdHkvQS9BMi9jb2RlL2RhdGEvcG9wdWxhdGlvbi5jc3YiKQ0KYGBgDQoNClJldHJpZXZlIGRhdGEgYmFzZWQgb24gZGVzaXJlZCByYW5nZSB3aGljaCBpcyAwMS0wMi0yMDIwIHRvIDMwLTExLTIwMjEgb25seS4NCg0KYGBge3J9DQpjYXNlc19NWSA8LSBjYXNlc19tYWxheXNpYVtjYXNlc19tYWxheXNpYSRkYXRlID49ICIyMDIwLTAyLTAxIiAmIGNhc2VzX21hbGF5c2lhJGRhdGUgPD0gIjIwMjEtMTEtMzAiLF0NCmBgYA0KDQpgYGB7cn0NClZpZXcoY2FzZXNfTVkpDQpgYGANCg0KYGBge3J9DQp0LnRlc3QoY2FzZXNfTVkkY2FzZXNfbmV3LCB5ID0gTlVMTCwgYWx0ZXJuYXRpdmUgPSBjKCJ0d28uc2lkZWQiKSwgbXUgPSAwLCBwYWlyZWQgPSBGQUxTRSwgdmFyLmVxdWFsID0gRkFMU0UsIGNvbmYubGV2ZWwgPSAwLjk1KQ0KDQp0LnRlc3QoY2FzZXNfTVkkY2FzZXNfbmV3LCB5ID0gTlVMTCwgYWx0ZXJuYXRpdmUgPSBjKCJ0d28uc2lkZWQiKSwgbXUgPSAwLCBwYWlyZWQgPSBGQUxTRSwgdmFyLmVxdWFsID0gRkFMU0UsIGNvbmYubGV2ZWwgPSAwLjk5KQ0KYGBgDQoNCmBgYHtyfQ0KIyBnZ3Bsb3QoY2FzZXNfTVkkY2FzZXNfdW52YXgsIGRhdGUgPSAgKQ0KZ2dwbG90KGNhc2VzX01ZLCBhZXMoeCA9IGFzLkRhdGUoZGF0ZSksIHkgPSBjYXNlc191bnZheCwgZ3JvdXAgPSAxKSkgKyBnZW9tX2xpbmUoKQ0KYGBgDQoNCmBgYHtyfQ0KcG9wdWxhdGlvbl9NWSA8LSBwb3B1bGF0aW9uW3BvcHVsYXRpb24kc3RhdGUgPT0gIk1hbGF5c2lhIixdDQoNCnBvcF9NWSA8LSBwb3B1bGF0aW9uX01ZJHBvcA0KcG9wMTJfTVkgPC0gcG9wdWxhdGlvbl9NWSRwb3BfMTINCnBvcDE4X01ZIDwtIHBvcHVsYXRpb25fTVkkcG9wXzE4DQpwb3A2MF9NWSA8LSBwb3B1bGF0aW9uX01ZJHBvcF82MA0KYGBgDQoNCmBgYHtyfQ0KdG90YWxfY2FzZXMgPC0gc3VtKGNhc2VzX01ZJGNhc2VzX25ldykNCnRvdGFsX2luZmVjdGVkX3BlcmNlbnRhZ2UgPC0gdG90YWxfY2FzZXMgLyBwb3BfTVkgKiAxMDANCnByaW50KHRvdGFsX2Nhc2VzKQ0KcHJpbnQodG90YWxfaW5mZWN0ZWRfcGVyY2VudGFnZSkNCiNwcmludChpbmZlY3RlZF9wZXJjZW50YWdlICogcG9wX01ZKQ0KDQpwcmludCgiQ2hpbGQiKQ0KcHJpbnQoc3VtKGNhc2VzX01ZJGNhc2VzX2NoaWxkICsgY2FzZXNfTVkkY2FzZXNfYWRvbGVzY2VudCkgLyBwb3AxMl9NWSAqIDEwMCkNCmBgYA0KDQpgYGB7cn0NCm1lYW4oY2FzZXNfTVkkY2FzZXNfbmV3KQ0KbWVhbihjYXNlc19NWSRjYXNlc19uZXcsIG5hLnJtID0gVFJVRSkNCmBgYA0KDQpgYGB7cn0NCmZpcnN0VHdvIDwtIGNhc2VzX01ZW2Nhc2VzX01ZJGRhdGUgPj0gIjIwMjAtMDItMDEiICYgY2FzZXNfTVkkZGF0ZSA8PSAiMjAyMC0wMy0zMSIsIF0NCiNWaWV3KGZpcnN0VHdvKQ0KdC50ZXN0KGZpcnN0VHdvJGNhc2VzX25ldywgeSA9IE5VTEwsIGFsdGVybmF0aXZlID0gYygidHdvLnNpZGVkIiksIG11ID0gMCwgcGFpcmVkID0gRkFMU0UsIHZhci5lcXVhbCA9IEZBTFNFLCBjb25mLmxldmVsID0gMC45NSkNCmBgYA0KDQpgYGB7cn0NCmZpcnN0Rm91ciA8LSBjYXNlc19NWVtjYXNlc19NWSRkYXRlID49ICIyMDIwLTAyLTAxIiAmIGNhc2VzX01ZJGRhdGUgPD0gIjIwMjAtMDUtMzEiLCBdDQp0LnRlc3QoZmlyc3RGb3VyJGNhc2VzX25ldywgeSA9IE5VTEwsIGFsdGVybmF0aXZlID0gYygidHdvLnNpZGVkIiksIG11ID0gMCwgcGFpcmVkID0gRkFMU0UsIHZhci5lcXVhbCA9IEZBTFNFLCBjb25mLmxldmVsID0gMC45NSkNCmBgYA0KDQpgYGB7cn0NCiNzZXEoYXMuRGF0ZShjdXQoYXMuRGF0ZSgiMjAyMC0wMy0zMSIpLCAibW9udGgiKSksIGxlbmd0aD0yLCBieT0iKzIgbW9udGgiKVsyXS0xDQojIyAiMjAxMi0wNi0zMCINCiNsdWJyaWNhdGUNCiNiYXNlX2RhdGUgPC0gIjIwMjAtMDMtMzEiDQpiYXNlX2RhdGUgPC0gIjIwMjAtMDMtMzEiDQoNCmZpcnN0Rm91ciA8LSBjYXNlc19NWVtjYXNlc19NWSRkYXRlID49ICIyMDIwLTAyLTAxIiAmIGNhc2VzX01ZJGRhdGUgPD0gYmFzZV9kYXRlLCBdDQp0LnRlc3QoZmlyc3RGb3VyJGNhc2VzX25ldywgeSA9IE5VTEwsIGFsdGVybmF0aXZlID0gYygidHdvLnNpZGVkIiksIG11ID0gMCwgcGFpcmVkID0gRkFMU0UsIHZhci5lcXVhbCA9IEZBTFNFLCBjb25mLmxldmVsID0gMC45NSkNCg0KZm9yICh4IGluIDE6MTApIHsNCiAgI3ByaW50KGFzLkRhdGUoIjIwMjAtMDMtMzEiKSAlbSslIG1vbnRocygyKSkNCiAgdXBkYXRlIDwtIGFzLkRhdGUoYmFzZV9kYXRlKSAlbSslIG1vbnRocygyKQ0KICBiYXNlX2RhdGUgPC0gdXBkYXRlDQogIGZpbHRlcmVkIDwtIGNhc2VzX01ZW2Nhc2VzX01ZJGRhdGUgPj0gIjIwMjAtMDItMDEiICYgY2FzZXNfTVkkZGF0ZSA8PSBiYXNlX2RhdGUsIF0NCmR0IDwtIHQudGVzdChmaWx0ZXJlZCRjYXNlc19uZXcsIHkgPSBOVUxMLCBhbHRlcm5hdGl2ZSA9IGMoInR3by5zaWRlZCIpLCBtdSA9IDAsIHBhaXJlZCA9IEZBTFNFLCB2YXIuZXF1YWwgPSBGQUxTRSwgY29uZi5sZXZlbCA9IDAuOTUpDQogICNwcmludChiYXNlX2RhdGUpDQpwcmludChkdCkNCn0NCg0KYGBgDQo=</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KDQpUaGlzIGlzIGFuIFtSIE1hcmtkb3duXShodHRwOi8vcm1hcmtkb3duLnJzdHVkaW8uY29tKSBOb3RlYm9vay4gV2hlbiB5b3UgZXhlY3V0ZSBjb2RlIHdpdGhpbiB0aGUgbm90ZWJvb2ssIHRoZSByZXN1bHRzIGFwcGVhciBiZW5lYXRoIHRoZSBjb2RlLg0KDQpUcnkgZXhlY3V0aW5nIHRoaXMgY2h1bmsgYnkgY2xpY2tpbmcgdGhlICpSdW4qIGJ1dHRvbiB3aXRoaW4gdGhlIGNodW5rIG9yIGJ5IHBsYWNpbmcgeW91ciBjdXJzb3IgaW5zaWRlIGl0IGFuZCBwcmVzc2luZyAqQ3RybCtTaGlmdCtFbnRlciouDQoNCmBgYHtyfQ0KcGxvdChjYXJzKQ0KYGBgDQoNCkFkZCBhIG5ldyBjaHVuayBieSBjbGlja2luZyB0aGUgKkluc2VydCBDaHVuayogYnV0dG9uIG9uIHRoZSB0b29sYmFyIG9yIGJ5IHByZXNzaW5nICpDdHJsK0FsdCtJKi4NCg0KV2hlbiB5b3Ugc2F2ZSB0aGUgbm90ZWJvb2ssIGFuIEhUTUwgZmlsZSBjb250YWluaW5nIHRoZSBjb2RlIGFuZCBvdXRwdXQgd2lsbCBiZSBzYXZlZCBhbG9uZ3NpZGUgaXQgKGNsaWNrIHRoZSAqUHJldmlldyogYnV0dG9uIG9yIHByZXNzICpDdHJsK1NoaWZ0K0sqIHRvIHByZXZpZXcgdGhlIEhUTUwgZmlsZSkuDQoNClRoZSBwcmV2aWV3IHNob3dzIHlvdSBhIHJlbmRlcmVkIEhUTUwgY29weSBvZiB0aGUgY29udGVudHMgb2YgdGhlIGVkaXRvci4gQ29uc2VxdWVudGx5LCB1bmxpa2UgKktuaXQqLCAqUHJldmlldyogZG9lcyBub3QgcnVuIGFueSBSIGNvZGUgY2h1bmtzLiBJbnN0ZWFkLCB0aGUgb3V0cHV0IG9mIHRoZSBjaHVuayB3aGVuIGl0IHdhcyBsYXN0IHJ1biBpbiB0aGUgZWRpdG9yIGlzIGRpc3BsYXllZC4NCg0KYGBge3J9DQppbnN0YWxsLnBhY2thZ2VzKCdsdWJyaWRhdGUnKQ0KaW5zdGFsbC5wYWNrYWdlcygndGlkeXZlcnNlJykNCg0KYGBgDQoNCmBgYHtyfQ0KbGlicmFyeShsdWJyaWRhdGUpDQpsaWJyYXJ5KHRpZHl2ZXJzZSkNCg0KYGBgDQoNCkltcG9ydCByZXF1aXJlZCBsaWJyYXJ5DQoNCmBgYHtyfQ0KbGlicmFyeShnZ3Bsb3QyKQ0KYGBgDQoNCmBgYHtyfQ0KIyBJbXBvcnQgZGF0YXNldA0KY2FzZXNfbWFsYXlzaWEgPC0gcmVhZC5jc3YoIkU6L1VUZU0vU2VtIDMvU3RhdGlzdGljcyBhbmQgUHJvYmFiaWxpdHkvQS9BMi9jb2RlL2RhdGEvY2FzZXNfbWFsYXlzaWEuY3N2IikNCnBvcHVsYXRpb24gPC0gcmVhZC5jc3YoIkU6L1VUZU0vU2VtIDMvU3RhdGlzdGljcyBhbmQgUHJvYmFiaWxpdHkvQS9BMi9jb2RlL2RhdGEvcG9wdWxhdGlvbi5jc3YiKQ0KYGBgDQoNClJldHJpZXZlIGRhdGEgYmFzZWQgb24gZGVzaXJlZCByYW5nZSB3aGljaCBpcyAwMS0wMi0yMDIwIHRvIDMwLTExLTIwMjEgb25seS4NCg0KYGBge3J9DQpjYXNlc19NWSA8LSBjYXNlc19tYWxheXNpYVtjYXNlc19tYWxheXNpYSRkYXRlID49ICIyMDIwLTAyLTAxIiAmIGNhc2VzX21hbGF5c2lhJGRhdGUgPD0gIjIwMjEtMTEtMzAiLF0NCmBgYA0KDQpgYGB7cn0NClZpZXcoY2FzZXNfTVkpDQpgYGANCg0KYGBge3J9DQp0LnRlc3QoY2FzZXNfTVkkY2FzZXNfbmV3LCB5ID0gTlVMTCwgYWx0ZXJuYXRpdmUgPSBjKCJ0d28uc2lkZWQiKSwgbXUgPSAwLCBwYWlyZWQgPSBGQUxTRSwgdmFyLmVxdWFsID0gRkFMU0UsIGNvbmYubGV2ZWwgPSAwLjk1KQ0KDQp0LnRlc3QoY2FzZXNfTVkkY2FzZXNfbmV3LCB5ID0gTlVMTCwgYWx0ZXJuYXRpdmUgPSBjKCJ0d28uc2lkZWQiKSwgbXUgPSAwLCBwYWlyZWQgPSBGQUxTRSwgdmFyLmVxdWFsID0gRkFMU0UsIGNvbmYubGV2ZWwgPSAwLjk5KQ0KYGBgDQoNCmBgYHtyfQ0KIyBnZ3Bsb3QoY2FzZXNfTVkkY2FzZXNfdW52YXgsIGRhdGUgPSAgKQ0KZ2dwbG90KGNhc2VzX01ZLCBhZXMoeCA9IGFzLkRhdGUoZGF0ZSksIHkgPSBjYXNlc191bnZheCwgZ3JvdXAgPSAxKSkgKyBnZW9tX2xpbmUoKQ0KYGBgDQoNCmBgYHtyfQ0KcG9wdWxhdGlvbl9NWSA8LSBwb3B1bGF0aW9uW3BvcHVsYXRpb24kc3RhdGUgPT0gIk1hbGF5c2lhIixdDQoNCnBvcF9NWSA8LSBwb3B1bGF0aW9uX01ZJHBvcA0KcG9wMTJfTVkgPC0gcG9wdWxhdGlvbl9NWSRwb3BfMTINCnBvcDE4X01ZIDwtIHBvcHVsYXRpb25fTVkkcG9wXzE4DQpwb3A2MF9NWSA8LSBwb3B1bGF0aW9uX01ZJHBvcF82MA0KYGBgDQoNCmBgYHtyfQ0KdG90YWxfY2FzZXMgPC0gc3VtKGNhc2VzX01ZJGNhc2VzX25ldykNCnRvdGFsX2luZmVjdGVkX3BlcmNlbnRhZ2UgPC0gdG90YWxfY2FzZXMgLyBwb3BfTVkgKiAxMDANCnByaW50KHRvdGFsX2Nhc2VzKQ0KcHJpbnQodG90YWxfaW5mZWN0ZWRfcGVyY2VudGFnZSkNCiNwcmludChpbmZlY3RlZF9wZXJjZW50YWdlICogcG9wX01ZKQ0KDQpwcmludCgiQ2hpbGQiKQ0KcHJpbnQoc3VtKGNhc2VzX01ZJGNhc2VzX2NoaWxkICsgY2FzZXNfTVkkY2FzZXNfYWRvbGVzY2VudCkgLyBwb3AxMl9NWSAqIDEwMCkNCmBgYA0KDQpgYGB7cn0NCm1lYW4oY2FzZXNfTVkkY2FzZXNfbmV3KQ0KbWVhbihjYXNlc19NWSRjYXNlc19uZXcsIG5hLnJtID0gVFJVRSkNCmBgYA0KDQpgYGB7cn0NCmZpcnN0VHdvIDwtIGNhc2VzX01ZW2Nhc2VzX01ZJGRhdGUgPj0gIjIwMjAtMDItMDEiICYgY2FzZXNfTVkkZGF0ZSA8PSAiMjAyMC0wMy0zMSIsIF0NCiNWaWV3KGZpcnN0VHdvKQ0KdC50ZXN0KGZpcnN0VHdvJGNhc2VzX25ldywgeSA9IE5VTEwsIGFsdGVybmF0aXZlID0gYygidHdvLnNpZGVkIiksIG11ID0gMCwgcGFpcmVkID0gRkFMU0UsIHZhci5lcXVhbCA9IEZBTFNFLCBjb25mLmxldmVsID0gMC45NSkNCmBgYA0KDQpgYGB7cn0NCmZpcnN0Rm91ciA8LSBjYXNlc19NWVtjYXNlc19NWSRkYXRlID49ICIyMDIwLTAyLTAxIiAmIGNhc2VzX01ZJGRhdGUgPD0gIjIwMjAtMDUtMzEiLCBdDQp0LnRlc3QoZmlyc3RGb3VyJGNhc2VzX25ldywgeSA9IE5VTEwsIGFsdGVybmF0aXZlID0gYygidHdvLnNpZGVkIiksIG11ID0gMCwgcGFpcmVkID0gRkFMU0UsIHZhci5lcXVhbCA9IEZBTFNFLCBjb25mLmxldmVsID0gMC45NSkNCmBgYA0KDQpgYGB7cn0NCiNzZXEoYXMuRGF0ZShjdXQoYXMuRGF0ZSgiMjAyMC0wMy0zMSIpLCAibW9udGgiKSksIGxlbmd0aD0yLCBieT0iKzIgbW9udGgiKVsyXS0xDQojIyAiMjAxMi0wNi0zMCINCiNsdWJyaWNhdGUNCiNiYXNlX2RhdGUgPC0gIjIwMjAtMDMtMzEiDQpiYXNlX2RhdGUgPC0gIjIwMjAtMDMtMzEiDQoNCmZpcnN0Rm91ciA8LSBjYXNlc19NWVtjYXNlc19NWSRkYXRlID49ICIyMDIwLTAyLTAxIiAmIGNhc2VzX01ZJGRhdGUgPD0gYmFzZV9kYXRlLCBdDQp0LnRlc3QoZmlyc3RGb3VyJGNhc2VzX25ldywgeSA9IE5VTEwsIGFsdGVybmF0aXZlID0gYygidHdvLnNpZGVkIiksIG11ID0gMCwgcGFpcmVkID0gRkFMU0UsIHZhci5lcXVhbCA9IEZBTFNFLCBjb25mLmxldmVsID0gMC45NSkNCg0KZm9yICh4IGluIDE6MTApIHsNCiAgI3ByaW50KGFzLkRhdGUoIjIwMjAtMDMtMzEiKSAlbSslIG1vbnRocygyKSkNCiAgdXBkYXRlIDwtIGFzLkRhdGUoYmFzZV9kYXRlKSAlbSslIG1vbnRocygyKQ0KICBiYXNlX2RhdGUgPC0gdXBkYXRlDQogIGZpbHRlcmVkIDwtIGNhc2VzX01ZW2Nhc2VzX01ZJGRhdGUgPj0gIjIwMjAtMDItMDEiICYgY2FzZXNfTVkkZGF0ZSA8PSBiYXNlX2RhdGUsIF0NCmR0IDwtIHQudGVzdChmaWx0ZXJlZCRjYXNlc19uZXcsIHkgPSBOVUxMLCBhbHRlcm5hdGl2ZSA9IGMoInR3by5zaWRlZCIpLCBtdSA9IDAsIHBhaXJlZCA9IEZBTFNFLCB2YXIuZXF1YWwgPSBGQUxTRSwgY29uZi5sZXZlbCA9IDAuOTUpDQogICNwcmludChiYXNlX2RhdGUpDQpwcmludChkdCkNCnByaW50KG1lYW4oZmlsdGVyZWQkY2FzZXNfbmV3KSkNCn0NCg0KYGBgDQoNCmBgYHtyfQ0KIyByZXRyaWV2ZSBjYXNlcyBmb3IgdW5kZXIgMTggY2hpbGQNCg0KYmFzZV9kYXRlIDwtICIyMDIwLTAzLTMxIg0KDQpmaXJzdEZvdXIgPC0gY2FzZXNfTVlbY2FzZXNfTVkkZGF0ZSA+PSAiMjAyMC0wMi0wMSIgJiBjYXNlc19NWSRkYXRlIDw9IGJhc2VfZGF0ZSwgXQ0KdC50ZXN0KGZpcnN0Rm91ciRjYXNlc19uZXcsIHkgPSBOVUxMLCBhbHRlcm5hdGl2ZSA9IGMoInR3by5zaWRlZCIpLCBtdSA9IDAsIHBhaXJlZCA9IEZBTFNFLCB2YXIuZXF1YWwgPSBGQUxTRSwgY29uZi5sZXZlbCA9IDAuOTUpDQoNCmZvciAoeCBpbiAxOjEwKSB7DQogIGJhc2VfZGF0ZSA8LSBhcy5EYXRlKGJhc2VfZGF0ZSkgJW0rJSBtb250aHMoMikNCiAgZmlsdGVyZWQgPC0gY2FzZXNfTVlbY2FzZXNfTVkkZGF0ZSA+PSAiMjAyMC0wMi0wMSIgJiBjYXNlc19NWSRkYXRlIDw9IGJhc2VfZGF0ZSxdDQogICNjYXNlczEyIDwtIGZpbHRlcmVkW2ZpbHRlcmVkJF0NCiAgY2FzZXNfMTIgPC0gZmlsdGVyZWQkY2FzZXNfMF80ICsgZmlsdGVyZWQkY2FzZXNfNV8xMSArIGZpbHRlcmVkJGNhc2VzXzEyXzE3DQogIHRvdGFsXzEyIDwtIGRhdGEuZnJhbWUoZGF0ZSA9IGZpbHRlcmVkJGRhdGUsIGNhc2VzID0gY2FzZXNfMTIpDQogIyBWaWV3KGNhc2VzXzEyKQ0KICAjVmlldyh0b3RhbF8xMikNCiAgY2FzZXMxMiA8LSB0LnRlc3QodG90YWxfMTIkY2FzZXMsIHkgPSBOVUxMLCBhbHRlcm5hdGl2ZSA9ICJ0d28uc2lkZWQiLCBtdSA9IDAsIHBhaXJlZCA9IEZBTFNFLCB2YXIuZXF1YWwgPSBGQUxTRSwgY29uZi5sZXZlbCA9IDAuOTUpDQogIHByaW50KGNhc2VzMTIpDQogIHByaW50KG1lYW4oZmlsdGVyZWQkY2FzZXNfbmV3KSkNCn0NCiAgcHJpbnQoc3VtKHRvdGFsXzEyJGNhc2VzKSkNCg0KYGBgDQoNCmBgYHtyfQ0KIyByZXRyaWV2ZSBjYXNlcyBmb3IgY2hpbGQgYWx0ZXJuYXRpdmUNCg0KYmFzZV9kYXRlIDwtICIyMDIwLTAzLTMxIg0KDQpmaXJzdEZvdXIgPC0gY2FzZXNfTVlbY2FzZXNfTVkkZGF0ZSA+PSAiMjAyMC0wMi0wMSIgJiBjYXNlc19NWSRkYXRlIDw9IGJhc2VfZGF0ZSwgXQ0KdC50ZXN0KGZpcnN0Rm91ciRjYXNlc19jaGlsZCArIGZpcnN0Rm91ciRjYXNlc19hZG9sZXNjZW50LCB5ID0gTlVMTCwgYWx0ZXJuYXRpdmUgPSBjKCJ0d28uc2lkZWQiKSwgbXUgPSAwLCBwYWlyZWQgPSBGQUxTRSwgdmFyLmVxdWFsID0gRkFMU0UsIGNvbmYubGV2ZWwgPSAwLjk1KQ0KDQpmb3IgKHggaW4gMToxMCkgew0KICBiYXNlX2RhdGUgPC0gYXMuRGF0ZShiYXNlX2RhdGUpICVtKyUgbW9udGhzKDIpDQogIGZpbHRlcmVkIDwtIGNhc2VzX01ZW2Nhc2VzX01ZJGRhdGUgPj0gIjIwMjAtMDItMDEiICYgY2FzZXNfTVkkZGF0ZSA8PSBiYXNlX2RhdGUsXQ0KICBjYXNlczEyIDwtIHQudGVzdChmaWx0ZXJlZCRjYXNlc19jaGlsZCArIGZpbHRlcmVkJGNhc2VzX2Fkb2xlc2NlbnQsIHkgPSBOVUxMLCBhbHRlcm5hdGl2ZSA9ICJ0d28uc2lkZWQiLCBtdSA9IDAsIHBhaXJlZCA9IEZBTFNFLCB2YXIuZXF1YWwgPSBGQUxTRSwgY29uZi5sZXZlbCA9IDAuOTUpDQogIHByaW50KGNhc2VzMTIpDQogICNwcmludChtZWFuKGZpbHRlcmVkJGNhc2VzX2NoaWxkICsgZmlsdGVyZWQkY2FzZXNfYWRvbGVzY2VudCkpDQp9DQpwcmludChzdW0oZmlsdGVyZWQkY2FzZXNfY2hpbGQgKyBmaWx0ZXJlZCRjYXNlc19hZG9sZXNjZW50KSkNCg0KYGBgDQoNCmBgYHtyfQ0KIyByZXRyaWV2ZSBjYXNlcyBmb3IgYWR1bHQNCg0KYmFzZV9kYXRlIDwtICIyMDIwLTAzLTMxIg0KDQpmaXJzdEZvdXIgPC0gY2FzZXNfTVlbY2FzZXNfTVkkZGF0ZSA+PSAiMjAyMC0wMi0wMSIgJiBjYXNlc19NWSRkYXRlIDw9IGJhc2VfZGF0ZSwgXQ0KdC50ZXN0KGZpcnN0Rm91ciRjYXNlc19hZHVsdCwgeSA9IE5VTEwsIGFsdGVybmF0aXZlID0gYygidHdvLnNpZGVkIiksIG11ID0gMCwgcGFpcmVkID0gRkFMU0UsIHZhci5lcXVhbCA9IEZBTFNFLCBjb25mLmxldmVsID0gMC45NSkNCg0KZm9yICh4IGluIDE6MTApIHsNCiAgYmFzZV9kYXRlIDwtIGFzLkRhdGUoYmFzZV9kYXRlKSAlbSslIG1vbnRocygyKQ0KICBmaWx0ZXJlZCA8LSBjYXNlc19NWVtjYXNlc19NWSRkYXRlID49ICIyMDIwLTAyLTAxIiAmIGNhc2VzX01ZJGRhdGUgPD0gYmFzZV9kYXRlLF0NCiAgY2FzZXMxOCA8LSB0LnRlc3QoZmlsdGVyZWQkY2FzZXNfYWR1bHQsIHkgPSBOVUxMLCBhbHRlcm5hdGl2ZSA9ICJ0d28uc2lkZWQiLCBtdSA9IDAsIHBhaXJlZCA9IEZBTFNFLCB2YXIuZXF1YWwgPSBGQUxTRSwgY29uZi5sZXZlbCA9IDAuOTUpDQogIHByaW50KGNhc2VzMTgpDQogIyBwcmludChtZWFuKGZpbHRlcmVkJGNhc2VzX25ldykpDQp9DQpwcmludChzdW0oZmlsdGVyZWQkY2FzZXNfYWR1bHQpKQ0KDQpgYGANCg0KYGBge3J9DQojIHJldHJpZXZlIGNhc2VzIGZvciBlbGRlcmx5DQoNCmJhc2VfZGF0ZSA8LSAiMjAyMC0wMy0zMSINCg0KZmlyc3RGb3VyIDwtIGNhc2VzX01ZW2Nhc2VzX01ZJGRhdGUgPj0gIjIwMjAtMDItMDEiICYgY2FzZXNfTVkkZGF0ZSA8PSBiYXNlX2RhdGUsIF0NCnQudGVzdChmaXJzdEZvdXIkY2FzZXNfZWxkZXJseSwgeSA9IE5VTEwsIGFsdGVybmF0aXZlID0gYygidHdvLnNpZGVkIiksIG11ID0gMCwgcGFpcmVkID0gRkFMU0UsIHZhci5lcXVhbCA9IEZBTFNFLCBjb25mLmxldmVsID0gMC45NSkNCg0KZm9yICh4IGluIDE6MTApIHsNCiAgYmFzZV9kYXRlIDwtIGFzLkRhdGUoYmFzZV9kYXRlKSAlbSslIG1vbnRocygyKQ0KICBmaWx0ZXJlZCA8LSBjYXNlc19NWVtjYXNlc19NWSRkYXRlID49ICIyMDIwLTAyLTAxIiAmIGNhc2VzX01ZJGRhdGUgPD0gYmFzZV9kYXRlLF0NCiAgY2FzZXM2MCA8LSB0LnRlc3QoZmlsdGVyZWQkY2FzZXNfZWxkZXJseSwgeSA9IE5VTEwsIGFsdGVybmF0aXZlID0gInR3by5zaWRlZCIsIG11ID0gMCwgcGFpcmVkID0gRkFMU0UsIHZhci5lcXVhbCA9IEZBTFNFLCBjb25mLmxldmVsID0gMC45NSkNCiAgcHJpbnQoY2FzZXM2MCkNCiAjIHByaW50KG1lYW4oZmlsdGVyZWQkY2FzZXNfbmV3KSkNCn0NCnByaW50KHN1bShmaWx0ZXJlZCRjYXNlc19lbGRlcmx5KSkNCmBgYA0KDQpgYGB7cn0NCmJhc2VfZGF0ZSA8LSAiMjAyMC0wMy0zMSINCg0KZmlyc3RGb3VyIDwtIGNhc2VzX01ZW2Nhc2VzX01ZJGRhdGUgPj0gIjIwMjAtMDItMDEiICYgY2FzZXNfTVkkZGF0ZSA8PSBiYXNlX2RhdGUsIF0NCnQudGVzdChmaXJzdEZvdXIkY2FzZXNfZWxkZXJseSwgeSA9IE5VTEwsIGFsdGVybmF0aXZlID0gYygidHdvLnNpZGVkIiksIG11ID0gMCwgcGFpcmVkID0gRkFMU0UsIHZhci5lcXVhbCA9IEZBTFNFLCBjb25mLmxldmVsID0gMC45NSkNCg0KZm9yICh4IGluIDE6MTApIHsNCiAgYmFzZV9kYXRlIDwtIGFzLkRhdGUoYmFzZV9kYXRlKSAlbSslIG1vbnRocygyKQ0KICBmaWx0ZXJlZCA8LSBjYXNlc19NWVtjYXNlc19NWSRkYXRlID49ICIyMDIwLTAyLTAxIiAmIGNhc2VzX01ZJGRhdGUgPD0gYmFzZV9kYXRlLF0NCiAgY2FzZXM2MCA8LSB0LnRlc3QoZmlsdGVyZWQkY2FzZXNfZWxkZXJseSwgeSA9IE5VTEwsIGFsdGVybmF0aXZlID0gInR3by5zaWRlZCIsIG11ID0gMCwgcGFpcmVkID0gRkFMU0UsIHZhci5lcXVhbCA9IEZBTFNFLCBjb25mLmxldmVsID0gMC45NSkNCiAjIHByaW50KGNhc2VzNjAkZXN0aW1hdGUpDQogICNwcmludChjYXNlczYwJGNvbmYuaW50KQ0KICBwcmludCh0b1N0cmluZyhyb3VuZChjYXNlczYwJGVzdGltYXRlLCBkaWdpdHMgPSA0KSkpDQogIHByaW50KHRvU3RyaW5nKHJvdW5kKGNhc2VzNjAkY29uZi5pbnQsIGRpZ2l0cyA9IDQpKSkNCiAjIHByaW50KG1lYW4oZmlsdGVyZWQkY2FzZXNfbmV3KSkNCn0NCnByaW50KHN1bShmaWx0ZXJlZCRjYXNlc19lbGRlcmx5KSkNCmBgYA0KDQpgYGB7cn0NCmJhc2VfZGF0ZSA8LSAiMjAyMC0wMy0zMSINCg0KZmlyc3RGb3VyIDwtIGNhc2VzX01ZW2Nhc2VzX01ZJGRhdGUgPj0gIjIwMjAtMDItMDEiICYgY2FzZXNfTVkkZGF0ZSA8PSBiYXNlX2RhdGUsIF0NCmNhc2VzNjAgPC0gdC50ZXN0KGZpcnN0Rm91ciRjYXNlc19lbGRlcmx5LCB5ID0gTlVMTCwgYWx0ZXJuYXRpdmUgPSBjKCJ0d28uc2lkZWQiKSwgbXUgPSAwLCBwYWlyZWQgPSBGQUxTRSwgdmFyLmVxdWFsID0gRkFMU0UsIGNvbmYubGV2ZWwgPSAwLjk1KQ0KDQojZGYgPSBkYXRhLmZyYW1lKGRhdGUgPSBjKDEsIDIsIDMsIDQsIDUsIDYsIDcsIDgsIDksIDEwICwgMTEpKQ0KDQpkZiA9IGRhdGEuZnJhbWUoKQ0KDQpmaXJzdCA8LSBkYXRhLmZyYW1lKGRhdGUgPSBmaXJzdEZvdXIkZGF0ZSwgbWVhbiA9IHRvU3RyaW5nKHJvdW5kKGNhc2VzNjAkZXN0aW1hdGUsIGRpZ2l0cyA9IDQpKSwgY29uZmlkZW5jZV9pbnRlcnZhbCA9IHRvU3RyaW5nKHJvdW5kKGNhc2VzNjAkY29uZi5pbnQsIGRpZ2l0cyA9IDQpKSkNCg0KI2ZpcnN0IDwtIGhlYWQoZmlyc3QsIG4gPSAxKQ0KZmlyc3QgPC0gdGFpbChmaXJzdCwgbiA9IDEpDQoNCmRmID0gcmJpbmQoZGYsIGZpcnN0KQ0KDQpmb3IgKHggaW4gMToxMCkgew0KICBiYXNlX2RhdGUgPC0gYXMuRGF0ZShiYXNlX2RhdGUpICVtKyUgbW9udGhzKDIpDQogIGZpbHRlcmVkIDwtIGNhc2VzX01ZW2Nhc2VzX01ZJGRhdGUgPj0gIjIwMjAtMDItMDEiICYgY2FzZXNfTVkkZGF0ZSA8PSBiYXNlX2RhdGUsXQ0KICBjYXNlczYwIDwtIHQudGVzdChmaWx0ZXJlZCRjYXNlc19lbGRlcmx5LCB5ID0gTlVMTCwgYWx0ZXJuYXRpdmUgPSAidHdvLnNpZGVkIiwgbXUgPSAwLCBwYWlyZWQgPSBGQUxTRSwgdmFyLmVxdWFsID0gRkFMU0UsIGNvbmYubGV2ZWwgPSAwLjk1KQ0KICMgcHJpbnQoY2FzZXM2MCRlc3RpbWF0ZSkNCiAgI3ByaW50KGNhc2VzNjAkY29uZi5pbnQpDQogIyBwcmludCh0b1N0cmluZyhyb3VuZChjYXNlczYwJGVzdGltYXRlLCBkaWdpdHMgPSA0KSkpDQogICNwcmludCh0b1N0cmluZyhyb3VuZChjYXNlczYwJGNvbmYuaW50LCBkaWdpdHMgPSA0KSkpDQogIyBwcmludChtZWFuKGZpbHRlcmVkJGNhc2VzX25ldykpDQogIHNlY29uZCA8LSBkYXRhLmZyYW1lKGRhdGUgPSBmaWx0ZXJlZCRkYXRlLCBtZWFuID0gdG9TdHJpbmcocm91bmQoY2FzZXM2MCRlc3RpbWF0ZSwgZGlnaXRzID0gNCkpLCBjb25maWRlbmNlX2ludGVydmFsID0gdG9TdHJpbmcocm91bmQoY2FzZXM2MCRjb25mLmludCwgZGlnaXRzID0gNCkpKQ0KICANCiAgI3NlY29uZCA8LSBoZWFkKHNlY29uZCwgbiA9IDEpDQogIHNlY29uZCA8LSB0YWlsKHNlY29uZCwgbiA9IDEpDQogIA0KICBkZiA9IHJiaW5kKGRmLCBzZWNvbmQpDQogIA0KICAjdGhpcmQgPC0gcmJpbmQoZmlyc3QsIHNlY29uZCkNCn0NCiNWaWV3KHRoaXJkKQ0KI2RmDQpWaWV3KGRmKQ0KcHJpbnQoc3VtKGZpbHRlcmVkJGNhc2VzX2VsZGVybHkpKQ0KYGBgDQo=</div>
 
 
 

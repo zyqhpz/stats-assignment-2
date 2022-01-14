@@ -116,6 +116,147 @@ for (x in 1:10) {
 dt <- t.test(filtered$cases_new, y = NULL, alternative = c("two.sided"), mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)
   #print(base_date)
 print(dt)
+print(mean(filtered$cases_new))
 }
 
+```
+
+```{r}
+# retrieve cases for under 18 child
+
+base_date <- "2020-03-31"
+
+firstFour <- cases_MY[cases_MY$date >= "2020-02-01" & cases_MY$date <= base_date, ]
+t.test(firstFour$cases_new, y = NULL, alternative = c("two.sided"), mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)
+
+for (x in 1:10) {
+  base_date <- as.Date(base_date) %m+% months(2)
+  filtered <- cases_MY[cases_MY$date >= "2020-02-01" & cases_MY$date <= base_date,]
+  #cases12 <- filtered[filtered$]
+  cases_12 <- filtered$cases_0_4 + filtered$cases_5_11 + filtered$cases_12_17
+  total_12 <- data.frame(date = filtered$date, cases = cases_12)
+ # View(cases_12)
+  #View(total_12)
+  cases12 <- t.test(total_12$cases, y = NULL, alternative = "two.sided", mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)
+  print(cases12)
+  print(mean(filtered$cases_new))
+}
+  print(sum(total_12$cases))
+
+```
+
+```{r}
+# retrieve cases for child alternative
+
+base_date <- "2020-03-31"
+
+firstFour <- cases_MY[cases_MY$date >= "2020-02-01" & cases_MY$date <= base_date, ]
+t.test(firstFour$cases_child + firstFour$cases_adolescent, y = NULL, alternative = c("two.sided"), mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)
+
+for (x in 1:10) {
+  base_date <- as.Date(base_date) %m+% months(2)
+  filtered <- cases_MY[cases_MY$date >= "2020-02-01" & cases_MY$date <= base_date,]
+  cases12 <- t.test(filtered$cases_child + filtered$cases_adolescent, y = NULL, alternative = "two.sided", mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)
+  print(cases12)
+  #print(mean(filtered$cases_child + filtered$cases_adolescent))
+}
+print(sum(filtered$cases_child + filtered$cases_adolescent))
+
+```
+
+```{r}
+# retrieve cases for adult
+
+base_date <- "2020-03-31"
+
+firstFour <- cases_MY[cases_MY$date >= "2020-02-01" & cases_MY$date <= base_date, ]
+t.test(firstFour$cases_adult, y = NULL, alternative = c("two.sided"), mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)
+
+for (x in 1:10) {
+  base_date <- as.Date(base_date) %m+% months(2)
+  filtered <- cases_MY[cases_MY$date >= "2020-02-01" & cases_MY$date <= base_date,]
+  cases18 <- t.test(filtered$cases_adult, y = NULL, alternative = "two.sided", mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)
+  print(cases18)
+ # print(mean(filtered$cases_new))
+}
+print(sum(filtered$cases_adult))
+
+```
+
+```{r}
+# retrieve cases for elderly
+
+base_date <- "2020-03-31"
+
+firstFour <- cases_MY[cases_MY$date >= "2020-02-01" & cases_MY$date <= base_date, ]
+t.test(firstFour$cases_elderly, y = NULL, alternative = c("two.sided"), mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)
+
+for (x in 1:10) {
+  base_date <- as.Date(base_date) %m+% months(2)
+  filtered <- cases_MY[cases_MY$date >= "2020-02-01" & cases_MY$date <= base_date,]
+  cases60 <- t.test(filtered$cases_elderly, y = NULL, alternative = "two.sided", mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)
+  print(cases60)
+ # print(mean(filtered$cases_new))
+}
+print(sum(filtered$cases_elderly))
+```
+
+```{r}
+base_date <- "2020-03-31"
+
+firstFour <- cases_MY[cases_MY$date >= "2020-02-01" & cases_MY$date <= base_date, ]
+t.test(firstFour$cases_elderly, y = NULL, alternative = c("two.sided"), mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)
+
+for (x in 1:10) {
+  base_date <- as.Date(base_date) %m+% months(2)
+  filtered <- cases_MY[cases_MY$date >= "2020-02-01" & cases_MY$date <= base_date,]
+  cases60 <- t.test(filtered$cases_elderly, y = NULL, alternative = "two.sided", mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)
+ # print(cases60$estimate)
+  #print(cases60$conf.int)
+  print(toString(round(cases60$estimate, digits = 4)))
+  print(toString(round(cases60$conf.int, digits = 4)))
+ # print(mean(filtered$cases_new))
+}
+print(sum(filtered$cases_elderly))
+```
+
+```{r}
+base_date <- "2020-03-31"
+
+firstFour <- cases_MY[cases_MY$date >= "2020-02-01" & cases_MY$date <= base_date, ]
+cases60 <- t.test(firstFour$cases_elderly, y = NULL, alternative = c("two.sided"), mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)
+
+#df = data.frame(date = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10 , 11))
+
+df = data.frame()
+
+first <- data.frame(date = firstFour$date, mean = toString(round(cases60$estimate, digits = 4)), confidence_interval = toString(round(cases60$conf.int, digits = 4)))
+
+#first <- head(first, n = 1)
+first <- tail(first, n = 1)
+
+df = rbind(df, first)
+
+for (x in 1:10) {
+  base_date <- as.Date(base_date) %m+% months(2)
+  filtered <- cases_MY[cases_MY$date >= "2020-02-01" & cases_MY$date <= base_date,]
+  cases60 <- t.test(filtered$cases_elderly, y = NULL, alternative = "two.sided", mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)
+ # print(cases60$estimate)
+  #print(cases60$conf.int)
+ # print(toString(round(cases60$estimate, digits = 4)))
+  #print(toString(round(cases60$conf.int, digits = 4)))
+ # print(mean(filtered$cases_new))
+  second <- data.frame(date = filtered$date, mean = toString(round(cases60$estimate, digits = 4)), confidence_interval = toString(round(cases60$conf.int, digits = 4)))
+  
+  #second <- head(second, n = 1)
+  second <- tail(second, n = 1)
+  
+  df = rbind(df, second)
+  
+  #third <- rbind(first, second)
+}
+#View(third)
+#df
+View(df)
+print(sum(filtered$cases_elderly))
 ```
