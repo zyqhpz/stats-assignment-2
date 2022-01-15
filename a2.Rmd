@@ -230,7 +230,7 @@ cases60 <- t.test(firstFour$cases_elderly, y = NULL, alternative = c("two.sided"
 
 df = data.frame()
 
-first <- data.frame(date = firstFour$date, mean = toString(round(cases60$estimate, digits = 4)), confidence_interval = toString(round(cases60$conf.int, digits = 4)))
+first <- data.frame(date = toString(paste("2020-02-01 - ", base_date)), mean = toString(round(cases60$estimate, digits = 4)), confidence_interval = toString(round(cases60$conf.int, digits = 4)))
 
 #first <- head(first, n = 1)
 first <- tail(first, n = 1)
@@ -246,7 +246,7 @@ for (x in 1:10) {
  # print(toString(round(cases60$estimate, digits = 4)))
   #print(toString(round(cases60$conf.int, digits = 4)))
  # print(mean(filtered$cases_new))
-  second <- data.frame(date = filtered$date, mean = toString(round(cases60$estimate, digits = 4)), confidence_interval = toString(round(cases60$conf.int, digits = 4)))
+second <- data.frame(date = toString(paste("2020-02-01 - ", base_date)), mean = toString(round(cases60$estimate, digits = 4)), confidence_interval = toString(round(cases60$conf.int, digits = 4)))
   
   #second <- head(second, n = 1)
   second <- tail(second, n = 1)
@@ -257,6 +257,7 @@ for (x in 1:10) {
 }
 #View(third)
 #df
+rownames(df) <- 1:nrow(df)    # Assign sequence to row names
 View(df)
-print(sum(filtered$cases_elderly))
+# print(sum(filtered$cases_elderly))
 ```
