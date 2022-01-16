@@ -20,13 +20,17 @@ The preview shows you a rendered HTML copy of the contents of the editor. Conseq
 ```{r}
 install.packages('lubridate')
 install.packages('tidyverse')
+install.packages('ggthemes')
+install.packages('ggtext')
+install.packages('ggplot2')
 
 ```
 
 ```{r}
 library(lubridate)
 library(tidyverse)
-
+library(ggthemes)
+library(ggtext)
 ```
 
 Import required library
@@ -428,8 +432,8 @@ pop_mean_by_states <- function(state_name) {
     df = rbind(df, second)
   }
   rownames(df) <- 1:nrow(df)
-  #View(df)
-  #df
+  
+  #print(df)
   
   #val_x = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11)
   
@@ -437,7 +441,7 @@ pop_mean_by_states <- function(state_name) {
   
   #ggplot(df, aes(x = date_array, y = as.double(mean_12), group = 1)) + geom_line() + labs(title = "Population mean of contracted cases in Malaysia", x = "Date", y = "Mean 12")
   
-  return (ggplot(df, aes(x = date_array)) + geom_line(aes(y = as.double(mean_12), color = "Child", group = "Child")) + geom_line(aes(y = as.double(mean_18), color = "Adult", group = "Adult")) + geom_line(aes(y = as.double(mean_60), color = "Elderly", group = "Elderly")) + geom_line(aes(y = as.double(mean_overall), color = "Overall", group = "Overall")) + labs(title = paste("Population mean of contracted cases in", state_name), x = "Date", y = "Population Mean", group = "Category", color = "Age Category"))
+  return (ggplot(df, aes(x = date_array)) + geom_line(aes(y = as.double(mean_12), color = "Child", group = "Child")) + geom_line(aes(y = as.double(mean_18), color = "Adult", group = "Adult")) + geom_line(aes(y = as.double(mean_60), color = "Elderly", group = "Elderly")) + geom_line(aes(y = as.double(mean_overall), color = "All", group = "All")) + labs(title = paste("Population mean of contracted cases in", state_name), x = "Date", y = "Population Mean", group = "Category", color = "Age Category") + theme(axis.text.x = element_markdown(angle = 45, hjust = 1)))
 }
 
 population_states <- population[population$state != "Malaysia",]
@@ -446,4 +450,57 @@ for (state in population_states$state) {
   #print(toString(state))
   print(pop_mean_by_states(toString(state)))
 }
+```
+
+bar chart for all mean in each state
+
+```{r}
+cat <- rep(c("Mean 12", "Mean 18", "Mean 60", "Mean Overall"), 4)
+
+filtered <- cases_states[cases_states$date >= "2020-02-01" & cases_states$date <= base_date & cases_states$state == "Johor", ]
+
+overall_cases <- t.test(filtered$cases_new, y = NULL, alternative = c("two.sided"), mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)
+
+cases12 <- t.test(filtered$cases_child + filtered$cases_adolescent, y = NULL, alternative = c("two.sided"), mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)
+    
+    cases18 <- t.test(filtered$cases_adult, y = NULL, alternative = c("two.sided"), mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)
+    
+    cases60 <- t.test(filtered$cases_elderly, y = NULL, alternative = "two.sided", mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)
+
+dt <- data.frame( category = cat, value = c( cases12$estimate, cases18$estimate, cases60$estimate, overall_cases$estimate ) )
+
+ggplot(dt, aes( x = cat, y = value, fill = cat)) + geom_bar(position="dodge",stat = "identity")
+```
+
+bar chart for overall mean by state
+
+```{r}
+mean_pop_states <- function(state_name) {
+  filtered <- cases_states[cases_states$date >= "2020-02-01" & cases_states$date <= "2021-11-30" & cases_states$state == state_name, ]
+
+  overall_cases <- t.test(filtered$cases_new, y = NULL, alternative = c("two.sided"), mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)
+
+  dt <- data.frame(state = state_name, mean = overall_cases$estimate, total = sum(filtered$cases_new))
+
+  return(dt)
+}
+
+population_states <- population[population$state != "Malaysia",]
+
+mean_states <- data.frame()
+
+for (state in population_states$state) {
+ mean_states <- rbind(mean_states, mean_pop_states(toString(state)))
+}
+rownames(mean_states) <- 1:nrow(mean_states)
+
+#ggplot(mean_states, aes( x = state, y = mean, fill = state)) + geom_bar(stat = "identity") + theme(legend.position = "none") + geom_text(aes(label = round(mean, digits = 4), size = 0.5, hjust = -0.2))  + coord_flip() + labs(title = "Population mean of contracted cases by state", x = "State", y = "Population Mean")
+
+ggplot(mean_states, aes( x = state, y = mean, fill = state)) + geom_bar(stat = "identity") + theme(legend.position = "none") + coord_flip() + labs(title = "Population mean of contracted cases by state", x = "State", y = "Population Mean")
+
+ggplot(mean_states, aes( x = state, y = round((as.double(total)/population_states$pop * 100), digits = 2), fill = state)) + geom_bar(stat = "identity") + theme(legend.position = "none") + geom_text(aes(label = round((as.double(total)/population_states$pop * 100), digits = 2), size = 0.3, hjust = 1.5)) + coord_flip() + labs(title = "Cases per 100 population by state", x = "State", y = "Cases")
+```
+
+```{r}
+
 ```
