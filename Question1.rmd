@@ -1,0 +1,130 @@
+---
+title: "Question 1"
+output: html_notebook
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Packages installation
+
+```{r}
+install.packages('lubridate')
+install.packages('tidyverse')
+install.packages('ggthemes')
+install.packages('ggtext')
+install.packages('ggplot2')
+install.packages('gridExtra')
+```
+
+Import required packages
+
+```{r}
+library(lubridate)
+library(tidyverse)
+library(ggthemes)
+library(ggtext)
+library(gridExtra)
+library(ggplot2)
+```
+
+```{r}
+cases_malaysia <- read.csv("../data/cases_malaysia.csv")
+cases_state <- read.csv("../data/cases_state.csv")
+population <- read.csv("../data/population.csv")
+```
+
+Retrieve data based on desired range which is 01-02-2020 to 30-11-2021 only.
+
+```{r}
+cases_MY <- cases_malaysia[cases_malaysia$date >= "2020-02-01" & cases_malaysia$date <= "2021-11-30",]
+cases_states <- cases_state[cases_state$date >= "2020-02-01" & cases_state$date <= "2021-11-30",]
+```
+
+```{r}
+ggplot(cases_MY, aes(x = as.Date(date), y = cases_new, group = 1)) + geom_line() + labs(title = "Daily New Covid-19 Cases in Malaysia", x = "Date", y = "Daily New Cases")
+```
+
+```{r}
+pop_mean_by_states <- function(state_name) {
+  
+  base_date <- "2020-03-31"
+  
+  firstFour <- cases_states[cases_states$date >= "2020-02-01" & cases_states$date <= base_date & cases_states$state == state_name, ]
+  
+  cases_overall <- cases12 <- t.test(firstFour$cases_new, y = NULL, alternative = c("two.sided"), mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)
+  
+  cases12 <- t.test(firstFour$cases_child + firstFour$cases_adolescent, y = NULL, alternative = c("two.sided"), mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)
+  
+  cases18 <- t.test(firstFour$cases_adult, y = NULL, alternative = c("two.sided"), mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)
+  
+  cases60 <- t.test(firstFour$cases_elderly, y = NULL, alternative = c("two.sided"), mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)
+  
+  df = data.frame()
+  
+  first <- data.frame(date = toString(paste("2020-02-01 - ", base_date)), mean_overall = toString(round(cases_overall$estimate, digits = 4)), confidence_interval_overall = toString(round(cases_overall$conf.int, digits = 4)), mean_12 = toString(round(cases12$estimate, digits = 4)), confidence_interval_12 = toString(round(cases12$conf.int, digits = 4)), mean_18 = toString(round(cases18$estimate, digits = 4)), confidence_interval_18 = toString(round(cases18$conf.int, digits = 4)), mean_60 = toString(round(cases60$estimate, digits = 4)), confidence_interval_60 = toString(round(cases60$conf.int, digits = 4)))
+  
+  first <- tail(first, n = 1)
+  
+  df = rbind(df, first)
+  
+  for (x in 1:10) {
+    base_date <- as.Date(base_date) %m+% months(2)
+
+    filtered <- cases_states[cases_states$date >= "2020-02-01" & cases_states$date <= base_date & cases_states$state == state_name, ]
+    
+    cases_overall <- t.test(filtered$cases_new, y = NULL, alternative = c("two.sided"), mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)
+    
+    cases12 <- t.test(filtered$cases_child + filtered$cases_adolescent, y = NULL, alternative = c("two.sided"), mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)
+    
+    cases18 <- t.test(filtered$cases_adult, y = NULL, alternative = c("two.sided"), mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)
+    
+    cases60 <- t.test(filtered$cases_elderly, y = NULL, alternative = "two.sided", mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)
+  
+    second <- data.frame(date = toString(paste("2020-02-01 - ", base_date)), mean_overall = toString(round(cases_overall$estimate, digits = 4)), confidence_interval_overall = toString(round(cases_overall$conf.int, digits = 4)), mean_12 = toString(round(cases12$estimate, digits = 4)), confidence_interval_12 = toString(round(cases12$conf.int, digits = 4)), mean_18 = toString(round(cases18$estimate, digits = 4)), confidence_interval_18 = toString(round(cases18$conf.int, digits = 4)), mean_60 = toString(round(cases60$estimate, digits = 4)), confidence_interval_60 = toString(round(cases60$conf.int, digits = 4)))
+  
+    second <- tail(second, n = 1)
+    
+    df = rbind(df, second)
+  }
+  rownames(df) <- 1:nrow(df)
+  
+  date_array = c("2020-03-31", "2020-05-31", "2020-07-31", "2020-09-30", "2020-11-30", "2021-01-30", "2021-03-30", "2021-05-30", "2021-07-30", "2021-09-30", "2021-11-30")
+  
+  return (ggplot(df, aes(x = date_array)) + geom_line(aes(y = as.double(mean_12), color = "Child", group = "Child")) + geom_line(aes(y = as.double(mean_18), color = "Adult", group = "Adult")) + geom_line(aes(y = as.double(mean_60), color = "Elderly", group = "Elderly")) + geom_line(aes(y = as.double(mean_overall), color = "All", group = "All")) + labs(title = paste("Population mean of contracted cases in", state_name), x = "Date", y = "Population Mean", group = "Category", color = "Age Category") + theme(axis.text.x = element_markdown(angle = 45, hjust = 1)))
+}
+
+population_states <- population[population$state != "Malaysia",]
+
+for (state in population_states$state) {
+  print(pop_mean_by_states(toString(state)))
+}
+```
+
+```{r}
+mean_pop_states <- function(state_name) {
+  filtered <- cases_states[cases_states$date >= "2020-02-01" & cases_states$date <= "2021-11-30" & cases_states$state == state_name, ]
+
+  overall_cases <- t.test(filtered$cases_new, y = NULL, alternative = c("two.sided"), mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)
+
+  dt <- data.frame(state = state_name, mean = round(overall_cases$estimate, digits = 4), confidence_interval = toString(round(overall_cases$conf.int, digits = 4)), total = sum(filtered$cases_new))
+
+  return(dt)
+}
+
+population_states <- population[population$state != "Malaysia",]
+population_states <- population_states[order(population_states$state),]
+rownames(population_states) <- 1:nrow(population_states)
+
+mean_states <- data.frame()
+
+for (state in population_states$state) {
+ mean_states <- rbind(mean_states, mean_pop_states(toString(state)))
+}
+rownames(mean_states) <- 1:nrow(mean_states)
+
+ggplot(mean_states, aes( x = state, y = mean, fill = state)) + geom_bar(stat = "identity") + theme(legend.position = "none") + coord_flip() + labs(title = "Population mean of contracted cases by state", x = "State", y = "Population Mean")
+
+ggplot(mean_states, aes( x = state, y = round((as.double(total)/population_states$pop * 100), digits = 2), fill = state)) + geom_bar(stat = "identity") + theme(legend.position = "none") + geom_text(aes(label = ceiling((as.double(total)/population_states$pop * 100)), size = 0.3, hjust = 1.5)) + coord_flip() + labs(title = "Cases per 100 population by state", x = "State", y = "Cases")
+```
