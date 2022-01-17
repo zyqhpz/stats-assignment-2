@@ -23,6 +23,7 @@ install.packages('tidyverse')
 install.packages('ggthemes')
 install.packages('ggtext')
 install.packages('ggplot2')
+install.packages('gridExtra')
 
 ```
 
@@ -31,6 +32,7 @@ library(lubridate)
 library(tidyverse)
 library(ggthemes)
 library(ggtext)
+library(gridExtra)
 ```
 
 Import required library
@@ -277,6 +279,10 @@ View(df)
 # print(sum(filtered$cases_elderly))
 ```
 
+```{r}
+ggplot(cases_MY, aes(x = as.Date(date), y = cases_new, group = 1)) + geom_line() + labs(title = "Daily New Covid-19 Cases in Malaysia", x = "Date", y = "Daily New Cases")
+```
+
 retrieve data by age for Malaysia
 
 ```{r}
@@ -456,8 +462,27 @@ bar chart for all mean in each state
 
 ```{r}
 cat <- rep(c("Mean 12", "Mean 18", "Mean 60", "Mean Overall"), 4)
+cat <- rep(c("Child", "Adult", "Elderly", "Overall"), 4)
 
-filtered <- cases_states[cases_states$date >= "2020-02-01" & cases_states$date <= base_date & cases_states$state == "Johor", ]
+filtered <- cases_MY[cases_MY$date >= "2020-02-01" & cases_MY$date <= "2021-11-30", ]
+
+overall_cases <- t.test(filtered$cases_new, y = NULL, alternative = c("two.sided"), mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)
+
+cases12 <- t.test(filtered$cases_child + filtered$cases_adolescent, y = NULL, alternative = c("two.sided"), mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)
+    
+cases18 <- t.test(filtered$cases_adult, y = NULL, alternative = c("two.sided"), mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)
+    
+cases60 <- t.test(filtered$cases_elderly, y = NULL, alternative = "two.sided", mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)
+
+dt <- data.frame( category = cat, value = c( cases12$estimate, cases18$estimate, cases60$estimate, overall_cases$estimate ) )
+
+ggplot(dt, aes( x = cat, y = value, fill = cat)) + geom_bar(position="dodge",stat = "identity") + theme(legend.position = "none") + labs(title = "Population Mean by Age Category in Malaysia", x = "Age Category", y = "Mean")
+```
+
+```{r}
+cat <- rep(c("Mean 12", "Mean 18", "Mean 60", "Mean Overall"), 4)
+
+filtered <- cases_MY[cases_states$date >= "2020-02-01" & cases_states$date <= base_date ]
 
 overall_cases <- t.test(filtered$cases_new, y = NULL, alternative = c("two.sided"), mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)
 
@@ -480,12 +505,14 @@ mean_pop_states <- function(state_name) {
 
   overall_cases <- t.test(filtered$cases_new, y = NULL, alternative = c("two.sided"), mu = 0, paired = FALSE, var.equal = FALSE, conf.level = 0.95)
 
-  dt <- data.frame(state = state_name, mean = overall_cases$estimate, total = sum(filtered$cases_new))
+  dt <- data.frame(state = state_name, mean = round(overall_cases$estimate, digits = 4), confidence_interval = toString(round(overall_cases$conf.int, digits = 4)), total = sum(filtered$cases_new))
 
   return(dt)
 }
 
 population_states <- population[population$state != "Malaysia",]
+population_states <- population_states[order(population_states$state),]
+rownames(population_states) <- 1:nrow(population_states)
 
 mean_states <- data.frame()
 
@@ -494,13 +521,14 @@ for (state in population_states$state) {
 }
 rownames(mean_states) <- 1:nrow(mean_states)
 
-#ggplot(mean_states, aes( x = state, y = mean, fill = state)) + geom_bar(stat = "identity") + theme(legend.position = "none") + geom_text(aes(label = round(mean, digits = 4), size = 0.5, hjust = -0.2))  + coord_flip() + labs(title = "Population mean of contracted cases by state", x = "State", y = "Population Mean")
+png("test.png", height = 700, width = 500)
+grid.table(mean_states)
+dev.off()
 
 ggplot(mean_states, aes( x = state, y = mean, fill = state)) + geom_bar(stat = "identity") + theme(legend.position = "none") + coord_flip() + labs(title = "Population mean of contracted cases by state", x = "State", y = "Population Mean")
 
-ggplot(mean_states, aes( x = state, y = round((as.double(total)/population_states$pop * 100), digits = 2), fill = state)) + geom_bar(stat = "identity") + theme(legend.position = "none") + geom_text(aes(label = round((as.double(total)/population_states$pop * 100), digits = 2), size = 0.3, hjust = 1.5)) + coord_flip() + labs(title = "Cases per 100 population by state", x = "State", y = "Cases")
+ggplot(mean_states, aes( x = state, y = round((as.double(total)/population_states$pop * 100), digits = 2), fill = state)) + geom_bar(stat = "identity") + theme(legend.position = "none") + geom_text(aes(label = ceiling((as.double(total)/population_states$pop * 100)), size = 0.3, hjust = 1.5)) + coord_flip() + labs(title = "Cases per 100 population by state", x = "State", y = "Cases")
 ```
 
 ```{r}
-
 ```
